@@ -312,7 +312,6 @@
 	}
 	.header_main_block {
 		padding: 0;
-		height: 540px;
 	}
 	.nav_header {
 		padding: 0px 0px 0px;
@@ -459,5 +458,7 @@
 	}
 }
 @media screen and (max-width: 576px) {
-
+	.block_nav_list_big {
+		display: none;
+	}
 }

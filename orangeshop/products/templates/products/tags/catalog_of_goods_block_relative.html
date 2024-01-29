@@ -1,0 +1,14 @@
+<div class="catalog_of_goods_block_relative">
+	<div class="catalog_of_goods">
+		{% for cat in cats_list %}
+		{% if cat.level == 0 %}
+		<a href="#" class="catalog_items">
+			<div>
+				<img src="{{ cat.image2.url }}" alt="{{ cat.name }}">
+			</div>
+			<p class="catalog_items_title">{{ cat.name }}</p>
+		</a>	
+		{% endif %}
+		{% endfor %}
+	</div>
+</div>

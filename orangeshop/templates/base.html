@@ -128,6 +128,7 @@
                 </nav>
 
                 {% block headerSlider %}
+                {% comment %}
                 <!-- Автослайдер под header -->
                 <!--
                         <div class="photo_slider_block">
@@ -154,10 +155,16 @@
                                 <div class="slider_indicator"></div>
                             </div>
                         </div>
-                -->        
+                -->      
+                {% endcomment %}
                 {% endblock headerSlider%}
 
             </div>
+            {% block catalog_of_goods_block %}
+            {% comment %}
+            <!-- Выпадающее модальное окно - список категорий  -->
+            {% endcomment %}
+            {% endblock catalog_of_goods_block %}
         </header>
         
         <main class="main">

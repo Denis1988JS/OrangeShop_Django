@@ -94,6 +94,7 @@ class Category(MPTTModel):
     name = models.CharField(max_length=50,  unique=True, null=False, blank=False, verbose_name='Название категории')
     slug = models.SlugField(max_length=50, unique=True, null=False, blank=False, db_index=True, verbose_name='URL-категории')
     image = models.ImageField(upload_to="Categoty/", verbose_name='Фото категории')
+    image2 = models.ImageField(upload_to="Categoty_2/" ,null=True, blank=True, verbose_name='Фото 2 категории')
     description = models.TextField(max_length=2000, unique=True, verbose_name='Описание категории')
     parent = TreeForeignKey(
         'self',

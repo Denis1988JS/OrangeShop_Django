@@ -2,7 +2,7 @@
 {% load mptt_tags %}
 {% load static %}
 {% load orangeMainApp_tag %}
-
+{% load products_tag %}
 
 {% block css_block %}
 <link rel="stylesheet" href="{% static 'css/style_catalog_goods.css' %}">
@@ -22,6 +22,12 @@
 	</button>
 </div>
 {% endblock nav_list_big %}
+
+
+
+{% block catalog_of_goods_block %}
+{% category_list_relative %}
+{% endblock catalog_of_goods_block %}
 
 {% block page_name %}
 <section class="adres_info_section">

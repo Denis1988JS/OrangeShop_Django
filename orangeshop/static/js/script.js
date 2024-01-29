@@ -78,7 +78,7 @@ $('.nav_menu').on('click', function openMenu(e){
 		//открываем
 	if (statusMenu != 'open'){
 		statusMenu = statusMenuList[1];
-		
+		$('.header_block_container').css('height', 540 + 'px')
 		$('.block_logo').css('padding-top',60+'px');
 		$('.nav_menu_img').attr('src','static/images/header/ic-close-menu.svg');
 		$('.photo_slider_block').css('visibility', 'hidden');
@@ -91,7 +91,7 @@ $('.nav_menu').on('click', function openMenu(e){
 	//закрываем
 	else if ( statusMenu == 'open') {
 		statusMenu = statusMenuList[0];
-		
+		$('.header_block_container').css('height', 'auto')
 		$('.block_logo').css('padding-top', 11 + 'px');
 		$('.nav_menu_img').attr('src', 'static/images/header/nav_menu_open.svg');
 		$('.photo_slider_block').css('visibility', 'visible');

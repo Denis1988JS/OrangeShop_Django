@@ -101,21 +101,26 @@ from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 class CategoryAdmin(MPTTModelAdmin):
     mptt_level_indent = 100
     mptt_indent_field = 'name'
-    list_display = ('name', 'parent','get_html_photo')
+    list_display = ('name', 'parent','get_html_photo','get_html_photo2')
     list_display_links = ('name',)
     prepopulated_fields = {'slug': ('name',)}
-    readonly_fields = ('id', 'get_html_photo')
+    readonly_fields = ('id', 'get_html_photo','get_html_photo2')
     inlines = [ProductInline]
     fields = [
         ('id', 'name','slug'),
         'parent',
         'description',
-        ('image','get_html_photo')
+        ('image','get_html_photo'),
+        ('image2', 'get_html_photo2')
     ]
     def get_html_photo(self, object):
         if object.image:
             return mark_safe(f"<img src='{object.image.url}' width=75 height=75 style= object-fit:contain>")
     get_html_photo.short_description = 'Фото'
+    def get_html_photo2(self, object):
+        if object.image2:
+            return mark_safe(f"<img src='{object.image2.url}' width=75 height=75 style= object-fit:contain>")
+    get_html_photo2.short_description = 'Фото2'
 
 admin.site.register(Category,CategoryAdmin)
 
