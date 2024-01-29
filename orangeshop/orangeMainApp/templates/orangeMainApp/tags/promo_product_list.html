@@ -1,0 +1,20 @@
+<div class="promotional_goods_block">
+	<h2 class="h2_some_block_title_32_pb_35">
+		Акционные товары
+	</h2>
+	<div class="promotional_goods_block_list">
+		{% for product in product_promo %}
+		<div class="promotional_goods_cart">
+			<div class="discount_value">
+				<p>-{{product.discount|floatformat}}%</p>
+			</div>
+			<img src="{{ product.image.url }}" alt="Фото">
+			<p class="p16_Sans promotional_goods_cart_title">{{ product.name }} {{product.short_description| truncatechars:50}}</p>
+			<div class="promotional_goods_cart_footer">
+				<span class="promotional_goods_price">{{ product.sell_price }} &#8381</span>
+				<s class="promotional_goods_old_price">{{ product.price }} &#8381</s>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>

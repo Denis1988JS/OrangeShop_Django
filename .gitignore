@@ -1,0 +1,10 @@
+#python stuff
+venv/
+.pylintrc
+__pycache__/
+
+#ide stuff
+.idea
+
+#django stuff
+images_for_site/

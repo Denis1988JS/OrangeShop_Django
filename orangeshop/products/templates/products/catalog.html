@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+{% load static %}
+{% load orangeMainApp_tag %}
+
+
+{% block css_block %}
+<link rel="stylesheet" href="{% static 'css/style_catalog_goods.css' %}">
+{% endblock css_block %}
+
+{% block icon %}
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/icon_title.png' %}">
+{% endblock icon %}
+
+{% block nav_list_big %}
+<div class="block_nav_list_big">
+	<a href="#" class="nav_item_link_big">О компании</a>
+	<a href="#" class="nav_item_link_big">О продукции</a>
+	<button class="nav_item_btn_big">
+			Каталог товаров
+			<img src="{% static 'images/header/vector_list_of_good.svg'%}" alt="Каталог" class="nav_item_arrow_big">
+	</button>
+</div>
+{% endblock nav_list_big %}
+
+{% block page_name %}
+<section class="adres_info_section">
+	<div class="adres_info_block">
+		<a href="{% url 'home' %}">Главная</a>
+		<img src="{% static 'images/adres_block/arrow-right.png' %}" alt=">">
+		<a href="{% url 'catalog' %}">Товары</a>
+	</div>
+</section>
+{% endblock page_name %}
+
+
+{% block content %}
+<section class="title_info_block_main">
+	{% our_products_cart_list %}
+</section>
+<section class="popular_goods_section">
+<div class="popular_goods_block">
+	<h2 class="h2_some_block_title_32_pb_35">
+		Наши товары
+	</h2>
+	<div class="popular_goods_block_list">
+		{% for product in products %}
+		<div class="popular_goods_cart">
+			{% if product.discount %}
+			<div class="discount_value">
+				<p>-{{product.discount|floatformat:"0"}}%</p>
+			</div>
+			{% endif %}
+
+			{% if product.image %}
+			<img src="{{product.image.url}}" alt="{{product.name}}">
+			{% else %}
+			<img src="{% static 'images/category/Notfoundimage.png' %}" alt="Нет фото">
+			{% endif %}
+			<p class="p16_Sans popular_goods_cart_title">{{product.name}}</p>
+			<div class="promotional_goods_cart_footer">
+				{% if product.discount %}
+				<span class="popular_goods_price">{{ product.sell_price }} &#8381</span>
+				<s class="popular_goods_old_price">{{ product.price }} &#8381</s>
+				{% else %}
+				
+				<span class="popular_goods_price">{{ product.price }} &#8381</span>
+				{% endif %}
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="pagination_block">
+		
+		{% if page_obj.has_previous %}
+		<a class="pagination_btn" href="?page={{ page_obj.previous_page_number }}">
+			Назад
+		</a>
+		<a class="pagination_btn" href="?page=1">1</a>
+		<a class="pagination_btn" href="#">
+			...
+		</a>
+		{% endif %}
+
+		{% for page in paginator.page_range %}
+		{% if page_obj.number == page %}
+		<a class="pagination_btn_selected" href="?page={{page}}">
+			{{page}}
+		</a>
+		{% elif page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+		<a class="pagination_btn" href="?page={{page}}">
+			{{page}}
+		</a>
+		
+		{% endif %}
+		{% endfor %}
+		
+		{% if page_obj.has_next %}
+		<a class="pagination_btn" href="#">
+			...
+		</a>
+		<a href="">
+			<a href="?page={{ page_obj.paginator.num_pages }}" class="pagination_btn">{{page_obj.paginator.num_pages}}</a>
+		</a>
+		<a class="pagination_btn" href="?page={{ page_obj.next_page_number }}">
+			Вперед
+		</a>
+		{% endif %}
+		
+	</div>
+</div>
+</section>
+<section class="about_product_section">
+	<div class="product_section">
+		<h2 class="h2_some_block_title_32_pb_35">
+			Продукция
+		</h2>
+		<div class="product_section_list">
+			<p class="product_section_items">
+				Создавая торговую марку Orange, которая специализируется на производстве сантехнического оборудования и мебели для
+				ванной комнаты, мы ставили перед собой задачу предложить отечественному рынку оригинальную продукцию безупречного
+				качества по умеренным ценам. И судя по тому, что наша продукция пользуется огромным спросом на российском рынке, нам это
+				удалось. Понимая, что в СНГ имеет место глобальный дефицит недорогой и долговечной сантехники, мы предложили покупателю
+				качественную продукцию немецкого производства, которая полностью адаптирована к нашим реалиям. Теперь любой
+				заинтересованный покупатель из России может обзавестись всем необходимым для обустройства современной ванной комнаты без
+				серьезных издержек семейного бюджета.
+			</p>
+			<p class="product_section_items">Главная гордость компании – первоклассные смесители Orange Mixers, которые производятся в Германии из пищевой латуни с
+			высоким содержанием меди. За счёт уникального состава сплава корпус смесителя демонстрирует высокую прочность и
+			долговечность. В свою очередь низкое содержание свинца делает продукцию экологически безопасной для потребителя.
+			</p>
+			<p class="product_section_items">Смесители Orange комплектуются фирменным керамическим картриджем, который выдерживает десятилетия эксплуатации.
+			Дополнительный бонус сантехники Orange Mixers – запатентованный аэратор Neoperl, который препятствует образованию
+			известкового налета, что очень актуально для российского потребителя.
+			</p>
+			<p class="product_section_items">Также компания Orange производит высококачественную мебель, которая полностью совместима с немецкой сантехникой. Тумбы,
+			шкафы и подставки для раковин производятся из высококачественных материалов с применением дорогостоящих лакокрасочных
+			покрытий. При этом мы распространяем двухлетнюю гарантию на всю мебельную продукцию, что еще раз подтверждает её
+			качество и долговечность.
+			</p>
+			<p class="product_section_items">Мы всегда стремимся повышать планку качества и надежности. В каждой новой коллекции мы реализуем новые амбициозные
+			задачи, создавая современную красивую сантехнику и мебель для санузлов, которая соответствует стандарту ISO 9001.
+			Продукция пользуется завидным спросом на российском рынке, так как является оптимальным решением по цене и качеству.
+			</p>
+			<p class="product_section_items">Теперь у покупателя есть возможность обустроить ванную комнату по европейским стандартам, используя потрясающе красивую
+			сантехнику и функциональную мебель Orange. На страницах нашего магазина вы найдете огромный выбор продукции немецкого
+			бренда, которая порадует вас безупречной сборкой, разнообразными дизайнерскими решениями и отменным качеством материала.
+			</p>
+		</div>
+
+	</div>
+</section>
+{% endblock %}

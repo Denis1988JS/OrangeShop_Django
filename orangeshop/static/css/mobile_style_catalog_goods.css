@@ -1,0 +1,114 @@
+/*----------------Мобильный адаптив для страницы catalog-goods-----------*/
+
+/*1400-1200-992-768-576*/
+
+/*Мобильный стиль для header_main_block - на странице catalog-goods*/
+
+@media screen and (max-width: 1200px) {
+	.nav_header {
+		gap: 20px;
+	}
+}
+@media screen and (max-width: 576px) {
+	.header_block_container {
+		max-width: 1440px;
+		height: 100%;
+		margin: 0px auto;
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.block_nav_list_big {
+		display: none;
+	}
+	.photo_slider_block {
+		display: flex;
+	}
+}
+
+/*Мобильный стиль для title_info_block - товары по категории*/
+@media screen and (max-width: 1400px) {
+	.site_bar {
+		max-width: 235px;
+	}
+	.category_goods_cart {
+		flex: 0 1 40%;
+	}
+	.category_goods_list_block {
+		max-width: 800px;
+		justify-content: space-evenly;
+	}
+}
+@media screen and (max-width: 1200px) {
+	.site_bar {
+		max-width: 100%;
+		flex: 1 1 auto;
+		height: auto;
+	}
+	.category_goods_list_block {
+		max-width: 100%;
+		flex: 1 1 100%;
+		justify-content: space-between;
+	}
+	.category_goods_cart {
+		flex: 1 1 50%;
+	}
+	.checked_block {
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		flex: 0 2 auto;
+	}
+}
+@media screen and (max-width: 992px) {
+	.title_info_block_main, .adres_info_section {
+		padding: 0px 20px;
+	}
+	.adres_info_block {
+		padding: 20px 0px;
+	}
+	.checked_main_block {
+		align-items: flex-start;
+		gap: 20px;
+		flex-wrap: wrap;
+	}
+	.checked_block {
+		padding-top: 25px;
+		flex: 0 1 100%;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 15px 10px;
+	}
+	.select_button_block {
+		align-self: flex-start;
+		min-width: 223px;
+		height: 44px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.checked_block {
+		height: auto;
+	}
+	.checked_main_block {
+		gap: 30px 20px;
+	}
+	.check_btn {
+		color: var(--Text-Link, #FE5B00);
+		font-family: PT Sans;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 14px; /* 155.556% */
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.site_bar {
+		display: none;
+	}
+	.category_goods_cart {
+		flex: 1 1 100%;
+	}
+}

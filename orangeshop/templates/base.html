@@ -1,0 +1,219 @@
+{% load mptt_tags %}
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block icon %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon/icon_title.png' %}" />
+    {% endblock icon %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    {% block css_block %}
+
+    {% endblock css_block %}
+    <link rel="stylesheet" href="{% static '/css/min_style.css'%}">
+    <link rel="stylesheet" href="{% static '/css/statick_style.css'%}">
+    <link rel="stylesheet" href="{% static '/css/mobile_style.css'%}">
+    
+    {% bootstrap_javascript jquery='full' %}
+    <title>{{ title }}</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header_main_block">
+            <div class="header_block_container">
+                <nav class="nav_header">
+
+                    <div class="block_logo">
+                        <a href="#" target="_blank"><img src="{% static 'images/header/logo.svg'%}" alt="Логотип"></a>
+                        <div class="data_seach_btn_2">
+                            <button class="seach_btn_2">
+                                <img src="{% static 'images/header/search_btn_2.svg'%}" alt="Поиск">
+                            </button>
+                        </div>
+                        <div class="nav_menu">
+                            <img src="{% static 'images/header/nav_menu_open.svg'%}" alt="--" class="nav_menu_img">
+                            <p>Меню</p>
+                        </div>
+                    </div>
+                    
+                    {% block nav_list_big %}
+                    {% comment %}
+                    <!-- Навигация модальное каталог товаров в header
+                    <div class="block_nav_list_big">
+                        <a href="#" class="nav_item_link_big">О компании</a>
+                        <a href="#" class="nav_item_link_big">О продукции</a>
+                        <button class="nav_item_btn_big">
+                            Каталог товаров
+                            <img src="./link/img/header/vector_list_of_good.svg" alt="" class="nav_item_arrow_big">
+                        </button>
+                    </div>
+                    -->
+                    {% endcomment %}
+                    {% endblock nav_list_big %}
+
+                    
+                    {% block title_nav_block %}
+                    {% comment %}
+                    <!-- Блок сделано в РФ в header
+                    <div class="title_nav_block">
+                        <p class="title_nav">
+                            Разработано в Германии. Сделано в России.
+                        </p>
+                    </div>
+                    -->
+                    {% endcomment %}
+                    {% endblock title_nav_block %}
+
+                    <div class="nav_block_data">
+                        <div class="nav_link">
+                            <a href="tel:+7 (905) 543 23 45" class="nav_link_tel">+7 (905) 543 23 45</a>
+                        </div>
+                        <div class="data_cart">
+                            <a href="#">
+                                <img src="{% static '/images/header/cart.svg' %}" alt="Корзина" class="cart_img">
+                                <span class="value_cart">4290 &#8381</span>
+                            </a>
+                        </div>
+                        <div class="block_nav_list">
+                            <ul class="nav_list">
+                                <li class="nav_item">
+                                    <a href="#" class="nav_item_link">О компании</a>
+                                </li>
+                                <li class="nav_item">
+                                    <a href="#" class="nav_item_link">О продукции</a>
+                                </li>
+                                <li class="nav_item list_of_goods">
+                                    Каталог товаров
+                                    <img src="{% static 'images/header/vector_list_of_good.svg'%}" alt="" class="nav_item_arrow">
+                                    <ul class="list_of_category">
+                                        <li><a href="./category.html">Смесители</a></li>
+                                        <li><a href="#">Мебель</a></li>
+                                        <li><a href="#">Душевая программа</a></li>
+                                        <li><a href="#">Аксессуары</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="data_account">
+                            <a href="#">
+                                <img src="{% static 'images/header/user.svg'%}" alt="Пользователь">
+                            </a>
+                        </div>
+                        <div class="data_seach_btn">
+                            <button class="seach_btn">
+                                <img src="{% static 'images/header/search_btn.svg'%}" alt="Поиск">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form_seach_site">
+                        <form action="#" method="post" class="form_seach">
+                            <h2 class="form_header">Что вы ищете?</h2>
+                            <input type="text" name="seach" id="seach" class="seach" placeholder="Поиск на сайте...">
+                            <div class="form_seach_buttons">
+                                <button type="button" class="btn_close_form">
+                                    Отмена
+                                </button>
+                                <button class="seach_btn_form" name="seach_btn_form">
+                                    Искать
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+
+                {% block headerSlider %}
+                <!-- Автослайдер под header -->
+                <!--
+                        <div class="photo_slider_block">
+                            <div class="photo_slider_block_header">
+                                <h2>Сантехника и мебель для ванной комнаты</h2>
+                            </div>
+                            <div class="photo_slider_block_menu">
+                                <ul class="slider_header_list">
+                                    <li class="slider_header_items"><img src="./link/img/header/arrow_menu.svg" alt=""><a href="#">О
+                                            компании</a>
+                                    </li>
+                                    <li class="slider_header_items"><img src="./link/img/header/arrow_menu.svg"><a href="#">О продукции</a>
+                                    </li>
+                                    <li class="slider_header_items"><img src="./link/img/header/arrow_menu.svg"><a href="./catalog.html"
+                                            target="_blank">Каталог товаров</a></li>
+                                </ul>
+                            </div>
+                            <div class="photo_slider">
+                                <img src="./link/img/header/slider_header/first_slide.png" alt="Слайд" class="header_slider_img">
+                            </div>
+                            <div class="slider_indicators">
+                                <div class="slider_indicator slider_indicator_orange"></div>
+                                <div class="slider_indicator"></div>
+                                <div class="slider_indicator"></div>
+                            </div>
+                        </div>
+                -->        
+                {% endblock headerSlider%}
+
+            </div>
+        </header>
+        
+        <main class="main">
+            {% block page_name %}
+            {% endblock page_name %}
+            <!--Блок с основным содержимым сайта - ДИНАМИЧЕСКИЙ-->
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer class="footer">
+            <div class="footer_nav_block">
+                <nav class="nav_footer">
+                    <div class="block_logo_footer">
+                        <a href="#" target="_blank"><img src="{% static 'images/header/logo.svg'%}" alt="Логотип"></a>
+                    </div>
+                    <ul class="footer_items_list">
+                        <li class="footer_items"><img src="{% static 'images/header/arrow_menu.svg'%}" alt=""><a href="#">О компании</a>
+                        </li>
+                        <li class="footer_items"><img src="{% static 'images/header/arrow_menu.svg'%}" alt=""><a
+                                href="#">Сотрудничество</a>
+                        </li>
+                        <li class="footer_items"><img src="{% static 'images/header/arrow_menu.svg'%}" alt=""><a href="#">Покупателям</a>
+                        </li>
+                    </ul>
+                    <ul class="footer_items_list">
+                        <li class="footer_items"><img src="{% static 'images/header/arrow_menu.svg'%}" alt=""><a href="#">Где купить</a>
+                        </li>
+                        <li class="footer_items"><img src="{% static 'images/header/arrow_menu.svg'%}" alt=""><a href="#">Сервисное
+                                обслуживание</a>
+                        </li>
+                        <li class="footer_items"><img src="{% static 'images/header/arrow_menu.svg'%}" alt=""><a href="#">Контакты</a>
+                        </li>
+                    </ul>
+                    <div class="nav_footer_list_block">
+                        <h3 class="h3_16_white">Есть вопросы?</h3>
+                        <p class="nav_footer_items"><img src="{% static 'images/header/mail.svg'%}" alt=""><a
+                                href="mailto:hello@orangemixers.ru" class="nav_link_footer">hello@orangemixers.ru</a></p>
+                        <p class="nav_footer_items"><img src="{% static 'images/header/iphone_footer.svg'%}" alt=""><a
+                                href="tel:++7 (495) 543 23 45" class="nav_link_footer">+7 (495) 543 23 45</a></p>
+                    </div>
+                    <div class="nav_footer_list_block">
+                        <h3 class="h3_16_white">Мы в соцсетях</h3>
+                        <p class="nav_footer_items"><img src="{% static 'images/header/insta_logo.svg'%}" alt=""><a href="#"
+                                class="nav_link_footer"></a></p>
+                    </div>
+                    <div class="footer_info">
+                        <p class="footer_info_desc">© 2023</p>
+                        <div class="footer_info_link"><a href="https://github.com/Denis1988JS/orangeShop">GitHub - макета </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </footer>
+    </div>
+    <script src="{% static 'js/jquery-3.6.0.min.js'%}"></script>
+    <script src="{% static 'js/script.js'%}"></script>
+</body>
+</html>

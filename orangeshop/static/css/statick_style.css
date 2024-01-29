@@ -1,0 +1,141 @@
+.p_18_Sans {
+	color: #151716;
+	font-family: PT Sans;
+	font-size: clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem);
+	font-style: normal;
+	font-weight: 400;
+	line-height: 32px; /* 177.778% */
+}
+.b_orange {
+	color: #FE5B00;
+	font-family: PT Sans;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 32px; /* 177.778% */
+}
+.floatOff {
+	clear: left;
+	padding: 12px 0px;
+}
+
+.h2_some_block_title_32_pb_35{
+	color: #151716;
+	font-family: Orenburg;
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 36px; /* 112.5% */
+	letter-spacing: -0.5px;
+	width: 100%;
+	padding-bottom: 35px;
+}
+.h2_some_block_title_32_pb_6{
+	color: #151716;
+	font-family: Orenburg;
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 36px; /* 112.5% */
+	letter-spacing: -0.5px;
+	width: 100%;
+	padding-bottom: 6px;
+}
+
+.h3_18_white_pb_20 {
+	color: #FFF;
+	font-family: PT Sans;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 32px; /* 177.778% */
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	padding-bottom: 20px;
+}
+
+.p16_Sans {
+	color: #151716;
+	font-family: PT Sans;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px; /* 137.5% */
+}
+
+.h2_32_center {
+	color: var(--text-base, #151716);
+	text-align: center;
+	font-family: Orenburg;
+	font-size: 32px;
+	font-weight: 400;
+	line-height: 36px; /* 112.5% */
+	letter-spacing: -0.5px;
+}
+
+.p20-16_p24_12 {
+	color: var(--text-base, #151716);
+	text-align: center;
+	font-family: Orenburg;
+	font-size: clamp(1rem, 0.9423rem + 0.2564vw, 1.25rem);
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	padding: 24px 0px 12px;
+}
+.p15_sans_grey {
+	color: #7B7B7B;
+	text-align: center;
+	font-family: PT Sans;
+	font-size: clamp(0.75rem, 0.7067rem + 0.1923vw, 0.9375rem);
+	font-weight: 400;
+	line-height: 20px; /* 133.333% */
+}
+.h3_28_white {
+	color: #FFF;
+	text-align: center;
+	font-family: Orenburg;
+	font-size: clamp(1.25rem, 1.1346rem + 0.5128vw, 1.75rem);
+	font-weight: 400;
+	line-height: 36px; /* 128.571% */
+	max-width: 763px;
+	margin: 0px auto;
+}
+.h3_16_white {
+	color: #FFF;
+	font-family: Orenburg;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+.p16_bold {
+	color: var(--Text-Base, #151716);
+	font-family: Orenburg;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 0.2px;
+}
+.h3_20 {
+	color: var(--Text-Base, #151716);
+	font-family: Orenburg;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 28px; /* 140% */
+}
+
+/*табличка с ценой товара - оранжевая без тени*/
+.price_cart {
+	width: 140px;
+	color: #FFF;
+	font-family: PT Sans;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 24px; /* 100% */
+	padding: 14px 0px 12px;
+	background-color:  #FF7028;
+	text-align: center;
+}

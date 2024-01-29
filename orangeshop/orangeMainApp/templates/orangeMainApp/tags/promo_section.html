@@ -1,0 +1,19 @@
+
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+	
+	<div class="carousel-inner">
+	{% for slide in sliders %}	
+
+		<div class="carousel-item  {% if forloop.counter0 == 0 %} active {% endif %} " data-interval="5000">
+			<img src="{{ slide.image.url }}" class="d-block w-100 bg_img" alt="{{ slide.title }}">
+		</div>
+	{% endfor %}	
+	</div>
+	
+</div>
+<div class="promo_section_block">
+	<div class="promo_content">
+		<h3 class="h3_28_white">ORANGE – это строгий, тщательно продуманный дизайн и подлинные немецкие традиции.</h3>
+	</div>
+</div>

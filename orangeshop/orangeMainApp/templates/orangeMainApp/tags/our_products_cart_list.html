@@ -1,0 +1,21 @@
+{% load mptt_tags %}
+<div class="our_products_main">
+	<div class="our_products_block">
+		<h2 class="h2_some_block_title_32_pb_35">Наша продукция</h2>
+		<div class="our_products_cart_list">
+			{% for cat in cats_list %}
+			{% if cat.level == 0 %}
+			<a href="./category.html" class="products_category_link">
+				<div class="products_category">
+					<img src="{{ cat.image.url }}" alt="Фото товара"
+						class="img_cat_product">
+					<div class="products_category_name">
+						<p>{{ cat.name }}</p>
+					</div>
+				</div>
+			</a>	
+			{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>

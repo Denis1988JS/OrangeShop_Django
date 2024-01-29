@@ -1,0 +1,17 @@
+<div class="our_benefits_block">
+	<h3 class="h2_32_center">Наши преимущества</h3>
+	<div class="our_benefits_list">
+		{% for benefits in our_benefits %}
+		<div class="benefits_item">
+			<div class="img_item_benefits">
+				<img src="{{ benefits.image.url }}" alt="Фото">
+			</div>
+			<div>
+				<p class="p20-16_p24_12">{{ benefits.title }}</p>
+				<p class="p15_sans_grey">{{ benefits.description }}</p>
+			</div>
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+{% load static %}
+{% load orangeMainApp_tag %}
+
+{% block icon %}
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/icon_title.png' %}">
+{% endblock icon %}
+
+
+
+
+
+
+
+{% block title_nav_block %}
+<div class="title_nav_block">
+	<p class="title_nav">
+			Разработано в Германии. Сделано в России.
+	</p>
+</div>
+{% endblock title_nav_block %}
+
+{% block headerSlider %}
+	{% include 'include/slider_header.html' %}
+{% endblock headerSlider %}
+
+{% block content %}
+	<section class="title_info_section">
+		{% include "include/about_us_templates.html" %}
+		{% our_products_cart_list %}
+	</section>
+	<section class="collection_info_section">
+		{% collection_first %}
+	</section>
+	<section class="promotional_goods_section">
+		{% product_promo_list %}
+	</section>
+	<section class="our_benefits_section">
+		{% our_benefits_list %}
+	</section>
+	<section class="promo_section">
+		{% our_promo_list %}
+	</section>
+{% endblock %}
+

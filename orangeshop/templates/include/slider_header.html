@@ -1,0 +1,28 @@
+{% load static %}
+
+{% block css_block %}
+
+{% endblock css_block %}
+
+<div class="photo_slider_block">
+	<div class="photo_slider_block_header">
+		<h2>Сантехника и мебель для ванной комнаты</h2>
+	</div>
+	<div class="photo_slider_block_menu">
+		<ul class="slider_header_list">
+			<li class="slider_header_items"><img src="{% static 'images/header/arrow_menu.svg' %}"><a href="#">О компании</a>
+			</li>
+			<li class="slider_header_items"><img src="{% static 'images/header/arrow_menu.svg' %}"><a href="#">О продукции</a></li>
+			<li class="slider_header_items"><img src="{% static 'images/header/arrow_menu.svg' %}"><a href="{% url 'catalog' %}"
+					target="_blank">Каталог товаров</a></li>
+		</ul>
+	</div>
+	<div class="photo_slider">
+		<img src="{% static 'images/header/slider_header/first_slide.png' %}" alt="Слайд" class="header_slider_img">
+	</div>
+	<div class="slider_indicators">
+		<div class="slider_indicator slider_indicator_orange"></div>
+		<div class="slider_indicator"></div>
+		<div class="slider_indicator"></div>
+	</div>
+</div>

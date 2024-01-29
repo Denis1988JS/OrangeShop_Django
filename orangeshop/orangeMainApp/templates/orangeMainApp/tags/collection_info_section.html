@@ -1,0 +1,27 @@
+{% load static %}
+
+<div class="collection_dark_block">
+	<div class="collection_dark_content">
+		<h2 class="collection_info_title">Коллекции</h2>
+		<p class="collection_info_content">
+			{{ collection.description }}
+		</p>
+		<div class="all_collection_link_block">
+			<ul class="slider_header_list">
+				<li class="slider_header_items"><img src="{% static 'images/header/arrow_menu.svg' %}" alt=""><a href="#">Все
+						коллекции</a>
+				</li>
+		</div>
+	</div>
+</div>
+<div class="collection_img_block">
+	<div class="collection_info">
+		<h3 class="h3_18_white_pb_20">
+			{{ collection.name }}
+		</h3>
+		<div class="price_cart">
+			от {{ min_price }} ₽
+		</div>
+	</div>
+	<img src="{{ collection.image.url }}" alt="Фон блока" class="bg_collection_block">
+</div>
