@@ -5,7 +5,7 @@
 		<div class="our_products_cart_list">
 			{% for cat in cats_list %}
 			{% if cat.level == 0 %}
-			<a href="./category.html" class="products_category_link">
+			<a href="{{ cat.get_absolute_url }}" class="products_category_link">
 				<div class="products_category">
 					<img src="{{ cat.image.url }}" alt="Фото товара"
 						class="img_cat_product">

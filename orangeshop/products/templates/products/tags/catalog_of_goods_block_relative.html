@@ -2,7 +2,7 @@
 	<div class="catalog_of_goods">
 		{% for cat in cats_list %}
 		{% if cat.level == 0 %}
-		<a href="#" class="catalog_items">
+		<a href="{{ cat.get_absolute_url }}" class="catalog_items">
 			<div>
 				<img src="{{ cat.image2.url }}" alt="{{ cat.name }}">
 			</div>

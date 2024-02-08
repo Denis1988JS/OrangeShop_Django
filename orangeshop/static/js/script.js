@@ -80,7 +80,7 @@ $('.nav_menu').on('click', function openMenu(e){
 		statusMenu = statusMenuList[1];
 		$('.header_block_container').css('height', 540 + 'px')
 		$('.block_logo').css('padding-top',60+'px');
-		$('.nav_menu_img').attr('src','static/images/header/ic-close-menu.svg');
+		$('.nav_menu_img').attr('src','/static/images/header/ic-close-menu.svg');
 		$('.photo_slider_block').css('visibility', 'hidden');
 		$('.nav_block_data').css('visibility', 'visible');
 
@@ -93,7 +93,7 @@ $('.nav_menu').on('click', function openMenu(e){
 		statusMenu = statusMenuList[0];
 		$('.header_block_container').css('height', 'auto')
 		$('.block_logo').css('padding-top', 11 + 'px');
-		$('.nav_menu_img').attr('src', 'static/images/header/nav_menu_open.svg');
+		$('.nav_menu_img').attr('src', '/static/images/header/nav_menu_open.svg');
 		$('.photo_slider_block').css('visibility', 'visible');
 		$('.nav_block_data').css('visibility', 'hidden')
 
@@ -120,7 +120,7 @@ $(".data_seach_btn_2").on('click', function(e){
 	else if (statusForm == 'open') {
 		statusForm = statusFormList[0];
 		$('.form_seach_site').css('visibility', 'hidden')
-		$('.nav_menu_img').attr('src', 'static/images/header/nav_menu_open.svg');
+		$('.nav_menu_img').attr('src', '/static/images/header/nav_menu_open.svg');
 		$('.photo_slider_block').css('visibility', 'visible');
 
 		//По умолчанию скрываем мобильное меню - даже если она не открыта и ставим статус - закрыто
@@ -133,7 +133,7 @@ $('.btn_close_form').on('click', function(e){
 	if (statusForm == 'open') {
 		statusForm = statusFormList[0];
 		$('.form_seach_site').css('visibility', 'hidden')
-		$('.nav_menu_img').attr('src', 'static/images/header/nav_menu_open.svg');
+		$('.nav_menu_img').attr('src', '/static/images/header/nav_menu_open.svg');
 		$('.photo_slider_block').css('visibility', 'visible');
 
 		//По умолчанию скрываем мобильное меню - даже если она не открыта и ставим статус - закрыто
@@ -174,4 +174,8 @@ $(".nav_item_btn_big").on('click', function(e){
 		$('main').removeClass('main_opasity')
 	}
 })
+
+
+
+
 

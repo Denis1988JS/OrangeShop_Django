@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+{% load static %}
+{% load orangeMainApp_tag %}
+{% load products_tag %}
+
+
+{% block css_block %}
+<link rel="stylesheet" href="{% static 'css/style_catalog_goods.css' %}">
+<link rel="stylesheet" href="{% static 'css/mobile_style_catalog_goods.css' %}">
+{% endblock css_block %}
+
+{% block icon %}
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/icon_title.png' %}">
+{% endblock icon %}
+
+{% block nav_list_big %}
+<div class="block_nav_list_big">
+    <a href="#" class="nav_item_link_big">О компании</a>
+    <a href="#" class="nav_item_link_big">О продукции</a>
+    <button class="nav_item_btn_big">
+        Каталог товаров
+        <img src="{% static 'images/header/vector_list_of_good.svg'%}" alt="Каталог" class="nav_item_arrow_big">
+    </button>
+</div>
+{% endblock nav_list_big %}
+
+{% block catalog_of_goods_block %}
+{% category_list_relative %}
+{% endblock catalog_of_goods_block %}
+
+{% block page_name %}
+<section class="adres_info_section">
+    <div class="adres_info_block">
+        <a href="{% url 'home' %}">Главная</a>
+        <img src="{% static 'images/adres_block/arrow-right.png' %}" alt=">">
+        <a href="{% url 'catalog' %}">Товары</a>
+        <img src="{% static 'images/adres_block/arrow-right.png' %}" alt=">">
+        <a href="#"></a>
+    </div>
+</section>
+{% endblock page_name %}
+
+
+{% block content %}
+<section class="title_info_block_main">
+    
+    <div class="title_info_block">
+        <div class="title_info_header">
+            <h2 class="h2_some_block_title_32_pb_6">
+                {{ request.GET }}
+                <p>q = {{ q }}</p>
+                <p>{{collection_name}}</p>
+            </h2>
+            <h2 class="h2_some_block_title_32_pb_6">{{category.name}}</h2>
+            <div class="checked_main_block">
+                
+                <form action="{% url 'sorted'  %}" method="GET" class="checked_block">
+                    <!--Выбор по субкатегории ГОТОВО-->
+                    <!--Скрытые инпуты из других форм-->
+                    <!--Передаем слаг категории-->
+                    {% if request.GET.category_slug %}
+                    <input type="hidden" name="category_slug" value="{{ request.GET.category_slug }}">
+                    {% else %}
+                    <input type="hidden" name="category_slug" value="{{ category.slug }}">
+                    {% endif %}
+                    <!--Передаем сортировку -->
+                    {% if request.GET.orderby %}
+                    <input type="hidden" name="orderby" value="{{ request.GET.orderby }}">
+                    {% else %}
+                    <input type="hidden" name="orderby" value="name">
+                    {% endif %}
+                    <!--Передаем акционный товар или нет -->
+                    {% if request.GET.promo %}
+                    <input type="hidden" name="promo" value="{{ request.GET.promo }}">
+                    {% else %}
+                    <input type="hidden" name="promo" value="False">
+                    {% endif %}
+                    <!--Передаем коллекцию или нет -->
+                    {% if request.GET.collection_name %}
+                    {% for collection in q %}
+                    <input type="hidden" name="collection_name" value="{{ collection }}">
+                    {% endfor %}
+                    {% endif %}
+
+
+                
+                    <!--Форма-->
+                    <button class="check_btn" type="submit" value ="all" name="subcategory_slug">Все</button>
+                    {% for cat in category.get_children %}
+                    <button class="check_btn" type="submit" value ="{{ cat.slug }}" name="subcategory_slug">{{ cat.name }}</button>
+                    {% endfor %}
+                </form>
+
+                <div class="select_button_block">
+                    <!--Сортировка товара по алфавиту и цене ГОТОВО -->
+                    <form action="{% url 'sorted'  %}" method="GET">
+                        <!--Скрытые инпуты из других форм-->
+                        <!--Передаем слаг категории-->
+                        {% if request.GET.category_slug %}
+                        <input type="hidden" name="category_slug" value="{{ request.GET.category_slug }}">
+                        {% else %}
+                        <input type="hidden" name="category_slug" value="{{ category.slug }}">
+                        {% endif %}
+                        <!--передаем слаг субкатегории-->
+                        {% if request.GET.subcategory_slug %}
+                        <input type="hidden" name="subcategory_slug" value="{{ request.GET.subcategory_slug }}">
+                        {% else %}
+                        <input type="hidden" name="subcategory_slug" value="all">
+                        {% endif %}
+                        <!--Передаем акция или нет -->
+                        {% if request.GET.promo %}
+                        <input type="hidden" name="promo" value="{{ request.GET.promo }}">
+                        {% endif %}
+                        <!--Передаем коллекцию или нет -->
+                        {% if request.GET.collection_name %}
+                        {% for collection in q %}
+                        <input type="hidden" name="collection_name" value="{{ collection }}">
+                        {% endfor %}
+                        {% endif %}
+
+                        <!--Форма-->
+                        <ul class="select_items_list">
+                            <li class="select_items"> 
+                                <button type="submit" value="name" name="orderby" class="sorted_btn">
+                                    По алфавиту А-Я
+                                </button>
+                            </li>
+                            <li class="select_items" >
+                                <button type="submit" value="-name" name="orderby" class="sorted_btn">
+                                    По алфавиту Я-А
+                                </button>
+                            </li>
+                            <li class="select_items" >
+                                <button type="submit" value="price" name="orderby" class="sorted_btn">
+                                    По цене min-max
+                                </button>
+                            </li>
+                            <li class="select_items" >
+                                <button type="submit" value="-price" name="orderby" class="sorted_btn">
+                                    По цене max-min
+                                </button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <aside class="site_bar">
+            <!--Фильтрация товара по акции, цвету, коллекции -->
+            <div class="checkbox_block_filter">    
+                <form action="{% url 'sorted'  %}" method="GET" class="filter_form">
+                <!--Скрытые инпуты из других форм-->
+                <!--Передаем слаг категории-->
+                {% if request.GET.category_slug %}
+                <input type="hidden" name="category_slug" value="{{ request.GET.category_slug }}">
+                {% else %}
+                <input type="hidden" name="category_slug" value="{{ category.slug }}">
+                {% endif %}
+                <!--Передаем сортировку -->
+                {% if request.GET.orderby %}
+                <input type="hidden" name="orderby" value="{{ request.GET.orderby }}">
+                {% else %}
+                <input type="hidden" name="orderby" value="name">
+                {% endif %}
+                <!--передаем слаг субкатегории-->
+                {% if request.GET.subcategory_slug %}
+                <input type="hidden" name="subcategory_slug" value="{{ request.GET.subcategory_slug }}">
+                {% else %}
+                <input type="hidden" name="subcategory_slug" value="all">
+                {% endif %}
+
+
+                <!--Форма-->
+                <div class="promo_goods_checkbox">
+                    <!--Передаем акционный товар или нет -->
+                    <div>
+                        
+                        <input type="checkbox" name="promo" class="promo" id="promo" value="on" {% if request.GET.promo == 'on' %} checked {% endif %}>
+                        <label for="promo" class="p16_Sans">Акционные товары</label>
+                    </div>
+
+                </div>
+
+                {% color_list_product %}
+                    <div class="collection_goods_checkbox">
+                        <!--Блок фильрация по коллекции ГОТОВО-->
+                        <p class="p16_bold">Коллекция</p>
+                        {% for collection in collection_list %}
+                        <div class="checkbox_container">
+                            {% if collection.name in q %}
+                            <input type="checkbox" name="collection_name" id="type_1_goods_{{collection.name}}" value="{{collection.name}}" checked>
+                            {% else %}
+                            <input type="checkbox" name="collection_name" id="type_1_goods_{{collection.name}}" value="{{collection.name}}" >
+                            {% endif %}
+                            <label for="type_1_goods_{{collection.name}}" class="p16_Sans">{{collection.name}}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="seach_btn_form"  type="submit">
+                        Искать
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        <div class="category_goods_list_block">
+            {% for cart in products %}
+            <div class="category_goods_cart">
+                {% if cart.discount %}
+                <div class="discount_value">
+                    <p>-{{cart.discount}}%</p>
+                </div>
+                {% endif %}
+                <img src="{{cart.image.url}}" alt="Фото">
+                <p class="p16_Sans category_goods_cart_title">{{ cart.name }}</p>
+                <div class="promotional_goods_cart_footer">
+                    {% if cart.discount %}
+                    <span class="category_goods_price">{{ cart.sell_price }} &#8381</span>
+                    <s class="category_goods_old_price">{{cart.price}} &#8381</s>
+                    {% else %}
+                    <span class="category_goods_price">{{cart.price}} &#8381</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+        <div class="pagination_block">
+            {% if page_obj.has_previous %}
+            <a class="pagination_btn" href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}page={{ page_obj.previous_page_number }}">
+                Назад
+            </a>
+            <a class="pagination_btn" href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}page=1">1</a>
+            <a class="pagination_btn" href="#">
+                ...
+            </a>
+            {% endif %}
+            {% for page in paginator.page_range %}
+            {% if page_obj.number == page %}
+            <a class="pagination_btn_selected" href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}page={{page}}">
+                {{page}}
+            </a>
+            {% elif page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %} 
+                <a class="pagination_btn"
+                href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}page={{page}}">
+                {{page}}
+                </a>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <a class="pagination_btn" href="#">
+                    ...
+                </a>
+                <a href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}page={{page_obj.paginator.num_pages}}"
+                    class="pagination_btn">{{page_obj.paginator.num_pages}}
+                </a>
+                
+                <a class="pagination_btn" href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}page={{page_obj.next_page_number}}">
+                    Вперед
+                </a>
+                {% endif %}
+                
+        </div>
+</section>
+<section class="category_main_block">
+
+    <div class="category_block">
+        <h2 class="h2_some_block_title_32_pb_35 flex_100">{{category.name}}</h2>
+        <div class="category_content">
+            <p></p>{{ category.description|linebreaks}}
+            
+        </div>
+
+        <div class="flex_100 pd_top_40">
+            <h3 class="h3_20">Преимущества товаров данной категории:</h3>
+            <ul class="category_content_list_benefits">
+                {% for advantage in advantages %}
+                <li class="category_content_item_benefits">
+                    {{advantage.description}}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</section>
+{% endblock content %}

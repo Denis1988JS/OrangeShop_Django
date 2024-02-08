@@ -1,0 +1,10 @@
+<div class="color_goods_checkbox">
+	<p class="p16_bold">Цвет</p>
+	<div class="checkbox_color_list">
+		{% for color in color_list %}
+		<button class="check_color">
+			<img src="{{ color.img_color.url}}" alt="{{ color.value }}" data-color="{{ color.value }}">
+		</button>
+		{% endfor %}
+	</div>
+</div>

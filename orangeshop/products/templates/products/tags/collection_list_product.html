@@ -1,0 +1,13 @@
+<div class="collection_goods_checkbox">
+	<p class="p16_bold">Коллекция</p>
+		{% for collection in collection_list %}
+			
+			<div class="checkbox_container">
+				<button type="submit" value="{{collection.name}}">
+					<input type="checkbox" name="collection_name" id="type_1_goods" value="{{collection.name}}" >
+					<label for="type_1_goods" class="p16_Sans">{{collection.name}}</label>
+				</button>
+			</div>
+
+		{% endfor %}
+</div>

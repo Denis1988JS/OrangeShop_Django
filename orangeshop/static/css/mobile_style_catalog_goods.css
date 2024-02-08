@@ -85,6 +85,9 @@
 		min-width: 223px;
 		height: 44px;
 	}
+	.title_info_block {
+		padding: 50px 20px;
+	}
 }
 
 @media screen and (max-width: 768px) {

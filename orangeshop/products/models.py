@@ -105,20 +105,21 @@ class Category(MPTTModel):
     )
 
     def __str__(self):
-        return f'Категория - {self.name}'
+        return self.name
     def get_absolute_url(self):
         return reverse('category', kwargs={'category_slug':self.slug})
 
     class MPTTMeta:
         order_insertion_by = ['name']
     class Meta:
+        unique_together = [['parent', 'slug']]
         verbose_name = 'Категория товара'
         verbose_name_plural = 'Категории товаров'
 
 
 
 #Модель преимущество категории - AdvantagesCategory
-class AdvantagesCategory(models.CharField):
+class AdvantagesCategory(models.Model):
     description = models.TextField(max_length=500, unique=True, null=False, blank=False, verbose_name='Преимущество')
     categoty = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Категория", related_name='cat' )
     def __str__(self):

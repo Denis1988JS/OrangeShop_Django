@@ -124,6 +124,13 @@ class CategoryAdmin(MPTTModelAdmin):
 
 admin.site.register(Category,CategoryAdmin)
 
+#Модель преимущество категории товаров
+class AdvantagesCategoryAdmin(admin.ModelAdmin):
+    list_display = ('id',  'categoty')
+    list_display_links = ('id', 'categoty')
+
+admin.site.register(AdvantagesCategory,AdvantagesCategoryAdmin)
+
 
 #Модель товары - Product
 
