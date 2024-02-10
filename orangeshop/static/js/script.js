@@ -175,7 +175,20 @@ $(".nav_item_btn_big").on('click', function(e){
 	}
 })
 
+/*Обработчик checbox - color */
 
-
+$('.img_checkbox').on('click', function(e){
+	console.log($(this).siblings())
+	if ($(this).siblings().prop('checked')){
+		console.log('Не отметили')
+		$(this).removeClass('img_checkbox_checked')
+		$(this).siblings().prop('checked', false)
+	}
+	else if ($(this).siblings().not(':checked')) {
+		console.log('Отметили')
+		$(this).addClass('img_checkbox_checked')
+		$(this).siblings().prop('checked', true);
+	}
+})
 
 

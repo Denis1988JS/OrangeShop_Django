@@ -330,8 +330,29 @@
 	height: 26px;
 	border: 1px solid rgba(196, 196, 196, 1);
 	border-radius: 26px;
+	position: relative;
 }
-
+.checkbox_color {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+   transform: translate(-50%, -50%);
+	z-index: 1;
+}
+.img_checkbox {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+   transform: translate(-50%, -50%);
+	z-index: 1;
+	border-radius: 26px;
+	
+}
+.img_checkbox_checked {
+	-webkit-box-shadow: 0px -1px 7px 6px rgba(0, 26, 255);
+	-moz-box-shadow: 0px -1px 7px 6px  rgba(0, 26, 255);
+	box-shadow: 0px -1px 7px 6px  rgba(0, 26, 255);
+}
 .collection_goods_checkbox {
 	width: 100%;
 	border-bottom: 1px solid rgba(236, 236, 236, 1);

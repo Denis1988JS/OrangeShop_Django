@@ -47,11 +47,14 @@
     
     <div class="title_info_block">
         <div class="title_info_header">
+            <!--
+                Данные из request.GET
             <h2 class="h2_some_block_title_32_pb_6">
                 {{ request.GET }}
                 <p>q = {{ q }}</p>
                 <p>{{collection_name}}</p>
             </h2>
+            -->
             <h2 class="h2_some_block_title_32_pb_6">{{category.name}}</h2>
             <div class="checked_main_block">
                 
@@ -82,7 +85,12 @@
                     <input type="hidden" name="collection_name" value="{{ collection }}">
                     {% endfor %}
                     {% endif %}
-
+                    <!--Передаем цвет товара или нет -->
+                    {% if request.GET.color_name %}
+                    {% for color in c %}
+                    <input type="hidden" name="color_name" value="{{ color }}">
+                    {% endfor %}
+                    {% endif %}
 
                 
                     <!--Форма-->
@@ -116,6 +124,12 @@
                         {% if request.GET.collection_name %}
                         {% for collection in q %}
                         <input type="hidden" name="collection_name" value="{{ collection }}">
+                        {% endfor %}
+                        {% endif %}
+                        <!--Передаем цвет товара или нет -->
+                        {% if request.GET.color_name %}
+                        {% for color in c %}
+                        <input type="hidden" name="color_name" value="{{ color }}">
                         {% endfor %}
                         {% endif %}
 
@@ -171,18 +185,38 @@
                 {% endif %}
 
 
-                <!--Форма-->
-                <div class="promo_goods_checkbox">
-                    <!--Передаем акционный товар или нет -->
-                    <div>
-                        
-                        <input type="checkbox" name="promo" class="promo" id="promo" value="on" {% if request.GET.promo == 'on' %} checked {% endif %}>
-                        <label for="promo" class="p16_Sans">Акционные товары</label>
+                    <!--Форма-->
+                    <div class="promo_goods_checkbox">
+                        <!--Передаем акционный товар или нет -->
+                        <div>
+                            
+                            <input type="checkbox" name="promo" class="promo" id="promo" value="on" {% if request.GET.promo == 'on' %} checked {% endif %}>
+                            <label for="promo" class="p16_Sans">Акционные товары</label>
+                        </div>
+
                     </div>
 
-                </div>
+                    <!--Блок фильрация по цвету ГОТОВО-->
 
-                {% color_list_product %}
+                    <div class="color_goods_checkbox">
+                        <p class="p16_bold">Цвет</p>
+                        <div class="checkbox_color_list">
+                            {% for color in color_list %}
+                                {% if color.value in c %}
+                                <div class="check_color ">
+                                    <input type="checkbox" name="color_name" value="{{ color.value }}" class="checkbox_color" checked>
+                                    <img src="{{ color.img_color.url}}" alt="{{ color.value }}" data-color="{{ color.value }}" class="img_checkbox img_checkbox_checked">
+                                </div>
+                                {% else %}
+                                <div class="check_color ">
+                                    <input type="checkbox" name="color_name" value="{{ color.value }}" class="checkbox_color">
+                                    <img src="{{ color.img_color.url}}" alt="{{ color.value }}" data-color="{{ color.value }}" class="img_checkbox ">
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
                     <div class="collection_goods_checkbox">
                         <!--Блок фильрация по коллекции ГОТОВО-->
                         <p class="p16_bold">Коллекция</p>
@@ -228,22 +262,22 @@
     </div>
         <div class="pagination_block">
             {% if page_obj.has_previous %}
-            <a class="pagination_btn" href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}page={{ page_obj.previous_page_number }}">
+            <a class="pagination_btn" href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}{{color_list_get}}page={{ page_obj.previous_page_number }}">
                 Назад
             </a>
-            <a class="pagination_btn" href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}page=1">1</a>
+            <a class="pagination_btn" href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}{{color_list_get}}page=1">1</a>
             <a class="pagination_btn" href="#">
                 ...
             </a>
             {% endif %}
             {% for page in paginator.page_range %}
             {% if page_obj.number == page %}
-            <a class="pagination_btn_selected" href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}page={{page}}">
+            <a class="pagination_btn_selected" href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}{{color_list_get}}page={{page}}">
                 {{page}}
             </a>
             {% elif page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %} 
                 <a class="pagination_btn"
-                href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}page={{page}}">
+                href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}{{color_list_get}}page={{page}}">
                 {{page}}
                 </a>
                 {% endif %}
@@ -252,11 +286,11 @@
                 <a class="pagination_btn" href="#">
                     ...
                 </a>
-                <a href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}page={{page_obj.paginator.num_pages}}"
+                <a href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}{{color_list_get}}page={{page_obj.paginator.num_pages}}"
                     class="pagination_btn">{{page_obj.paginator.num_pages}}
                 </a>
                 
-                <a class="pagination_btn" href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}page={{page_obj.next_page_number}}">
+                <a class="pagination_btn" href="?{{subcategory_slug}}{{category_slug}}{{orderby}}{{promo}}{{collection_name}}{{color_list_get}}page={{page_obj.next_page_number}}">
                     Вперед
                 </a>
                 {% endif %}

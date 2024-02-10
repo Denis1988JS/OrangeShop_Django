@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView,View
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-from products.models import Product, Category, AdvantagesCategory, Collection
+from products.models import Product, Category, AdvantagesCategory, Collection, ColorProduct
 from django.db.models import Q
 from django.http import QueryDict
 
@@ -14,7 +14,7 @@ class CatalogProducts(ListView):
     model = Product
     template_name = 'products/catalog.html'
     context_object_name = 'products'
-    paginate_by = 8
+    paginate_by = 2
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Каталог'
@@ -26,7 +26,7 @@ class CatalogProductsCategory(ListView):
     model = Product
     template_name = 'products/catalog_category.html'
     context_object_name = 'products'
-    paginate_by = 3
+    paginate_by = 2
 
     def get_queryset(self):
         #Переопределяем модель продукты - к катерии и подкатегиям
@@ -42,6 +42,7 @@ class CatalogProductsCategory(ListView):
         context['category'] = Category.objects.get(slug=self.kwargs['category_slug'])
         context['advantages'] = AdvantagesCategory.objects.filter(categoty__id=context['category'].id)
         context['collection_list'] = Collection.objects.all()
+        context['color_list'] = ColorProduct.objects.all()  # Список всех цветов коллекци
         return context
 
 
@@ -55,35 +56,49 @@ class SortCatalogProductsCategory(ListView):
         print(self.request.GET)
         category = Category.objects.get(slug=self.request.GET.get("category_slug")) #Получаем категорию страницы
         sub_categories = category.get_descendants(include_self=True) #Все субкатегории
-
         # Обработчики форм и получение из них данных
+        #Получаем данные из коллекции товара
         if self.request.GET.getlist('collection_name') == []:
             collection_name = list(Collection.objects.all().values_list('name', flat=True))
             print('Список')
         else:
             collection_name = self.request.GET.getlist('collection_name')  # Список коллекций
 
-        print(collection_name)
-        print(type(collection_name))
+        #Получаем данные из цвета товара
+        if self.request.GET.getlist('color_name') == []:
+            color_list = list(ColorProduct.objects.all().values_list('value', flat=True))
+
+        else:
+            color_list = self.request.GET.getlist('color_name')  # Список цветов
+
+
         sub_cat = self.request.GET.getlist("subcategory_slug")[0] # слаг субкатегории
         orderby = self.request.GET.getlist('orderby')[0] #Сортировка из формы
-
-
 
         #Условия если субкатегория либо slug либо all
         if sub_cat == "all":
             #Получаем и возвращаем queryset
-            goods = Product.objects.filter(Q(category__in=sub_categories) & Q(collection__name__in = collection_name)).order_by(orderby).distinct()
+            goods = Product.objects.filter(Q(category__in=sub_categories) & Q(collection__name__in = collection_name) & Q(color__value__in =
+                                                                                                                         color_list)).order_by(orderby).distinct()
             if self.request.GET.get('promo') in [None, False, '']:
-                goods = Product.objects.filter(Q(category__in=sub_categories)& Q(collection__name__in = collection_name)).order_by(orderby).distinct()
+                goods = Product.objects.filter(Q(category__in=sub_categories)& Q(collection__name__in = collection_name) & Q(color__value__in =
+                                                                                                                         color_list)).order_by(
+                    orderby).distinct()
             elif self.request.GET.get('promo') == 'on':
-                goods = Product.objects.filter(Q(category__in=sub_categories) & Q(discount__gt=0)& Q(collection__name__in = collection_name)).order_by(orderby).distinct()
+                goods = Product.objects.filter(Q(category__in=sub_categories) & Q(discount__gt=0) & Q(collection__name__in =
+                                                                                                      collection_name) & Q(color__value__in =
+                                                                                                                         color_list)).order_by(
+                    orderby).distinct()
         else:
             # Получаем и возвращаем queryset
-            goods = Product.objects.filter(Q(category__in=sub_categories) & Q(category__slug=sub_cat)& Q(collection__name__in = collection_name)).order_by(
+            goods = Product.objects.filter(Q(category__in=sub_categories) & Q(category__slug=sub_cat) & Q(collection__name__in =
+                                                                                                          collection_name) & Q(color__value__in =
+                                                                                                                         color_list)).order_by(
                 orderby).distinct()
             if self.request.GET.get('promo') == 'on':
-                goods = Product.objects.filter(Q(category__in=sub_categories) & Q(category__slug=sub_cat)&Q(discount__gt =0)& Q(collection__name__in = collection_name)).order_by(
+                goods = Product.objects.filter(Q(category__in=sub_categories) & Q(category__slug=sub_cat)&Q(discount__gt =0)& Q(
+                    collection__name__in = collection_name) & Q(color__value__in =
+                                                                                                                         color_list)).order_by(
                     orderby).distinct()
 
 
@@ -94,17 +109,22 @@ class SortCatalogProductsCategory(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = f'Каталог '
         context['collection_list'] = Collection.objects.all() #Список всех коллекций
+        context['color_list'] = ColorProduct.objects.all()#Список всех цветов коллекций
         #Данные из GET запросов
         context['category'] = Category.objects.get(slug__in=self.request.GET.getlist("category_slug"))#Категория товаров
         context['orderby'] =  'orderby'+'='+self.request.GET.getlist("orderby")[0]+'&' #Сортировка в пагинацию
         context['subcategory_slug'] = 'subcategory_slug'+'='+self.request.GET.getlist("subcategory_slug")[0]+'&' #Субкатегория в пагинацию
         context['category_slug'] = 'category_slug'+'='+ self.request.GET.getlist("category_slug")[0]+'&'
         context["collection_name"] = ''.join([f"collection_name={x}&" for x in self.request.GET.getlist("collection_name")])
+        context["color_list_get"] = ''.join([f"color_name={x}&" for x in self.request.GET.getlist("color_name")])
         context['q'] = QueryDict(context["collection_name"]).getlist(key='collection_name') #Список коллекций
+        context['c'] = QueryDict(context["color_list_get"]).getlist(key='color_name')  # Список коллекций
         if self.request.GET.get('promo') in [None, False, '']:
             context['promo'] = ''
         else:
             context['promo'] = 'promo'+'='+self.request.GET.getlist('promo')[0]+'&'
+
+
         return context
 
 
