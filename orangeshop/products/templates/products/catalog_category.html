@@ -247,7 +247,11 @@
                 </div>
                 {% endif %}
                 <img src="{{cart.image.url}}" alt="Фото">
-                <p class="p16_Sans category_goods_cart_title">{{ cart.name }}</p>
+                <p class="p16_Sans promotional_goods_cart_title">
+                    <a href="{{ cart.get_absolute_url }}">
+                        {{ cart.name }} {{cart.short_description| truncatechars:50}}
+                    </a>
+                </p>
                 <div class="promotional_goods_cart_footer">
                     {% if cart.discount %}
                     <span class="category_goods_price">{{ cart.sell_price }} &#8381</span>

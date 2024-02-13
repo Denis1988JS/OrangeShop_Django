@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+{% load static %}
+{% load orangeMainApp_tag %}
+
+{% block css_block %}
+<link rel="stylesheet" href="{% static 'css/style_catalog_goods.css' %}">
+<link rel="stylesheet" href="{% static 'css/mobile_style_catalog_goods.css' %}">
+<link rel="stylesheet" href="{% static 'css/style_product_detail.css' %}">
+{% endblock css_block %}
+
+
+{% block icon %}
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/icon_title.png' %}">
+{% endblock icon %}
+
+{% block title %}{{ product.name }}{% endblock title %}
+
+{% block modal %}
+<section class="modal_block_main">
+	<div class="modal_header">
+		<button class="modal_close">Закрыть</button>
+	</div>
+	<div class="block_chema">
+		<img src="{{product.connectionDiagram.url}}" alt="Схема">
+	</div>
+</section>
+{% endblock modal %}
+
+{% block page_name %}
+<section class="adres_info_section">
+	<div class="adres_info_block">
+		<a href="{% url 'home' %}">Главная</a>
+		<img src="{% static 'images/adres_block/arrow-right.png' %}" alt=">">
+		<a href="{% url 'catalog' %}">Товары</a>
+		<img src="{% static 'images/adres_block/arrow-right.png' %}" alt=">">
+		<a href="{% url 'catalog' %}">{{product.category}}</a>
+	</div>
+</section>
+{% endblock page_name %}
+
+{% block content %}
+	<section class="title_product_section">
+		<div class="title_product_block">
+			<div class="product_block_image">
+				<img src="{{product.image.url}}" alt="{{product.name}}" class="product_main_photo">
+			</div>
+			<div class="product_block_info">
+				<div class="product_block_absolute">
+					<div class="rel">
+						<div class="product_block_sticky">
+							<p class="h3_20_sans">
+								{{ product.name }} {{product.short_description| truncatechars:50}}
+							</p>
+							<div class="promotional_goods_cart_footer">
+								{% if product.discount %}
+								<span class="popular_goods_price">{{ product.sell_price }} &#8381</span>
+								<s class="popular_goods_old_price">{{ product.price }} &#8381</s>
+								{% else %}
+								<span class="popular_goods_price">{{ product.price }} &#8381</span>
+								{% endif %}
+							</div>
+							<div class="block_button_cart">
+								<button class="button_cart">
+									В корзину
+								</button>
+							</div>
+							<div class="line"></div>
+							<div class="our_benefits_column_list">
+								{% for benefit in benefits %}
+								<div class="benefits_block_item_list">
+									<div class="benefits_image_block">
+										<img src="{{benefit.image.url}}" alt="{{benefit.name}}">
+									</div>
+									<div class="benefits_data">
+										<p class="p20-16_p0_5">{{benefit.title}}</p>
+										<p class="p15_sans_grey_nocenter">{{benefit.description}}</p>
+									</div>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="description_product_section">
+		<div class="description_product_block">
+			<h2 class="h2_some_block_title_32_pb_35">
+				Что в комплекте
+			</h2>
+			<div class="complect_list">
+				{% for complect in product.equipment.all %}
+				<div class="complect_item">
+					<p>{{ complect.name }}</p>
+				</div>
+				{% endfor %}
+			</div>
+			<p class="show_chema">Показать схему подключения</p>
+		</div>
+	</section>
+	<section class="promo_section">
+		{% our_promo_list %}
+	</section>
+{% endblock %}

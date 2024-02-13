@@ -192,3 +192,11 @@ $('.img_checkbox').on('click', function(e){
 })
 
 
+/*Модальное окно - показать схему подключения  */
+
+$('.show_chema').on('click', function(e){
+	$('.modal_block_main').toggleClass('modal_open')
+})
+$('.modal_header').on('click', function(e){
+	$('.modal_block_main').removeClass('modal_open')
+})

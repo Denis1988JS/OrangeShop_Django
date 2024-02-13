@@ -63,7 +63,12 @@
 			{% else %}
 			<img src="{% static 'images/category/Notfoundimage.png' %}" alt="Нет фото">
 			{% endif %}
-			<p class="p16_Sans popular_goods_cart_title">{{product.name}}</p>
+			<p class="p16_Sans promotional_goods_cart_title">
+				<a href="{{ product.get_absolute_url }}">
+					{{ product.name }} {{product.short_description| truncatechars:50}}
+				</a>
+			</p>
+			
 			<div class="promotional_goods_cart_footer">
 				{% if product.discount %}
 				<span class="popular_goods_price">{{ product.sell_price }} &#8381</span>

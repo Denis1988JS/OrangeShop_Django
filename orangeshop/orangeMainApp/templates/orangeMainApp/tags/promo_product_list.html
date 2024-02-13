@@ -9,7 +9,11 @@
 				<p>-{{product.discount|floatformat}}%</p>
 			</div>
 			<img src="{{ product.image.url }}" alt="Фото">
-			<p class="p16_Sans promotional_goods_cart_title">{{ product.name }} {{product.short_description| truncatechars:50}}</p>
+			<p class="p16_Sans promotional_goods_cart_title">
+				<a href="{{ product.get_absolute_url }}">
+				{{ product.name }} {{product.short_description| truncatechars:50}}
+				</a>
+			</p>
 			<div class="promotional_goods_cart_footer">
 				<span class="promotional_goods_price">{{ product.sell_price }} &#8381</span>
 				<s class="promotional_goods_old_price">{{ product.price }} &#8381</s>

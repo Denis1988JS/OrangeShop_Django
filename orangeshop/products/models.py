@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+
 
 # Create your models here.
 
@@ -37,7 +38,7 @@ class EquipmentProduct(models.Model):
         name = models.CharField(max_length=150, verbose_name='Комплектация')
         description = models.TextField(max_length=200, verbose_name='Описание комплектации')
         def __str__(self):
-            return f'Комплектация - {self.name}'
+            return f'{self.name}'
         class Meta:
             verbose_name = 'Комплектация товара'
             verbose_name_plural = 'Комплектация товаров'
@@ -164,6 +165,10 @@ class Product(models.Model):
         if self.discount > 0:
             self.promo = True
             return self.promo
+
+    def get_absolute_url(self):
+        return reverse_lazy('product', kwargs={'product_slug':self.slug})
+
     class Meta:
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'

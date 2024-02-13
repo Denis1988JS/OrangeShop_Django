@@ -223,7 +223,10 @@
 		gap: 110px;
 	}
 	.about_us_main {
-		padding: 0px 15px;
+		padding: 0px 20px;
+	}
+	.our_products_main {
+		padding: 0;
 	}
 	.promotional_goods_section, .popular_goods_section, .our_products_block  {
 		padding: 20px 20px;

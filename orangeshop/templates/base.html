@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{% static '/css/mobile_style.css'%}">
     
     {% bootstrap_javascript jquery='full' %}
-    <title>{{ title }}</title>
+    <title>{% block title %}{{ title }}{% endblock title %}</title>
 </head>
 <body>
     <div class="wrapper">
@@ -30,7 +30,7 @@
                 <nav class="nav_header">
 
                     <div class="block_logo">
-                        <a href="#" target="_blank"><img src="{% static 'images/header/logo.svg'%}" alt="Логотип"></a>
+                        <a href="/" target="_blank"><img src="{% static 'images/header/logo.svg'%}" alt="Логотип"></a>
                         <div class="data_seach_btn_2">
                             <button class="seach_btn_2">
                                 <img src="{% static 'images/header/search_btn_2.svg'%}" alt="Поиск">
@@ -166,7 +166,8 @@
             {% endcomment %}
             {% endblock catalog_of_goods_block %}
         </header>
-        
+        {% block modal %}
+        {% endblock modal %}
         <main class="main">
             {% block page_name %}
             {% endblock page_name %}

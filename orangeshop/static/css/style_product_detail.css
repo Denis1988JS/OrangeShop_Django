@@ -1,0 +1,193 @@
+
+/*Секция описание товара + карточка с ценой + покупка - title_product_section*/
+.title_product_section {
+	width: 100%;
+	padding: 0px 20px;
+}
+.title_product_block {
+	margin: 0px auto;
+	max-width: 1200px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 40px 0px;
+	
+}
+.product_main_photo {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+.product_block_image {
+	flex: 0 1 40%;
+	height: auto;
+}
+.product_block_info {
+	position: relative;
+	flex: 0 1 40%;
+	top: 60px;
+	min-height: 100%;
+}
+.product_block_absolute {
+	position: absolute;
+	width: 100%;
+	height: 100vh;
+}
+.rel {
+	position: relative;
+	height: 100vh;
+}
+.product_block_sticky {
+	position: sticky;
+	left: 0;
+	top: 60px;
+	z-index: 100;
+	width: 100%;
+	border: 1px solid #FB6900;
+	padding: 25px;
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+	background-color: #FFF;
+}
+.button_cart {
+	text-align: center;
+	background-color: #FB6900;
+	color: #FFF;
+	font-family: Orenburg;
+	font-size: 18px;
+	line-height: 24px;
+	width: 219px;
+	padding: 10px 0px;
+	border-radius: 4px;
+}
+.line {
+	border-top: 1px solid #ECECEC;
+}
+.our_benefits_column_list {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+.benefits_block_item_list {
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 20px;
+}
+.benefits_image_block {
+	width: 48px;
+	height: auto;
+}
+.benefits_image_block img{
+	width: 48px;
+	height: auto;
+	object-fit: contain;
+}
+
+/*Секция комплектация + преимущества товара - description_product_section */
+
+.description_product_section {
+	width: 100%;
+	height: auto;
+	border-radius: 2px;
+	background: #F6F6F6;
+	padding: 0px 40px;
+}
+.description_product_block {
+	margin: 0px auto;
+	max-width: 1200px;
+	padding: 60px 0px;
+}
+.complect_list {
+	max-width: 50%;
+	height: auto;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px 20px;
+}
+.complect_item {
+	padding: 15px 20px;
+	border-radius: 48px;
+	background-color: #FFF;
+}
+.complect_item p {
+	margin-left: 10px;
+	font-size: 18px;
+	line-height: 32px;
+	font-family: PT Sans;
+	position: relative;
+	margin-left: 20px;
+}
+.complect_item p::before {
+	content: '';
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	background-image: url('../images/complect/checkmark.png');
+	background-position: left center;
+	background-repeat: no-repeat;
+	left: -20px;
+	top: 10px;
+}
+.show_chema {
+	width: fit-content;
+	color: #FB6900;
+	font-size: 16px;
+	font-family: PT Sans;
+	line-height: 16px;
+	padding: 25px 0px 3px 0px;
+
+}
+.show_chema:hover {
+	cursor: pointer;
+	padding-bottom: 2px;
+	border-bottom: 1px dashed #FB6900;
+}
+/*модальное окно - показать схему подключения - modal_block_main */
+.modal_block_main {
+	width: 100%;
+	height: 100vh;
+	position: sticky;
+	left: 0;
+	top: 0;
+	background-color: #FFF;
+	z-index: -100;
+	display: none;
+}
+.modal_header {
+	width: 100%;
+	height: auto;
+	padding: 25px 40px;
+	display: flex;
+	justify-content: flex-end;
+}
+.modal_close {
+	text-align: center;
+	background-color: #FB6900;
+	color: #FFF;
+	font-family: Orenburg;
+	font-size: 18px;
+	line-height: 24px;
+	width: 219px;
+	padding: 10px 0px;
+	border-radius: 4px;
+}
+.modal_open {
+	z-index: 1000;
+	display: block;
+}
+.block_chema {
+	max-width: 635px;
+	padding: 20px;
+	margin: 0px auto;
+	height: auto;
+	text-align: center;
+}
+.block_chema img {
+	max-width: 100%;
+	height: auto;
+	object-fit: cover;
+}

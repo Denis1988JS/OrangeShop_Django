@@ -5,7 +5,13 @@
 	width: 100%;
 	height: auto;
 }
-
+.p16_Sans a {
+	color: inherit;
+	cursor: pointer;
+}
+.p16_Sans a:hover {
+	color: #FF7028;
+}
 /*Шапка сайта--------------------------------------------------------------*/
 
 .header_main_block {
@@ -481,6 +487,7 @@ color: rgba(254, 91, 0, 1);
 .our_products_main {
 	width: 100%;
 	background: #FFF;
+	padding: 0px 40px;
 }
 .our_products_block {
 	max-width: 1200px;

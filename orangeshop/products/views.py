@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView,View
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
+
+from orangeMainApp.models import OurBenefits
 from products.models import Product, Category, AdvantagesCategory, Collection, ColorProduct
 from django.db.models import Q
 from django.http import QueryDict
@@ -9,12 +11,12 @@ from django.http import QueryDict
 # Create your views here.
 
 
-#Классовй шаблон - каталог товаров
+#Классовый шаблон - каталог товаров
 class CatalogProducts(ListView):
     model = Product
     template_name = 'products/catalog.html'
     context_object_name = 'products'
-    paginate_by = 2
+    paginate_by = 8
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Каталог'
@@ -101,7 +103,6 @@ class SortCatalogProductsCategory(ListView):
                                                                                                                          color_list)).order_by(
                     orderby).distinct()
 
-
         queryset = goods
         return queryset
 
@@ -124,12 +125,7 @@ class SortCatalogProductsCategory(ListView):
         else:
             context['promo'] = 'promo'+'='+self.request.GET.getlist('promo')[0]+'&'
 
-
         return context
-
-
-
-
 
 # sub_category = self.request.GET.getlist("subcategory_slug")[0]
 # collection_name = self.request.GET.getlist("collection_name")
@@ -149,9 +145,6 @@ class SortCatalogProductsCategory(ListView):
 #     if len(collection_name) > 0:
 #         queryset = Product.objects.filter(Q(category__slug=sub_category) & Q(collection__name__in = collection_name)& Q(promo=promo_true)).distinct().order_by(sort)
 
-
-
-
 # context['category_slug'] = 'category_slug'+'='+self.request.GET.getlist("category_slug")[0]+'&'
 # context['orderby'] = 'orderby'+'='+self.request.GET.getlist("orderby")[0]+'&'
 # context['subcategory_slug'] = 'subcategory_slug'+'='+self.request.GET.getlist("subcategory_slug")[0] +'&'
@@ -161,3 +154,14 @@ class SortCatalogProductsCategory(ListView):
 # context["collection_name"] = ''.join([f"collection_name={x}&" for x in self.request.GET.getlist("collection_name")])
 # context["promo"] = 'promo'+'='+self.request.GET.getlist("promo_goods")[0] +'&'
 # context['q'] = QueryDict(context["collection_name"]).getlist(key='collection_name')
+
+
+class ProductView(DetailView):
+    model = Product
+    template_name = 'products/product_detail.html'
+    context_object_name = 'product'
+    slug_url_kwarg = 'product_slug'
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['benefits'] = OurBenefits.objects.all()
+        return context
