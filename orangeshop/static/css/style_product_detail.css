@@ -87,7 +87,7 @@
 	object-fit: contain;
 }
 
-/*Секция комплектация + преимущества товара - description_product_section */
+/*Секция комплектация + преимущества товара - description_product_section + benefits_product_block */
 
 .description_product_section {
 	width: 100%;
@@ -190,4 +190,54 @@
 	max-width: 100%;
 	height: auto;
 	object-fit: cover;
+}
+.product_full_description {
+	padding-top: 25px;
+}
+.orage_first {
+	color: #151716;
+	font-family: PT Sans;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 32px; /* 177.778% */
+}
+.orage_first::first-letter {
+	font-family: "PT Sans";
+	color: #ccc;
+	font-size: 52px;
+	line-height: 40px;
+	float: left;
+	font-weight: 400;
+	margin-bottom: 0px;
+	margin-right: 7px;
+	position: relative;
+	color: rgba(254, 91, 0, 1);
+}
+
+/*benefits_product_block*/
+.benefits_product_block {
+	margin: 0px auto;
+	max-width: 1200px;
+	padding: 0px 0px 60px 0px;
+}
+.product_benefits_column_list {
+	width: 100%;
+}
+.product_benefits_block_item_list {
+	height: auto;
+	display: flex;
+	align-items: flex-start;
+	gap: 30px;
+	margin-bottom: 20px;
+}
+.product_benefits_image_block {
+	width: 100px;
+	height: 100px;
+	flex: 0 0 100px;
+	background-color: #FB6900;
+	border-radius: 100px;
+}
+.product_benefits_data {
+	flex: 0 1 auto;
 }

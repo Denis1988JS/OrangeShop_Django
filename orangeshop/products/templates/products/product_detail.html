@@ -17,6 +17,7 @@
 {% block title %}{{ product.name }}{% endblock title %}
 
 {% block modal %}
+<!--Модальное окно - схема подключения -->
 <section class="modal_block_main">
 	<div class="modal_header">
 		<button class="modal_close">Закрыть</button>
@@ -86,6 +87,7 @@
 		</div>
 	</section>
 	<section class="description_product_section">
+
 		<div class="description_product_block">
 			<h2 class="h2_some_block_title_32_pb_35">
 				Что в комплекте
@@ -98,6 +100,30 @@
 				{% endfor %}
 			</div>
 			<p class="show_chema">Показать схему подключения</p>
+			<div class="product_full_description">
+				<p class="orage_first">
+					{{product.description}}
+				</p>
+			</div>
+		</div>
+
+		<div class="benefits_product_block">
+			<h2 class="h2_some_block_title_32_pb_35">
+				Преимущества
+			</h2>
+			<div class="product_benefits_column_list">
+				{% for advantages in product.advantages.all %}
+				<div class="product_benefits_block_item_list">
+					<div class="product_benefits_image_block">
+						
+					</div>
+					<div class="product_benefits_data">
+						<p class="p20-16_p0_5">{{advantages.name}}</p>
+						<p class="p15_sans_grey_nocenter">{{advantages.description}}</p>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
 		</div>
 	</section>
 	<section class="promo_section">
