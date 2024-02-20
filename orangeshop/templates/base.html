@@ -1,6 +1,10 @@
 {% load mptt_tags %}
 {% load bootstrap4 %}
 {% load static %}
+{% load static %}
+{% load orangeMainApp_tag %}
+{% load products_tag %}
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -19,8 +23,8 @@
     <link rel="stylesheet" href="{% static '/css/min_style.css'%}">
     <link rel="stylesheet" href="{% static '/css/statick_style.css'%}">
     <link rel="stylesheet" href="{% static '/css/mobile_style.css'%}">
-    
     {% bootstrap_javascript jquery='full' %}
+    
     <title>{% block title %}{{ title }}{% endblock title %}</title>
 </head>
 <body>
@@ -59,7 +63,6 @@
                     {% endcomment %}
                     {% endblock nav_list_big %}
 
-                    
                     {% block title_nav_block %}
                     {% comment %}
                     <!-- Блок сделано в РФ в header
@@ -82,26 +85,15 @@
                                 <span class="value_cart">4290 &#8381</span>
                             </a>
                         </div>
-                        <div class="block_nav_list">
-                            <ul class="nav_list">
-                                <li class="nav_item">
-                                    <a href="#" class="nav_item_link">О компании</a>
-                                </li>
-                                <li class="nav_item">
-                                    <a href="#" class="nav_item_link">О продукции</a>
-                                </li>
-                                <li class="nav_item list_of_goods">
-                                    Каталог товаров
-                                    <img src="{% static 'images/header/vector_list_of_good.svg'%}" alt="" class="nav_item_arrow">
-                                    <ul class="list_of_category">
-                                        <li><a href="./category.html">Смесители</a></li>
-                                        <li><a href="#">Мебель</a></li>
-                                        <li><a href="#">Душевая программа</a></li>
-                                        <li><a href="#">Аксессуары</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+                        
+                        {% block mobile_cat_list %}
+                        <!--Блок список категорий для мобильного меню -->
+                        {% collection_list_product_mobile %}
+                        {% endblock mobile_cat_list %}
+                        
+
+                        
+                        
                         <div class="data_account">
                             <a href="#">
                                 <img src="{% static 'images/header/user.svg'%}" alt="Пользователь">

@@ -75,7 +75,7 @@
 @media screen and (max-width: 768px) {
 	.our_benefits_list {
 		gap: 30px 0px;
-		padding: 54px 15px 80px;
+		padding: 54px 20px 80px;
 	}
 	.benefits_item {
 		min-width: 100%;
@@ -108,7 +108,7 @@
 }
 @media screen and (max-width: 576px) {
 	.promotional_goods_cart, .popular_goods_cart {
-		flex: 0 1 262px;
+		flex: 0 1 100%;
 	}
 }
 
@@ -454,7 +454,7 @@
 	}
 	.product_section_list {
 		flex-direction: row;
-		height: auto;
+		max-height: fit-content;
 	}
 	.product_section_items {
 		max-width: 100%;
@@ -463,5 +463,29 @@
 @media screen and (max-width: 576px) {
 	.block_nav_list_big {
 		display: none;
+	}
+}
+/*adres_info_section - адресная строка*/
+
+@media screen and (max-width: 756px) {
+	.adres_info_section {
+		padding: 10px 20px;
+	}
+	.adres_info_block {
+		flex-wrap: wrap;
+		padding: 0px;
+	}
+}
+
+/*Доработки по стилям*/
+@media screen and (max-width: 476px) {
+	.promotional_goods_block, .footer {
+		padding: 0px 0px;
+	}
+	.about_us_block {
+		padding: 20px 0px;
+	}
+	.our_benefits_list {
+		padding: 20px 20px;
 	}
 }

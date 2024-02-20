@@ -143,6 +143,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('name', 'category')
     search_help_text = ('Поиск')
     ordering = ['id']
+    
     def get_html_photo(self, object):
         if object.image:
             return mark_safe(f"<img src='{object.image.url}' width=35>")

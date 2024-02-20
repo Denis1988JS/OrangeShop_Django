@@ -10,7 +10,6 @@ def category_list_relative():
     return {'cats_list': cats_list}
 
 
-
 @register.inclusion_tag('products/tags/color_list_product.html')
 #В проекте не применяется
 def color_list_product():
@@ -22,3 +21,10 @@ def color_list_product():
 def collection_list_product():
     collection_list = Collection.objects.all()
     return {'collection_list': collection_list}
+
+
+#Список категорий для мобильной навигации
+@register.inclusion_tag('products/tags/mobile_list_of_category.html')
+def collection_list_product_mobile():
+    category_list = Category.objects.all()
+    return {'category_list': category_list}

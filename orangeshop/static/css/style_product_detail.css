@@ -2,7 +2,7 @@
 /*Секция описание товара + карточка с ценой + покупка - title_product_section*/
 .title_product_section {
 	width: 100%;
-	padding: 0px 20px;
+	padding: 0px 40px;
 }
 .title_product_block {
 	margin: 0px auto;
@@ -35,7 +35,7 @@
 }
 .rel {
 	position: relative;
-	height: 100vh;
+	height: 230vh;
 }
 .product_block_sticky {
 	position: sticky;
@@ -215,14 +215,14 @@
 	color: rgba(254, 91, 0, 1);
 }
 
-/*benefits_product_block*/
+/*benefits_product_block - блок преимущество товара */
 .benefits_product_block {
 	margin: 0px auto;
 	max-width: 1200px;
 	padding: 0px 0px 60px 0px;
 }
 .product_benefits_column_list {
-	width: 100%;
+	width: 50%;
 }
 .product_benefits_block_item_list {
 	height: auto;
@@ -240,4 +240,99 @@
 }
 .product_benefits_data {
 	flex: 0 1 auto;
+}
+
+/*characteristics_product_block - блок характеристики товара*/
+.characteristics_product_block {
+	max-width: 1200px;
+	margin: 0px auto;
+	padding: 0px 0px 60px 0px;
+}
+.characteristics_product_column {
+	max-width: 50%;
+	display: flex;
+	flex-direction: column;
+}
+.characteristic_block_list {
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+.characteristic_block_item_flex {
+	gap: 20px;
+}
+.characteristic_block_item_flex img{
+	width: 80px;
+	height: 80px;
+	object-fit: contain;
+	padding-bottom: 15px;
+	
+}
+.characteristic_block_list p {
+	padding-top: 15px;
+}
+.characteristic_block_list_column {
+	max-width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-top: 50px;
+}
+.characteristic_block_item_column {
+	width: 100%;
+	height: auto;
+	padding: 30px 0px;
+	border-top: 1px dashed #B6B6B6;
+	display: flex;
+	align-items: center;
+}
+.characteristic_block_item_column p {
+	flex: 0 1 50%;
+}
+.color_block_list {
+	width: 50%;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+.color_block_item {
+	display: flex;
+	align-items: center;
+	flex: 0 1 31%;
+	gap: 10px;
+}
+/*Секция 4 товара из коллекции - section_other_collection_products */
+.section_other_collection_products {
+	width: 100%;
+	height: auto;
+	background: #FFF;
+	padding: 0px 40px;
+}
+.other_collection_products {
+	max-width: 1200px;
+	margin: 0px auto;
+	padding: 80px 0px;
+}
+
+/*Секция гарантия и сервис - garant_section */
+.garant_section {
+	width: 100%;
+	height: auto;
+	background-color: #FFF6EF;
+	padding: 30px 40px;
+}
+.garant_block {
+	max-width: 522px;
+	height: auto;
+	margin: 0px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+.garant_block img {
+	max-width: 95px;
+	max-height: 113px;
+	padding-bottom: 35px;
 }

@@ -2,11 +2,13 @@
 {% load mptt_tags %}
 {% load static %}
 {% load orangeMainApp_tag %}
+{% load products_tag %}
 
 {% block css_block %}
 <link rel="stylesheet" href="{% static 'css/style_catalog_goods.css' %}">
 <link rel="stylesheet" href="{% static 'css/mobile_style_catalog_goods.css' %}">
 <link rel="stylesheet" href="{% static 'css/style_product_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/mobile_style_product_detail.css' %}">
 {% endblock css_block %}
 
 
@@ -14,6 +16,19 @@
 <link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/icon_title.png' %}">
 {% endblock icon %}
 
+{% block nav_list_big %}
+<div class="block_nav_list_big">
+	<a href="#" class="nav_item_link_big">О компании</a>
+	<a href="#" class="nav_item_link_big">О продукции</a>
+	<button class="nav_item_btn_big">
+		Каталог товаров
+		<img src="{% static 'images/header/vector_list_of_good.svg'%}" alt="Каталог" class="nav_item_arrow_big">
+	</button>
+</div>
+{% endblock nav_list_big %}
+{% block catalog_of_goods_block %}
+{% category_list_relative %}
+{% endblock catalog_of_goods_block %}
 {% block title %}{{ product.name }}{% endblock title %}
 
 {% block modal %}
@@ -39,6 +54,8 @@
 	</div>
 </section>
 {% endblock page_name %}
+
+
 
 {% block content %}
 	<section class="title_product_section">
@@ -125,8 +142,75 @@
 				{% endfor %}
 			</div>
 		</div>
+
+		<div class="characteristics_product_block">
+			<h2 class="h2_some_block_title_32_pb_35">
+				Характеристики
+			</h2>
+			<div class="characteristics_product_column">
+				<div class="characteristic_block_list">
+					{% for ch in product.characteristics.all %}
+					<div class="characteristic_block_item_flex">
+						<img src="{{ ch.image.url }}" alt="{{product.name}}">
+						<h3 class="h3_20_sans">{{ch.title}}</h3>
+						<p class="p16_Sans">{{ch.description}}</p>
+					</div>
+					{% endfor %}
+				</div>
+				<div class="characteristic_block_list_column">
+					<div class="characteristic_block_item_column">
+						<p class="p16_Sans">Коллекция</p>
+						<p class="p16_Sans_bold_orange">{{product.collection.name}}</p>
+					</div>
+					
+					<div class="characteristic_block_item_column">
+						<p class="p16_Sans">Цвет</p>
+						<div class="color_block_list">
+						{% for color in product.color.all %}
+						<div class="color_block_item">
+							<img src="{{color.img_color.url}}" alt="{{color.value}}">
+							<p class="p16_Sans_bold">{{color.value}}</p>
+						</div>
+						{% endfor %}
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
 	</section>
 	<section class="promo_section">
 		{% our_promo_list %}
+	</section>
+	<section class="section_other_collection_products">
+		<div class="other_collection_products">
+			<h2 class="h2_some_block_title_32_pb_35">Из этой коллекции</h2>
+			<div class="promotional_goods_block_list">
+				{% for product in other_product %}
+				<div class="promotional_goods_cart">
+					<div class="discount_value">
+						<p>-{{product.discount|floatformat}}%</p>
+					</div>
+					<img src="{{ product.image.url }}" alt="Фото">
+					<p class="p16_Sans promotional_goods_cart_title">
+						<a href="{{ product.get_absolute_url }}">
+							{{ product.name }} {{product.short_description| truncatechars:50}}
+						</a>
+					</p>
+					<div class="promotional_goods_cart_footer">
+						<span class="promotional_goods_price">{{ product.sell_price }} &#8381</span>
+						<s class="promotional_goods_old_price">{{ product.price }} &#8381</s>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+	<section class="garant_section">
+		<div class="garant_block">
+			<img src="{% static 'images/garant_section/Group 19.png' %}" alt="Гарантия">
+			<h2 class="h2_some_block_title_32_pb_35">Гарантия и сервис</h2>
+			<p class="p_garant">Компания Orange осуществляет гарантийное обслуживание своей продукции на территории РФ.</p>
+		</div>
 	</section>
 {% endblock %}

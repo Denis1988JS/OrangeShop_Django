@@ -1,0 +1,68 @@
+/*1400-1200-992-768-576*/
+
+
+/*Адаптив на с 992px и ниже*/
+@media screen and (max-width: 992px){
+	.title_product_section, .description_product_section, .section_other_collection_products {
+		padding: 0px 20px;
+	}
+}
+
+/*Адаптив на с 768px и ниже*/
+@media screen and (max-width: 768px){
+	.title_product_block {
+		flex-direction: column;
+		justify-content: stretch;
+		align-items: stretch;
+		height: 100%;
+	}
+	.product_block_absolute, .rel, .product_block_sticky {
+		position: relative;
+		height: auto;
+		top: 0;
+		border: none;
+	}
+	.product_block_sticky {
+		padding: 20px 0px 0px 0px;
+	}
+	.description_product_section {
+		
+	}
+	.product_block_info {
+		position: relative;
+		flex: auto;
+		top: 0;
+	}
+	.description_product_block, .other_collection_products {
+		padding: 30px 0px;
+	}
+	.complect_list {
+		max-width: 100%;
+	}
+	.product_benefits_column_list {
+		width: 100%;
+	}
+	.characteristics_product_column {
+		max-width: 100%;
+	}
+	.characteristic_block_item_flex {
+		flex: 0 1 50%;
+	}
+	.characteristics_product_block, .benefits_product_block {
+		padding: 0px 0px 20px 0px;
+	}
+}
+
+/*Адаптив на с 576px и ниже*/
+
+
+@media screen and (max-width: 576px){
+	.button_cart {
+		width: 100%;
+	}
+	.product_benefits_image_block {
+		width: 70px;
+		height: 70px;
+		flex: 0 0 70px;
+	}
+}

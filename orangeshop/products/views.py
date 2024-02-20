@@ -164,4 +164,6 @@ class ProductView(DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['benefits'] = OurBenefits.objects.all()
+        context['other_product'] = Product.objects.filter(collection_id=self.object.collection.id)[0:4]
+        print(context['other_product'])
         return context

@@ -1,0 +1,25 @@
+{% load static %}
+
+<!--Список категорий для мобильного меню-->
+
+<div class="block_nav_list">
+    <ul class="nav_list">
+        <li class="nav_item">
+            <a href="#" class="nav_item_link">О компании</a>
+        </li>
+        <li class="nav_item">
+            <a href="#" class="nav_item_link">О продукции</a>
+        </li>
+        <li class="nav_item list_of_goods">
+            Каталог товаров
+            <img src="{% static 'images/header/vector_list_of_good.svg'%}" alt="" class="nav_item_arrow">
+            <ul class="list_of_category">
+                {% for cat in category_list %}
+                {% if cat.level == 0 %}
+                <li><a href="{{ cat.get_absolute_url }}">{{cat.name}}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+</div>
