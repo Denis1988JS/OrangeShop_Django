@@ -257,9 +257,9 @@
 	width: 100%;
 	height: auto;
 	display: flex;
-	flex-wrap: wrap;
 }
 .characteristic_block_item_flex {
+	flex: 0 1 50%;
 	gap: 20px;
 }
 .characteristic_block_item_flex img{

@@ -238,8 +238,9 @@
                 </form>
             </div>
         </aside>
-
+        
         <div class="category_goods_list_block">
+            {% if products %}
             {% for cart in products %}
             <div class="category_goods_cart">
                 {% if cart.discount %}
@@ -263,6 +264,14 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <div class="products_empty_list">
+                <img src="{% static 'images/category/empty_products.png' %}" alt="Нет товаров">
+                <h3 class="h3_28_orange">На данный момент товаров в данной категории нет</h3>
+            </div>
+            
+            {% endif %}
+
         </div>
     </div>
         <div class="pagination_block">

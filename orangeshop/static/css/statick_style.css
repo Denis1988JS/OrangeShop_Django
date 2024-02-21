@@ -132,6 +132,16 @@
 	max-width: 763px;
 	margin: 0px auto;
 }
+.h3_28_orange {
+	color: #FF7028;
+	text-align: center;
+	font-family: Orenburg;
+	font-size: clamp(1.25rem, 1.1346rem + 0.5128vw, 1.75rem);
+	font-weight: 400;
+	line-height: 36px; /* 128.571% */
+	max-width: 763px;
+	margin: 0px auto;
+}
 .h3_16_white {
 	color: #FFF;
 	font-family: Orenburg;

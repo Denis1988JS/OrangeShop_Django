@@ -545,6 +545,15 @@
 	line-height: 28px; /* 175% */
 }
 
+/*Блок если товаров нет по категориия, фильтру и так далее*/
 
-
-
+.products_empty_list {
+	padding: 25px 0px;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	justify-content: center;
+	align-items: center;
+}

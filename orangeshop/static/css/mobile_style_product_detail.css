@@ -57,6 +57,13 @@
 
 
 @media screen and (max-width: 576px){
+	.characteristic_block_list {
+		flex-wrap: wrap;
+		gap: 35px;
+	}
+	.characteristic_block_item_flex {
+		flex: 0 1 100%;
+	}
 	.button_cart {
 		width: 100%;
 	}
