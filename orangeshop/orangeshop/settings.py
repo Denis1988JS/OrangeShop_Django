@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,8 +43,8 @@ INSTALLED_APPS = [
 
     #Приложения Django
     'orangeMainApp',#приложение orangeMainApp
-    'products',#Приложение продукты
-
+    'products',#Приложение товары
+    'users',#Приложение пользователи (покупатели)
 ]
 
 MIDDLEWARE = [
@@ -86,6 +87,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+#Всплывающие сообщения
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'Регистрация прошла успешно !!!',
+    messages.WARNING: 'Что-то пошло не так !',
+    messages.ERROR: 'alert-danger',
+}
+
 
 
 # Password validation
@@ -134,6 +146,7 @@ STATICFILES_DIRS = [
 #Настройка медиа - для добавления фоток через модели
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

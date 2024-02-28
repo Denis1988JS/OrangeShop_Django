@@ -12,6 +12,17 @@
 .p16_Sans a:hover {
 	color: #FF7028;
 }
+.admin_link {
+	color: #1900ff;
+	font-family: PT Sans;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 20px;
+	position: relative;
+	z-index: 10000;
+	padding: 25px 0px;
+}
 /*Шапка сайта--------------------------------------------------------------*/
 
 .header_main_block {

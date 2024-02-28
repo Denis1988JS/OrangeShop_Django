@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+{% load bootstrap4 %}
+{% load static %}
+{% load orangeMainApp_tag %}
+{% load products_tag %}
+
+{% block css_block %}
+<link rel="stylesheet" href="{% static 'css/style_catalog_goods.css' %}">
+<link rel="stylesheet" href="{% static 'css/register_auth.css' %}">
+{% endblock css_block %}
+
+
+{% block icon %}
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/icon_title.png' %}">
+{% endblock icon %}
+
+{% block nav_list_big %}
+<div class="block_nav_list_big">
+	<a href="#" class="nav_item_link_big">О компании</a>
+	<a href="#" class="nav_item_link_big">О продукции</a>
+	<button class="nav_item_btn_big">
+		Каталог товаров
+		<img src="{% static 'images/header/vector_list_of_good.svg'%}" alt="Каталог" class="nav_item_arrow_big">
+	</button>
+</div>
+{% endblock nav_list_big %}
+{% block catalog_of_goods_block %}
+{% category_list_relative %}
+{% endblock catalog_of_goods_block %}
+
+{% block content %}
+<section class="registration_section">
+	{% if user.is_authenticated %}
+	<div class="message">
+		<p>Вы уже выполнили вход на сайт !</p>
+		<a href="{% url 'home' %}">Перейти на главную страницу</a>
+	</div>
+	{% else %}
+	<div class="registration_block">
+
+		<form method="POST" class="registration_form">
+			<div class="img_block_registration_form">
+				<img src="{% static 'images/category/form_img.png' %}" alt="ЛОГОТИП">
+			</div>
+
+			<h3 class="h3_28_black">Войти как покупатель</h3>
+			{% csrf_token %}
+			{{ form.username }}
+			<div class="form-error">{{form.username.errors}}</div>
+
+			{{ form.password }}
+			<div class="form-error">{{form.password.errors}}</div>
+
+			<button type="submit" class="button_form">Войти</button>
+		</form>
+		<div class="registration_block_footer between_block">
+			<a href="#">Напомнить пароль</a>
+			<a href="{% url 'registration' %}">Регистрация</a>
+		</div>
+		{% endif %}
+	</div>
+
+</section>
+{% endblock content %}

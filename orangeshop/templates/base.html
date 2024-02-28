@@ -28,13 +28,15 @@
     <title>{% block title %}{{ title }}{% endblock title %}</title>
 </head>
 <body>
+    {% if user.is_admin or user.is_staff %}
+    <a class="admin_link" href="{% url 'admin:index' %}">Админ панель</a>
+    {% endif %}
     <div class="wrapper">
         {% block modal %}
         {% endblock modal %}
         <header class="header_main_block">
             <div class="header_block_container">
                 <nav class="nav_header">
-
                     <div class="block_logo">
                         <a href="/" target="_blank"><img src="{% static 'images/header/logo.svg'%}" alt="Логотип"></a>
                         <div class="data_seach_btn_2">
@@ -91,13 +93,16 @@
                         {% collection_list_product_mobile %}
                         {% endblock mobile_cat_list %}
                         
-
-                        
-                        
                         <div class="data_account">
-                            <a href="#">
+                            {% if user.is_authenticated %}
+                            <a href="#" title="Кабинет {{user}}" >
                                 <img src="{% static 'images/header/user.svg'%}" alt="Пользователь">
                             </a>
+                            {% else %}
+                            <a href="{% url 'login' %}">
+                                <img src="{% static 'images/header/user.svg'%}" alt="Пользователь">
+                            </a>
+                            {% endif %}
                         </div>
                         <div class="data_seach_btn">
                             <button class="seach_btn">
@@ -162,10 +167,9 @@
         </header>
         
         <main class="main">
-            {% block page_name %}
-            {% endblock page_name %}
             <!--Блок с основным содержимым сайта - ДИНАМИЧЕСКИЙ-->
             {% block content %}
+            
             {% endblock %}
         </main>
 
