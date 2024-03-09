@@ -908,3 +908,48 @@ color: rgba(254, 91, 0, 1);
 	line-height: 24px; /* 150% */
 	color: white;
 }
+
+/*Стили для message-django - сообщений*/
+.messages {
+	width: 100%;
+	height: auto;
+}
+.alert-danger {
+	width: 100%;
+	height: auto;
+	padding: 50px 0px;
+	text-align: center;
+	background-color: crimson;
+	color: #FFF;
+   font-family: Orenburg;
+   font-size: 16px;
+   font-style: normal;
+   font-weight: 700;
+   line-height: normal
+}
+.alert-danger {
+	width: 100%;
+	height: auto;
+	padding: 30px 0px;
+	text-align: center;
+	background-color: crimson;
+	color: #FFF;
+   font-family: Orenburg;
+   font-size: 24px;
+   font-style: normal;
+   font-weight: 700;
+   line-height: normal
+}
+.alert-success {
+	width: 100%;
+	height: auto;
+	padding: 30px 0px;
+	text-align: center;
+	background-color: rgb(43, 220, 20);
+	color: #FFF;
+   font-family: Orenburg;
+   font-size: 24px;
+   font-style: normal;
+   font-weight: 700;
+   line-height: normal
+}

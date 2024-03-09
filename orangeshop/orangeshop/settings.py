@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mptt',#MTTP для модели Category
     'bootstrap4',  # бутстрап 4
-
     #Приложения Django
     'orangeMainApp',#приложение orangeMainApp
     'products',#Приложение товары
@@ -91,10 +90,10 @@ DATABASES = {
 
 #Всплывающие сообщения
 MESSAGE_TAGS = {
-    messages.DEBUG: 'alert-info',
+    messages.DEBUG: 'alert-secondary',
     messages.INFO: 'alert-info',
-    messages.SUCCESS: 'Регистрация прошла успешно !!!',
-    messages.WARNING: 'Что-то пошло не так !',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
 
@@ -146,6 +145,16 @@ STATICFILES_DIRS = [
 #Настройка медиа - для добавления фоток через модели
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
+
+
+#EMAIL_BACKEND - настройки для работы с отправкой E-mail - через mail.ru
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.mail.ru'
+# EMAIL_HOST_USER = 'тут ваша почта'
+# EMAIL_HOST_PASSWORD = 'пароль от почты'
+# EMAIL_PORT = 0000 - необходимый порт
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
 
 
 # Default primary key field type

@@ -24,3 +24,7 @@ class LoginUserForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username', 'password']
+
+#Форма востановления пароля
+class NewPasswordForm(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-input', "placeholder": "Ваша электронная почта",}))
