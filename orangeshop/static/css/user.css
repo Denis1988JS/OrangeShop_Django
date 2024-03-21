@@ -1,0 +1,306 @@
+/*Страница - Провиль пользователя или личный кабинет (без заказов) user.html*/
+.user_main_section {
+	width: 100%;
+	height: auto;
+	padding: 80px 40px;
+	background-color: #E5E5E5;
+}
+
+.user_main_block {
+	max-width: 1200px;
+	display: flex;
+	gap: 40px;
+	justify-content: center;
+	margin: 0px auto;
+}
+.user_profile_block {
+	flex: 0 1 290px;
+}
+.user_profile {
+	width: 100%;
+	height: auto;
+	border: 1px solid #D9D9D9;
+	border-radius: 8px;
+	padding: 20px 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+.user_profile a {
+	color: var(--text-link, #FE5B00);
+   font-family: PT Sans;
+   font-size: 15px;
+   font-weight: 400;
+	padding-top: 40px;
+}
+.avatar {
+	width: 93px;
+	height: 93px;
+	margin-bottom: 30px;
+}
+.user_info p{
+	padding-bottom: 20px;
+}
+.cart_empty {
+	width: 100%;
+	height: auto;
+	padding-top: 80px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+.link_btn_a {
+	width: calc(100% - 7px);
+	padding: 10px 0px;
+	text-align: center;
+	background-color: #FF7028;
+	color: #FFF;
+	font-family: PT Sans;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: normal;
+	cursor: pointer;
+	box-shadow: 5px 5px 0px #E5E5E5, 7px 7px 0px -1px rgba(246, 118, 26, 1), 7px 3px 0px -1px rgba(246, 118, 26, 1), 3px 7px 0px -1px rgba(246, 118, 26, 1);
+}
+/*Адаптив блока user_profile_block с 576px > 360px*/
+@media screen and (max-width: 576px) {
+	.user_profile_block {
+		width: 328px;
+	}
+	.user_main_section {
+		padding: 20px 15px;
+	}
+	.user_profile {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+	.user_info, .user_info p {
+		text-align: left;
+	}
+	.cart_empty {
+		padding-top: 30px;
+	}
+}
+
+/*Верста профиль пользователя и личный кабинет с заказами */
+.user_cart {
+	background-color: #FFFFFF;
+	padding: 40px;
+	flex: 0 2 870px;
+}
+.user_cart_block {
+	width: 100%;
+	height: auto;
+	padding-top: 35px;
+}
+.user_cart_header {
+	width: 100%;
+	height: auto;
+	display: flex;
+	gap: 35px;
+}
+.data_header {
+	flex: 0 1 72px;
+}
+.number_header {
+	flex: 0 1 102px;
+}
+.product_header {
+	flex: 1 1 auto;
+}
+.status_header {
+	flex: 0 1 58px;
+}
+.total_header {
+	flex: 0 1 80px;
+}
+/*Список заказов */
+
+.user_cart_list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	height: auto;
+}
+.user_cart_item {
+	display: flex;
+	align-items: flex-start;
+	padding: 15px 0px;
+	border-bottom: 1px solid #E0E0E0;
+	gap: 35px;
+}
+.cart_item_data {
+	flex: 0 0 72px;
+}
+.cart_item_number {
+	flex: 0 0 102px;
+}
+.cart_item_number p {
+	color: var(--text-link, #FE5B00);
+	font-family: PT Sans;
+	font-size: 15px;
+	font-weight: 400;
+}
+.cart_item_product_list {
+	flex: 1 1 auto;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+.cart_item_product_list img{
+	width: 40px;
+	height: 40px;
+	object-fit: contain;
+}
+.cart_item_status {
+	flex: 0 0 58px;
+}
+.cart_item_total {
+	flex: 0 0 80px;
+}
+
+/*Мобильный адаптив блока + списка заказов + аватарка */
+
+@media screen and (max-width: 1200px) {
+	.user_main_section {
+		padding: 30px 15px;
+	}
+
+}
+@media screen and (max-width: 992px) {
+	.user_main_block {
+		flex-direction: column;
+		gap: 20px;
+	}
+	.user_cart  {
+		flex: 0 1 auto;
+	}
+}
+@media screen and (max-width: 768px) {
+	.user_cart_header {
+		display: none;
+	}
+	.user_main_block {
+		flex-direction: column;
+		gap: 20px;
+	}
+	.user_cart  {
+		flex: 0 1 auto;
+	}
+	.user_cart_item {
+		flex-wrap: wrap;
+	}
+	.cart_item_product_list {
+		order: 1;
+		flex: 0 1 100%;
+	}
+}
+@media screen and (max-width: 576px) {
+	.user_profile_block {
+		margin: 0px auto;
+		width: 100%;
+		flex: 0 1 auto;
+	}
+	.user_profile {
+		justify-content: center;
+		gap: 10px;
+	}
+	.user_cart_item {
+		justify-content: space-between;
+		gap: 10px 0px;
+	}
+	.cart_item_data, .cart_item_number, .cart_item_status, .cart_item_total {
+		flex: 0 1 40%;
+	}
+	.cart_item_data {
+		order: 1;
+	}
+	.cart_item_number {
+		order: 3;
+	}
+	.cart_item_status {
+		order: 2;
+	}
+	.cart_item_total {
+		order: 4;
+	}
+	.cart_item_product_list {
+		order: 5;
+	}
+}
+
+/*Страница - редактирование данных польщователя */
+.section_edit_user {
+	width: 100%;
+	height: auto;
+}
+.edit_user_block {
+	margin: 0px auto;
+	padding: 40px 0px;
+	width: fit-content;
+}
+@media screen and (max-width: 576px) {
+	.edit_user_block {
+		padding: 25px 15px;
+	}
+}
+.input-file {
+	position: relative;
+	display: inline-block;
+}
+.input-file-btn {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-size: 14px;
+	vertical-align: middle;
+	color: #FE5B00;
+	text-align: center;
+	font-weight: 700;
+	border-radius: 4px;
+	background-color: #ffffff;
+	line-height: 22px;
+	height: 40px;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	border: 1px solid #FE5B00;
+	margin: 0;
+	transition: background-color 0.2s;
+}
+.input-file-text {
+	padding: 0 10px;
+	line-height: 40px;
+	display: inline-block;
+}
+.input-file input[type=file] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: block;
+	width: 0;
+	height: 0;
+}
+ 
+/* Focus */
+.input-file input[type=file]:focus + .input-file-btn {
+	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+ 
+/* Hover/active */
+.input-file:hover .input-file-btn {
+	background-color: #FE5B00;
+	color: #FFF;
+}
+.input-file:active .input-file-btn {
+	background-color: #ffffff;
+}
+ 
+/* Disabled */
+.input-file input[type=file]:disabled + .input-file-btn {
+	background-color: #eee;
+}

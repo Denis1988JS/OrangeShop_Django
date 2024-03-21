@@ -95,7 +95,7 @@
                         
                         <div class="data_account">
                             {% if user.is_authenticated %}
-                            <a href="#" title="Кабинет {{user}}" >
+                            <a href="{% url 'profile' %}" title="Кабинет {{user}}" >
                                 <img src="{% static 'images/header/user.svg'%}" alt="Пользователь">
                             </a>
                             {% else %}

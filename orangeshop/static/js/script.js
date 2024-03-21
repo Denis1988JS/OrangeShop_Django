@@ -200,3 +200,8 @@ $('.show_chema').on('click', function(e){
 $('.modal_header').on('click', function(e){
 	$('.modal_block_main').removeClass('modal_open')
 })
+//Кнопка добавить аватарку - редактирование профиля
+$('.input-file input[type=file]').on('change', function () {
+	let file = this.files[0];
+	$(this).closest('.input-file').find('.input-file-text').html(file.name);
+});

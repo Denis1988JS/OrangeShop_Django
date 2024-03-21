@@ -16,4 +16,4 @@ class UserBuyersData(models.Model):
         verbose_name_plural = 'Данные о пользователях'
 
     def __str__(self):
-        return  self.first_name
+        return  f'{self.nick_name} доп данные '

@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+{% load bootstrap4 %}
+{% load static %}
+{% load orangeMainApp_tag %}
+{% load products_tag %}
+
+{% block css_block %}
+<link rel="stylesheet" href="{% static 'css/style_catalog_goods.css' %}">
+<link rel="stylesheet" href="{% static 'css/register_auth.css' %}">
+<link rel="stylesheet" href="{% static 'css/statick_style_new.css' %}">
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
+{% endblock css_block %}
+
+{% block icon %}
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/icon_title.png' %}">
+{% endblock icon %}
+
+{% block nav_list_big %}
+<div class="block_nav_list_big">
+	<a href="#" class="nav_item_link_big">О компании</a>
+	<a href="#" class="nav_item_link_big">О продукции</a>
+	<button class="nav_item_btn_big">
+		Каталог товаров
+		<img src="{% static 'images/header/vector_list_of_good.svg'%}" alt="Каталог" class="nav_item_arrow_big">
+	</button>
+</div>
+{% endblock nav_list_big %}
+{% block catalog_of_goods_block %}
+{% category_list_relative %}
+{% endblock catalog_of_goods_block %}
+
+{% block content %}
+{% if messages %}
+<ul class="messages">
+	{% for message in messages %}
+	<li class="{{ message.tags }}">
+		{{ message|safe }}
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+	<section class="user_main_section">
+		<div class="user_main_block">
+			<div class="user_profile_block">
+				<div class="user_profile">
+
+					{% if user_data.image == '' %}
+					<img src="{% static 'images/user/baseavatar.jpg' %}"  alt="Аватар" class="avatar">
+					{% else %}
+					<img src="{{ user_data.image.url  }}" alt="Аватар" class="avatar">
+					{% endif %}
+
+					<div class="user_info">
+						<h2 class="p_18_Sans">{{user.first_name}} {{user.last_name}}</h2>
+						<p class="p15_sans_grey">{{user.email}}</p>
+						<a href="{% url 'edit_user' user_data.id %}">Редактировать профиль </a>
+					</div>
+				</div>
+			</div>
+			<!--
+			<div class="user_cart">
+				<h2 class="h2_some_block_title_32_pb_0">Мои заказы</h2>
+				<div class="user_cart_block">
+					<div class="user_cart_header">
+						<div class="data_header">
+							<p class="cart_p_14">
+								Дата
+							</p>
+						</div>
+						<div class="number_header">
+							<p class="cart_p_14">
+								Номер
+							</p>
+						</div>
+						<div class="product_header">
+							<p class="cart_p_14">
+								Товары
+							</p>
+						</div>
+						<div class="status_header">
+							<p class="cart_p_14">
+								Статус
+							</p>
+						</div>
+						<div class="total_header">
+							<p class="cart_p_14">
+								Итого
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="user_cart_list">
+					<div class="user_cart_item">
+						<div class="cart_item_data">
+							<p class="p15_sans_grey_left">13.06.2019</p>
+						</div>
+						<div class="cart_item_number">
+							<p>№ R879554545</p>
+						</div>
+						<div class="cart_item_product_list">
+							<img src="./link/img/profile/1.svg" alt="Фото">
+						</div>
+						<div class="cart_item_status">
+							<p class="p15_sans_grey_left">Оплачено</p>
+						</div>
+						<div class="cart_item_total">
+							<p class="p_15_bold">4 180,00 ₽</p>
+						</div>
+					</div>
+
+					<div class="user_cart_item">
+						<div class="cart_item_data">
+							<p class="p15_sans_grey_left">20.03.2019</p>
+						</div>
+						<div class="cart_item_number">
+							<p>№ R522481282</p>
+						</div>
+						<div class="cart_item_product_list">
+							<img src="./link/img/profile/12.svg" alt="Фото">
+							<img src="./link/img/profile/123.svg" alt="Фото">
+						</div>
+						<div class="cart_item_status">
+							<p class="p15_sans_grey_left">Отменен</p>
+						</div>
+						<div class="cart_item_total">
+							<p class="p_15_bold">14 890,00 ₽</p>
+						</div>
+					</div>
+
+					<div class="user_cart_item">
+						<div class="cart_item_data">
+							<p class="p15_sans_grey_left">13.06.2019</p>
+						</div>
+						<div class="cart_item_number">
+							<p>№ 9966547855</p>
+						</div>
+						<div class="cart_item_product_list">
+							<img src="./link/img/profile/1234.svg" alt="Фото">
+						</div>
+						<div class="cart_item_status">
+							<p class="p15_sans_grey_left">Оплачено</p>
+						</div>
+						<div class="cart_item_total">
+							<p class="p_15_bold">790,00 ₽ ₽</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			-->
+		</div>
+	</section>
+{% endblock content %}

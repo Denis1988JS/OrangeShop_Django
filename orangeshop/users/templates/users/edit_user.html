@@ -8,8 +8,9 @@
 {% block css_block %}
 <link rel="stylesheet" href="{% static 'css/style_catalog_goods.css' %}">
 <link rel="stylesheet" href="{% static 'css/register_auth.css' %}">
+<link rel="stylesheet" href="{% static 'css/statick_style_new.css' %}">
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
 {% endblock css_block %}
-
 
 {% block icon %}
 <link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/icon_title.png' %}">
@@ -30,45 +31,34 @@
 {% endblock catalog_of_goods_block %}
 
 {% block content %}
-{% if messages %}
-<ul class="messages">
-	{% for message in messages %}
-	<li class="{{ message.tags }}">
-		{{ message|safe }}
-	</li>
-	{% endfor %}
-</ul>
-{% endif %}
-<section class="registration_section">
-	{% if user.is_authenticated %}
-	<div class="message">
-		<p>Вы уже выполнили вход на сайт !</p>
-		<a href="{% url 'home' %}">Перейти на главную страницу</a>
-	</div>
-	{% else %}
-	<div class="registration_block">
-
-		<form method="POST" class="registration_form" >
+<section class="section_edit_user">
+	<div class="edit_user_block">
+		<form method="POST" class="registration_form" enctype="multipart/form-data">
 			<div class="img_block_registration_form">
 				<img src="{% static 'images/category/form_img.png' %}" alt="ЛОГОТИП">
 			</div>
-
-			<h3 class="h3_28_black">Войти как покупатель</h3>
+		
+			<h3 class="h3_28_black">Редактирование пользователя {{user}}</h3>
 			{% csrf_token %}
-			{{ form.username }}
-			<div class="form-error">{{form.username.errors}}</div>
+			
+			{{ form.nick_name }}
+			<div class="form-error">{{form.nick_name.errors}}</div>
 
-			{{ form.password }}
-			<div class="form-error">{{form.password.errors}}</div>
+			<label class="input-file">
+				{{ form.image }}
+				<span class="input-file-btn">Выберите файл</span>
+				<span class="input-file-text">Фото для аватарки</span>
+			</label>
 
-			<button type="submit" class="button_form">Войти</button>
+
+			{{ form.phone_number }}
+			<div class="form-error">{{form.phone_number.errors}}</div>
+		
+			<button type="submit" class="button_form">Редактировать</button>
 		</form>
-		<div class="registration_block_footer between_block">
-			<a href="{% url 'new_pass' %}">Напомнить пароль</a>
-			<a href="{% url 'registration' %}">Регистрация</a>
-		</div>
-		{% endif %}
-	</div>
 
+
+		</div>
+	</div>
 </section>
 {% endblock content %}

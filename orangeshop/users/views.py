@@ -1,18 +1,21 @@
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, View, ListView, DetailView, CreateView, FormView
-from users.forms import RegisterUserForm, LoginUserForm, NewPasswordForm
+from django.views.generic import TemplateView, View, ListView, DetailView, CreateView, FormView, UpdateView
+from users.forms import RegisterUserForm, LoginUserForm, NewPasswordForm, UserBuyersDataRedactor
 from django.contrib import messages
 
 import string
 import random
 
+from users.models import UserBuyersData
 
 
 #Функция генерирует пароль
@@ -20,8 +23,6 @@ def generate_password():
     characters = string.ascii_letters + string.digits + string.punctuation
     password = ''.join(random.choice(characters) for _ in range(8))
     return password
-
-# Create your views here.
 
 #Регистрация пользователя
 class RegisterUser(CreateView):
@@ -35,6 +36,10 @@ class RegisterUser(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
+        user = User.objects.get(id=user.id)
+        u = UserBuyersData()
+        u.user = user
+        u.save()
         return redirect('home')
 
 #Авторизация пользователя
@@ -50,7 +55,6 @@ class LoginUser(LoginView):
         return reverse_lazy('home')
 
 #Напомнить пароль
-
 class NewPassword(TemplateView):
     template_name =  'users/new_password.html'
     def post(self, request):
@@ -83,4 +87,27 @@ class NewPassword(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Страница востановления пароля'
         context['form'] = NewPasswordForm
+        return context
+
+#Личный кабинет
+class UserProfile(LoginRequiredMixin,TemplateView):
+    model = User
+    template_name = 'users/user_with_orders.html'
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user_data'] = UserBuyersData.objects.get(user=self.request.user.id)
+        context['title'] = f'Личный кабинет {self.request.user}'
+        return context
+
+#Редактирование профиля - только UserBuyersData
+class EditUserProfile(SuccessMessageMixin,LoginRequiredMixin,UpdateView):
+    model = UserBuyersData
+    template_name = 'users/edit_user.html'
+    form_class = UserBuyersDataRedactor
+    success_url = reverse_lazy('profile')
+    success_message = 'Данные успешно изменены'
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = f'Редактирование пользователя {self.request.user}'
+        print(self.request)
         return context

@@ -1,0 +1,249 @@
+.p_18_Sans {
+	color: #151716;
+	font-family: PT Sans;
+	font-size: clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem);
+	font-style: normal;
+	font-weight: 400;
+	line-height: 32px; /* 177.778% */
+}
+.p_18_Sans {
+	color: #151716;
+	font-family: PT Sans;
+	font-size: clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem);
+	font-style: normal;
+	font-weight: 400;
+	line-height: 32px; /* 177.778% */
+}
+.p_18_Sans_lite_grey {
+	color: #6F5F53;
+	font-family: PT Sans;
+	font-size: clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem);
+	font-style: normal;
+	font-weight: 400;
+	line-height: 32px; /* 177.778% */
+}
+.b_orange {
+	color: #FE5B00;
+	font-family: PT Sans;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 32px; /* 177.778% */
+}
+.orange_lh24_18 {
+	color: #FE5B00;
+	font-family: PT Sans;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 24px; /* 177.778% */
+}
+.floatOff {
+	clear: left;
+	padding: 12px 0px;
+}
+
+.h2_some_block_title_32_pb_35{
+	color: #151716;
+	font-family: Orenburg;
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 36px; /* 112.5% */
+	letter-spacing: -0.5px;
+	width: 100%;
+	padding-bottom: 35px;
+}
+.h2_some_block_title_32_pb_6{
+	color: #151716;
+	font-family: Orenburg;
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 36px; /* 112.5% */
+	letter-spacing: -0.5px;
+	width: 100%;
+	padding-bottom: 6px;
+}
+.h2_some_block_title_32_pb_0{
+	color: #151716;
+	font-family: Orenburg;
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 36px; /* 112.5% */
+	letter-spacing: -0.5px;
+	width: 100%;
+}
+
+.h3_18_white_pb_20 {
+	color: #FFF;
+	font-family: PT Sans;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 32px; /* 177.778% */
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	padding-bottom: 20px;
+}
+
+.p16_Sans {
+	color: #151716;
+	font-family: PT Sans;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px; /* 137.5% */
+}
+.p16_Sans_700 {
+	color: #151716;
+	font-family: PT Sans;
+	font-size: 16px;
+	font-weight: 700;
+	letter-spacing: 0.01em;
+}
+.p16_Sans_to15 {
+	color: #151716;
+	font-family: PT Sans;
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 20px; /* 137.5% */
+}
+.h2_32_center {
+	color: var(--text-base, #151716);
+	text-align: center;
+	font-family: Orenburg;
+	font-size: 32px;
+	font-weight: 400;
+	line-height: 36px; /* 112.5% */
+	letter-spacing: -0.5px;
+}
+
+.p20-16_p24_12 {
+	color: var(--text-base, #151716);
+	text-align: center;
+	font-family: Orenburg;
+	font-size: clamp(1rem, 0.9423rem + 0.2564vw, 1.25rem);
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	padding: 24px 0px 12px;
+}
+
+.p20-16_p0_0 {
+	color: var(--text-base, #151716);
+	text-align: center;
+	font-family: Orenburg;
+	font-size: clamp(1rem, 0.9423rem + 0.2564vw, 1.25rem);
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	padding: 0;
+}
+.p15_sans_grey {
+	color: #7B7B7B;
+	text-align: center;
+	font-family: PT Sans;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 20px; /* 133.333% */
+}
+.p15_sans_grey_left {
+	color: #7B7B7B;
+	text-align: left;
+	font-family: PT Sans;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 20px; /* 133.333% */
+}
+.p_15_bold {
+	color: var(--text-base, #151716);
+	font-family: PT Sans;
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 20px
+}
+.h3_28_white {
+	color: #FFF;
+	text-align: center;
+	font-family: Orenburg;
+	font-size: clamp(1.25rem, 1.1346rem + 0.5128vw, 1.75rem);
+	font-weight: 400;
+	line-height: 36px; /* 128.571% */
+	max-width: 763px;
+	margin: 0px auto;
+}
+
+.h3_16_white {
+	color: #FFF;
+	font-family: Orenburg;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+.p16_bold {
+	color: var(--Text-Base, #151716);
+	font-family: Orenburg;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 0.2px;
+}
+.h3_20 {
+	color: var(--Text-Base, #151716);
+	font-family: Orenburg;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 28px; /* 140% */
+}
+
+.h3_20_sans {
+	color: var(--Text-Base, #424242);
+	font-family: PT Sans;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 28px; /* 140% */
+}
+.h3_24_sans {
+	color: var(--Text-Base, #151716);
+	font-family: PT Sans;
+	font-size: 24px;
+	font-weight: 800;
+	line-height: 28px; /* 140% */
+}
+/*табличка с ценой товара - оранжевая без тени*/
+.price_cart {
+	width: 140px;
+	color: #FFF;
+	font-family: PT Sans;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 24px; /* 100% */
+	padding: 14px 0px 12px;
+	background-color:  #FF7028;
+	text-align: center;
+}
+.letter_spasing_p::first-letter {
+	color: #FF7028;
+	font-size: 70px;
+	line-height: 24px;
+	float: left;
+	padding: 24px 10px 10px 0px;
+}
+.cart_p_14 {
+	color: var(--text-secondary, #7B7B7B);
+   font-family: PT Sans;
+   font-size: 14px;
+   font-weight: 400;
+   line-height: 20px
+}
+
+
+
