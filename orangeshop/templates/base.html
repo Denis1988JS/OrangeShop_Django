@@ -111,14 +111,14 @@
                         </div>
                     </div>
                     <div class="form_seach_site">
-                        <form action="#" method="post" class="form_seach">
+                        <form action="{% url 'seach' %}" method="get" name="filter" class="form_seach">
                             <h2 class="form_header">Что вы ищете?</h2>
                             <input type="text" name="seach" id="seach" class="seach" placeholder="Поиск на сайте...">
                             <div class="form_seach_buttons">
                                 <button type="button" class="btn_close_form">
                                     Отмена
                                 </button>
-                                <button class="seach_btn_form" name="seach_btn_form">
+                                <button type="submit" class="seach_btn_form" >
                                     Искать
                                 </button>
                             </div>

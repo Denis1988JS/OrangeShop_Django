@@ -171,6 +171,7 @@
                 <input type="hidden" name="category_slug" value="{{ request.GET.category_slug }}">
                 {% else %}
                 <input type="hidden" name="category_slug" value="{{ category.slug }}">
+                
                 {% endif %}
                 <!--Передаем сортировку -->
                 {% if request.GET.orderby %}

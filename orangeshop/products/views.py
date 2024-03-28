@@ -55,14 +55,12 @@ class SortCatalogProductsCategory(ListView):
     paginate_by = 2
     def get_queryset(self):
         #Переоределяем  queryset
-        print(self.request.GET)
         category = Category.objects.get(slug=self.request.GET.get("category_slug")) #Получаем категорию страницы
         sub_categories = category.get_descendants(include_self=True) #Все субкатегории
         # Обработчики форм и получение из них данных
         #Получаем данные из коллекции товара
         if self.request.GET.getlist('collection_name') == []:
             collection_name = list(Collection.objects.all().values_list('name', flat=True))
-            print('Список')
         else:
             collection_name = self.request.GET.getlist('collection_name')  # Список коллекций
 
@@ -117,9 +115,9 @@ class SortCatalogProductsCategory(ListView):
         context['subcategory_slug'] = 'subcategory_slug'+'='+self.request.GET.getlist("subcategory_slug")[0]+'&' #Субкатегория в пагинацию
         context['category_slug'] = 'category_slug'+'='+ self.request.GET.getlist("category_slug")[0]+'&'
         context["collection_name"] = ''.join([f"collection_name={x}&" for x in self.request.GET.getlist("collection_name")])
-        context["color_list_get"] = ''.join([f"color_name={x}&" for x in self.request.GET.getlist("color_name")])
+        context["color_list_get"] = ''.join([f"color_name={x}&" for x in self.request.GET.getlist("color_name")])#Цвета в пагинацию
         context['q'] = QueryDict(context["collection_name"]).getlist(key='collection_name') #Список коллекций
-        context['c'] = QueryDict(context["color_list_get"]).getlist(key='color_name')  # Список коллекций
+        context['c'] = QueryDict(context["color_list_get"]).getlist(key='color_name')  # Список цветов
         if self.request.GET.get('promo') in [None, False, '']:
             context['promo'] = ''
         else:
@@ -155,7 +153,7 @@ class SortCatalogProductsCategory(ListView):
 # context["promo"] = 'promo'+'='+self.request.GET.getlist("promo_goods")[0] +'&'
 # context['q'] = QueryDict(context["collection_name"]).getlist(key='collection_name')
 
-
+#Класс - о товаре отдельно
 class ProductView(DetailView):
     model = Product
     template_name = 'products/product_detail.html'
@@ -166,4 +164,67 @@ class ProductView(DetailView):
         context['benefits'] = OurBenefits.objects.all()
         context['other_product'] = Product.objects.filter(collection_id=self.object.collection.id)[0:4]
         print(context['other_product'])
+        return context
+
+#Класс - поиск на сайте
+class SeachProduct(ListView):
+    template_name = 'products/seach_result.html'
+    paginate_by = 3
+    context_object_name = 'products'
+    #Переопределяем запрос - поиск по какому либо символу(символам) среди товаров
+    def get_queryset(self):
+        print(self.request.GET.get('orderby'))
+        #Список коллекций
+        if self.request.GET.getlist('collection_name'):
+            collection_name = self.request.GET.getlist('collection_name')
+        else:
+            collection_name = list(Collection.objects.all().values_list('name', flat=True))
+        #Акционный товар или нет
+        if self.request.GET.get('promo') == 'on':
+            promo = 'on'
+        else:
+            promo = False
+        # Сортировка - если есть в request то значение из request если нет то name
+        if self.request.GET.get("orderby") != 'name':
+            orderby = self.request.GET.get("orderby")
+        else:
+            orderby = 'name'
+        # Список цветов если есть в request то значение из request если нет то все цвета (список)
+        if self.request.GET.getlist('color_name'):
+            color_list = self.request.GET.getlist('color_name')
+        else:
+            color_list = list(ColorProduct.objects.all().values_list('value', flat=True))
+
+        if orderby or color_list or collection_name:
+            goods = Product.objects.filter(
+                Q(name__icontains=self.request.GET.get("seach"))&
+                Q(color__value__in = color_list) & Q(
+                    collection__name__in = collection_name)).order_by(orderby).distinct()
+            
+        if promo == 'on':
+            goods = Product.objects.filter(
+                Q(name__icontains=self.request.GET.get("seach")) &
+                Q(color__value__in=color_list)&
+                Q(discount__gt = 0) &
+                Q(collection__name__in = collection_name)).order_by(orderby).distinct()
+        else:
+            goods =  Product.objects.filter(name__icontains=self.request.GET.get("seach")).order_by(orderby).distinct()
+        queryset = goods
+        return queryset
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['title'] = f'Поиск по {self.request.GET.get("seach")} ' #title
+        context['data'] = self.request.GET.get("seach") #Запрос get
+        context['seach'] = f'seach={self.request.GET.get("seach")}&' #Для пагинации что искали
+        context['orderby'] = f'orderby={self.request.GET.get("orderby")}&'  # Сортировка в пагинацию
+        context["color_list_get"] = ''.join([f"color_name={x}&" for x in self.request.GET.getlist("color_name")])
+        context['color_list'] = ColorProduct.objects.all()  # Список всех цветов коллекций
+        context['collection_list'] = Collection.objects.all()  # Список всех коллекций
+        context["collection_name"] = ''.join([f"collection_name={x}&" for x in self.request.GET.getlist("collection_name")])#Коллекци в пагинацию
+        context['c'] = QueryDict(context["color_list_get"]).getlist(key='color_name')#Цвета в GET
+        context['q'] = QueryDict(context["collection_name"]).getlist(key='collection_name')  # Список коллекций
+        if self.request.GET.get('promo') in [None, False, '']:
+            context['promo'] = ''
+        else:
+            context['promo'] = 'promo'+'='+self.request.GET.getlist('promo')[0]+'&'
         return context

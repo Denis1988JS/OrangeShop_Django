@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+{% load static %}
+{% load orangeMainApp_tag %}
+{% load products_tag %}
+
+{% block css_block %}
+<link rel="stylesheet" href="{% static 'css/style_catalog_goods.css' %}">
+{% endblock css_block %}
+
+{% block icon %}
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/icon_title.png' %}">
+{% endblock icon %}
+
+{% block nav_list_big %}
+<div class="block_nav_list_big">
+	<a href="#" class="nav_item_link_big">О компании</a>
+	<a href="#" class="nav_item_link_big">О продукции</a>
+	<button class="nav_item_btn_big">
+		Каталог товаров
+		<img src="{% static 'images/header/vector_list_of_good.svg'%}" alt="Каталог" class="nav_item_arrow_big">
+	</button>
+</div>
+{% endblock nav_list_big %}
+
+
+
+{% block catalog_of_goods_block %}
+{% category_list_relative %}
+{% endblock catalog_of_goods_block %}
+
+{% block page_name %}
+<section class="adres_info_section">
+	<div class="adres_info_block">
+		<a href="{% url 'home' %}">Главная</a>
+		<img src="{% static 'images/adres_block/arrow-right.png' %}" alt=">">
+		<a href="{% url 'catalog' %}">Товары</a>
+	</div>
+</section>
+{% endblock page_name %}
+
+{% block content %}
+<section class="title_info_block_main">
+
+	<div class="title_info_block">
+		<div class="title_info_header">
+			<div class="checked_main_block">
+				<h2 class="h2_some_block_title_32_pb_6">Результат поиска по -  {{data}}</h2>
+				<div class="select_button_block">
+					<!--Сортировка товара по алфавиту и цене ГОТОВО -->
+						<!--Форма-->
+						<form action="{% url 'seach' %}" method="GET">
+						<!--передаем слаг субкатегории-->
+						{% if request.GET.seach %}
+						<input type="hidden" name="seach" value="{{ request.GET.seach }}">
+						{% else %}
+						<input type="hidden" name="seach" value="name">
+						{% endif %}
+						
+						<!--Передаем акция или нет -->
+						{% if request.GET.promo %}
+						<input type="hidden" name="promo" value="{{ request.GET.promo }}">
+						{% endif %}
+						{% if request.GET.color_name %}
+						{% for color in c %}
+						<input type="hidden" name="color_name" value="{{ color }}">
+						{% endfor %}
+						{% endif %}
+						<!--Передаем коллекцию или нет -->
+						{% if request.GET.collection_name %}
+						{% for collection in q %}
+						<input type="hidden" name="collection_name" value="{{ collection }}">
+						{% endfor %}
+						{% endif %}
+						<ul class="select_items_list">
+							<li class="select_items">
+								<button type="submit" value="name" name="orderby" class="sorted_btn">
+									По алфавиту А-Я
+								</button>
+							</li>
+							<li class="select_items">
+								<button type="submit" value="-name" name="orderby" class="sorted_btn">
+									По алфавиту Я-А
+								</button>
+							</li>
+							<li class="select_items">
+								<button type="submit" value="price" name="orderby" class="sorted_btn">
+									По цене min-max
+								</button>
+							</li>
+							<li class="select_items">
+								<button type="submit" value="-price" name="orderby" class="sorted_btn">
+									По цене max-min
+								</button>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+		</div>
+		<aside class="site_bar">
+			<!--Фильтрация товара по акции, цвету, коллекции -->
+			<div class="checkbox_block_filter">
+				<form action="{% url 'seach'  %}" method="GET" class="filter_form">
+					{% if request.GET.seach %}
+					<input type="hidden" name="seach" value="{{ request.GET.seach }}">
+					{% else %}
+					<input type="hidden" name="seach" value="name">
+					{% endif %}
+					{% if request.GET.orderby %}
+					<input type="hidden" name="orderby" value="{{ request.GET.orderby }}">
+					{% else %}
+					<input type="hidden" name="orderby" value="name">
+					{% endif %}
+					<!--Форма-->
+					<div class="promo_goods_checkbox">
+						<!--Передаем акционный товар или нет -->
+						<div>
+					
+							<input type="checkbox" name="promo" class="promo" id="promo" value="on" {% if request.GET.promo == 'on' %} checked
+								{% endif %}>
+							<label for="promo" class="p16_Sans">Акционные товары</label>
+						</div>
+					
+					</div>
+					<!--Блок фильрация по цвету ГОТОВО-->
+
+					<div class="color_goods_checkbox">
+						<p class="p16_bold">Цвет</p>
+						<div class="checkbox_color_list">
+							{% for color in color_list %}
+							{% if color.value in c %}
+							<div class="check_color ">
+								<input type="checkbox" name="color_name" value="{{ color.value }}" class="checkbox_color"
+									checked>
+								<img src="{{ color.img_color.url}}" alt="{{ color.value }}" data-color="{{ color.value }}"
+									class="img_checkbox img_checkbox_checked">
+							</div>
+							{% else %}
+							<div class="check_color ">
+								<input type="checkbox" name="color_name" value="{{ color.value }}" class="checkbox_color">
+								<img src="{{ color.img_color.url}}" alt="{{ color.value }}" data-color="{{ color.value }}"
+									class="img_checkbox ">
+							</div>
+							{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+
+					<div class="collection_goods_checkbox">
+						<!--Блок фильрация по коллекции ГОТОВО-->
+						<p class="p16_bold">Коллекция</p>
+						{% for collection in collection_list %}
+						<div class="checkbox_container">
+							{% if collection.name in q %}
+							<input type="checkbox" name="collection_name" id="type_1_goods_{{collection.name}}"
+								value="{{collection.name}}" checked>
+							{% else %}
+							<input type="checkbox" name="collection_name" id="type_1_goods_{{collection.name}}"
+								value="{{collection.name}}">
+							{% endif %}
+							<label for="type_1_goods_{{collection.name}}" class="p16_Sans">{{collection.name}}</label>
+						</div>
+						{% endfor %}
+					</div>
+					<button class="seach_btn_form" type="submit">
+						Искать
+					</button>
+				</form>
+			</div>
+		</aside>
+
+		<div class="category_goods_list_block">
+			{% if products %}
+			{% for cart in products %}
+			<div class="category_goods_cart">
+				{% if cart.discount %}
+				<div class="discount_value">
+					<p>-{{cart.discount}}%</p>
+				</div>
+				{% endif %}
+				<img src="{{cart.image.url}}" alt="Фото">
+				<p class="p16_Sans promotional_goods_cart_title">
+					<a href="{{ cart.get_absolute_url }}">
+						{{ cart.name }} {{cart.short_description| truncatechars:50}}
+					</a>
+				</p>
+				<div class="promotional_goods_cart_footer">
+					{% if cart.discount %}
+					<span class="category_goods_price">{{ cart.sell_price }} &#8381</span>
+					<s class="category_goods_old_price">{{cart.price}} &#8381</s>
+					{% else %}
+					<span class="category_goods_price">{{cart.price}} &#8381</span>
+					{% endif %}
+				</div>
+			</div>
+			{% endfor %}
+			{% else %}
+			<div class="products_empty_list">
+				<img src="{% static 'images/category/empty_products.png' %}" alt="Нет товаров">
+				<h3 class="h3_28_orange">На данный момент товаров в данной категории нет</h3>
+			</div>
+
+			{% endif %}
+
+		</div>
+	</div>
+	<div class="pagination_block">
+		{% if page_obj.has_previous %}
+		<a class="pagination_btn"
+			href="?{{seach}}{{orderby}}{{color_list_get}}{{promo}}{{collection_name}}page={{ page_obj.previous_page_number }}">
+			Назад
+		</a>
+		<a class="pagination_btn"
+			href="?{{seach}}{{orderby}}{{color_list_get}}{{promo}}{{collection_name}}page=1">1</a>
+		<a class="pagination_btn" href="#">
+			...
+		</a>
+		{% endif %}
+		{% for page in paginator.page_range %}
+		{% if page_obj.number == page %}
+		<a class="pagination_btn_selected"
+			href="?{{seach}}{{orderby}}{{color_list_get}}{{promo}}{{collection_name}}page={{page}}">
+			{{page}}
+		</a>
+		{% elif page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %} <a class="pagination_btn"
+			href="?{{seach}}{{orderby}}{{color_list_get}}{{promo}}{{collection_name}}page={{page}}">
+			{{page}}
+			</a>
+			{% endif %}
+			{% endfor %}
+			{% if page_obj.has_next %}
+			<a class="pagination_btn" href="#">
+				...
+			</a>
+			<a href="?{{seach}}{{orderby}}{{color_list_get}}{{promo}}{{collection_name}}page={{page_obj.paginator.num_pages}}"
+				class="pagination_btn">{{page_obj.paginator.num_pages}}
+			</a>
+
+			<a class="pagination_btn"
+				href="?{{seach}}{{orderby}}{{color_list_get}}{{promo}}{{collection_name}}page={{page_obj.next_page_number}}">
+				Вперед
+			</a>
+			{% endif %}
+
+	</div>
+</section>
+
+{% endblock content %}
