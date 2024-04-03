@@ -205,3 +205,48 @@ $('.input-file input[type=file]').on('change', function () {
 	let file = this.files[0];
 	$(this).closest('.input-file').find('.input-file-text').html(file.name);
 });
+
+/*Кнопка  show_cupon_form - показать форму для промокода */
+let promo_code = 'ORANGELOVE'
+
+//Отобразить или скрыть форму
+$('.show_cupon_form').on('click', function () {
+	$(".cupon_form_block").toggle("easing");
+})
+
+//Добавляем стили к форме - форма активная
+$('.cupon_form').bind('click blur', function (e) {
+	if (e.type == 'click' || e.type == 'blur' && e.target.id == 'promo_code') {
+		$('.promo_code_disable').addClass('promo_code_active');
+		$('.cupon_form').addClass("cupon_form_active");
+		$('.send_promo_code').addClass('send_promo_code_active').attr('disabled', false)
+
+	}
+})
+//Убираем активные стили у формы по условию если есть элемент с id = promo_code на страница, т.к. тогда ошибки на других страницах при отсутствии элемента
+let p_c = $('#promo_code')
+if (p_c == true) {
+	$('*').bind('click', function (e) {
+		let promo_code_text = $('#promo_code').val()
+		if (promo_code_text.length == 0 && e.target.id != 'promo_code') {
+			$('.promo_code_disable').removeClass('promo_code_active');
+			$('.cupon_form').removeClass("cupon_form_active");
+			$('.send_promo_code').removeClass('send_promo_code_active').attr('disabled', true)
+		}
+	})
+}
+
+//Обработчик промокода
+$('.send_promo_code ').on('click', function (e) {
+
+	let code_val = $('#promo_code').val()
+	console.log(code_val)
+	if (code_val == promo_code) {
+		$('.message_block_promo_code').empty()
+		$('.message_block_promo_code').append("<p class='message_success_promo'>У вас скидка 5 120 ₽ (20%)</p>")
+	}
+	else if (code_val != promo_code) {
+		$('.message_block_promo_code').empty()
+		$('.message_block_promo_code').append("<p class='message_warning_promo'>Промо-код недействителен </p>")
+	}
+})

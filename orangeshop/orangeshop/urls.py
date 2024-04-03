@@ -27,6 +27,7 @@ urlpatterns = [
     path('', include('orangeMainApp.urls')),#Маршруты из приложения orangeMainApp
     path('products/', include('products.urls')),#Маршруты из приложения products
     path('user/', include('users.urls')),#Маршруты из приложения users
+    path('carts/', include('carts.urls')),#Маршруты из приложения carts
 ]
 
 if settings.DEBUG:

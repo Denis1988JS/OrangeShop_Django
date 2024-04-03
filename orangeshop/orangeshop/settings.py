@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'orangeMainApp',#приложение orangeMainApp
     'products',#Приложение товары
     'users',#Приложение пользователи (покупатели)
+    'carts',#Приложение корзина покупок
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,345 @@
+/*Стилизация корзина покупок*/
+.my_cart_section {
+	width: 100%;
+	height: auto;
+	background-color: #E5E5E5;
+	padding: 20px 40px;
+	position: relative;
+}
+.cart_header {
+	max-width: 1260px;
+   height: auto;
+   margin: 0px auto;
+	text-align: center;
+}
+.header_total_cart {
+	flex: 1 1 70px;
+	text-align: center;
+}
+.cart_block {
+	margin: 40px auto 40px;
+	max-width: 1000px;
+	height: auto;
+   border: 1px solid #D9D9D9;
+   border-radius: 8px;
+	padding: 40px 0px 15px;
+	background-color: #fff;
+}
+.header_count_product_cart {
+	flex: 1 1 70px;
+}
+.order_header_block {
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.cart_block_list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	height: auto;
+	padding: 25px 25px;
+	border-bottom: 1px solid #E0E0E0
+}
+
+.user_cart_item {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 0px;
+	border-bottom: 1px solid #E0E0E0;
+}
+.user_cart_img {
+	width: 100px;
+	height: 100px;
+	object-fit: contain;
+	flex: 0 1 100px;
+}
+.user_cart_product_name {
+	flex: 0 1 350px;
+}
+.user_cart_btn_block {
+	flex: 0 1 104px;
+	border: 1px solid #D9D9D9;
+	border-radius: 3px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+}
+
+.product_counter_minus {
+	width: fit-content;
+	height: auto;
+}
+.product_counter_plus{
+	width: fit-content;
+	height: auto;
+}
+
+.product_counter_minus, .product_counter_plus:hover{
+	cursor: pointer;
+
+}
+
+.product_total {
+	flex: 0 1 150px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 10px;
+}
+.delete_button {
+	flex: 0 1 auto;
+	padding: 15px;
+	text-align: center;
+	background-color: #fff;
+}
+.kupon_block {
+	width: 100%;
+	height: auto;
+}
+.show_cupon_form {
+	color: var(--text-link, #FE5B00);
+	font-family: PT Sans;
+	font-size: 15px;
+	background-color: #FFF;
+	font-weight: 400;
+	padding-top: 25px;
+	border-bottom: 1px solid #FFF;
+	transition: border-bottom 1s ease-out;
+}
+.show_cupon_form:hover {
+	border-bottom: 1px solid #FE5B00;
+}
+.cart_total_block {
+	width: 100%;
+	height: auto;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	background-color: #FCFCFC;
+	padding: 25px 25px;
+}
+.cart_total_description {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	max-width: 305px;
+}
+.cart_total_info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+.cart_total_list {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 10px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #E0E0E0
+}
+.subtotal_block_cart {
+	display: flex;
+	justify-content: flex-end;
+	gap: 30px;
+	width: fit-content;
+}
+.total_cart {
+	padding: 20px 0px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 30px;
+	width: fit-content;
+}
+
+/*Форма ввода промо-кода */
+.cupon_form_block {
+	display: none;
+	padding-top: 25px;
+	width: 100%;
+}
+
+.cupon_form {
+	margin: 0px auto;
+	width: fit-content;
+	border: 1px solid #D9D9D9;
+	border-radius: 3px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cupon_form_active{
+	margin: 0px auto;
+	width: fit-content;
+	border: 1px solid #EC9F76;
+	border-radius: 3px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.promo_code_disable {
+	padding: 15px;
+	font-family: PT Sans;
+	line-height: 24px;
+	font-size: 14px;
+	border-right: 1px solid #D9D9D9;
+}
+
+.promo_code_active {
+	padding: 15px;
+	font-family: PT Sans;
+	line-height: 24px;
+	font-size: 14px;
+	border-right: 1px solid #EC9F76;
+}
+
+.send_promo_code {
+	height: 100%;
+	background-color: #F2F2F2;
+	padding: 15px;
+	border: none;
+	color: #B5B5B5;
+	font-family: PT Sans;
+	line-height: 24px;
+	font-size: 14px;
+}
+.send_promo_code_active {
+	height: 100%;
+	background-color: #FFF2EB;
+	padding: 15px;
+	border: none;
+	color: #FE5B00;
+	font-family: PT Sans;
+	line-height: 24px;
+	font-size: 14px;
+}
+.message_block_promo_code {
+	margin: 0px auto;
+	text-align: center;
+}
+.message_warning_promo {
+	padding-top: 15px;
+	color: #D71D1D;
+	font-family: PT Sans;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 133%;
+}
+.message_success_promo {
+	margin: 15px auto 0px;
+	width: fit-content;
+	padding: 10px;
+	background-color: #EBF7CB;
+	color: #738249;
+	font-family: PT Sans;
+	line-height: 24px;
+	font-size: 14px;
+}
+
+/*Мобильный адаптив*/
+
+/*Точка - 992px*/ 
+@media screen and (max-width: 992px) {
+	.my_cart_section {
+		padding: 10px 15px;
+	}
+	.user_cart_img {
+		flex: 0 1 80px;
+		width: 80px;
+		height: 80px;
+	}
+	.order_header_block {
+		padding: 0 15px;
+	}
+	.cart_block_list, .cart_total_block {
+		padding: 15px;
+	}
+	.user_cart_product_name {
+		flex: 0 1 300px;
+	}
+}
+
+/*Точка - 768px*/ 
+
+@media screen and (max-width: 768px) {
+	.cart_block {
+		padding: 15px 0px;
+	}
+	.order_header_block {
+		display: none;
+	}
+	.user_cart_item {
+		gap: 20px;
+		flex-wrap: wrap;
+	}
+	.user_cart_img {
+		order: 1;
+	}
+	.user_cart_btn_block {
+		order: 2;
+		flex: 0 1 auto;
+	}
+	.product_total {
+		order: 3;
+		flex: 0 1 auto;
+	}
+	.delete_button {
+		order: 5;
+	}
+	.user_cart_product_name {
+		flex: 0 1 100%;
+		order: 0;
+		text-align: center;
+	}
+}
+
+/*Точка - 7576px*/ 
+
+@media screen and (max-width: 576px) {
+	.link_section {
+		background-color: #FFF;
+	}
+	.cart_block {
+		margin: 0px;
+		border: none;
+	}
+	.my_cart_section {
+		padding: 15px 0px;
+		background-color: #FFF;
+	}
+	.cart_total_block {
+		flex-wrap: wrap;
+		gap: 20px;
+	}
+	.cart_total_description {
+		order: 1;
+		max-width: none;
+		flex: 0 1 100%;
+		justify-content: center;
+	}
+	
+	.cart_total_info {
+		width: 100%;
+		align-items: flex-end;
+	}
+	.user_cart_item {
+		justify-content: center;
+	}
+	.product_total {
+		flex: 0 1 50%;
+	}
+	.delete_button {
+		flex: 0 1 40%;
+	}
+}

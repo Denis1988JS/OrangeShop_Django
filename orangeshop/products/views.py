@@ -28,7 +28,7 @@ class CatalogProductsCategory(ListView):
     model = Product
     template_name = 'products/catalog_category.html'
     context_object_name = 'products'
-    paginate_by = 2
+    paginate_by = 6
 
     def get_queryset(self):
         #Переопределяем модель продукты - к катерии и подкатегиям
@@ -36,7 +36,6 @@ class CatalogProductsCategory(ListView):
         sub_categories = category.get_descendants(include_self=True)
         queryset = Product.objects.filter(category__in=sub_categories)
         collection_name = self.request.GET.getlist("collection_name")
-
         return queryset
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -52,7 +51,7 @@ class CatalogProductsCategory(ListView):
 class SortCatalogProductsCategory(ListView):
     template_name = 'products/catalog_category.html'
     context_object_name = 'products'
-    paginate_by = 2
+    paginate_by = 6
     def get_queryset(self):
         #Переоределяем  queryset
         category = Category.objects.get(slug=self.request.GET.get("category_slug")) #Получаем категорию страницы
@@ -163,13 +162,12 @@ class ProductView(DetailView):
         context = super().get_context_data(**kwargs)
         context['benefits'] = OurBenefits.objects.all()
         context['other_product'] = Product.objects.filter(collection_id=self.object.collection.id)[0:4]
-        print(context['other_product'])
         return context
 
 #Класс - поиск на сайте
 class SeachProduct(ListView):
     template_name = 'products/seach_result.html'
-    paginate_by = 3
+    paginate_by = 6
     context_object_name = 'products'
     #Переопределяем запрос - поиск по какому либо символу(символам) среди товаров
     def get_queryset(self):

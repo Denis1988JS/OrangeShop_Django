@@ -1,5 +1,6 @@
 from django.contrib import admin
-from users.models import User
+from  .models import UserBuyersData
 # Register your models here.
 
-#Админка - делаем админку для пользователей + доп данные
+
+

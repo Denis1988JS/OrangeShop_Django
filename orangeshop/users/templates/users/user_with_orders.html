@@ -45,10 +45,10 @@
 			<div class="user_profile_block">
 				<div class="user_profile">
 
-					{% if user_data.image == '' %}
+					{% if user.image == '' %}
 					<img src="{% static 'images/user/baseavatar.jpg' %}"  alt="Аватар" class="avatar">
 					{% else %}
-					<img src="{{ user_data.image.url  }}" alt="Аватар" class="avatar">
+					<img src="{{ user.userbuyersdata.image.url  }}" alt="Аватар" class="avatar">
 					{% endif %}
 
 					<div class="user_info">
@@ -58,7 +58,7 @@
 					</div>
 				</div>
 			</div>
-			<!--
+			
 			<div class="user_cart">
 				<h2 class="h2_some_block_title_32_pb_0">Мои заказы</h2>
 				<div class="user_cart_block">
@@ -147,7 +147,7 @@
 					</div>
 				</div>
 			</div>
-			-->
+			
 		</div>
 	</section>
 {% endblock content %}

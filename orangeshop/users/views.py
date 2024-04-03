@@ -63,10 +63,8 @@ class NewPassword(TemplateView):
         try:
             user = User.objects.get(Q(email=user_email))
             if user:
-                print(user)
                 generated_password = generate_password()
                 user.password = generated_password
-                print(user.password)
                 user.save()
                 #Ниже отправка e-mail - код при тесте был рабочий - чтобы не светить почту код закомментирован
                 # message_data = f'Ваш новый пароль - {generated_password}'
@@ -80,7 +78,6 @@ class NewPassword(TemplateView):
                 return redirect('login')
 
         except User.DoesNotExist :
-                print(f'По введенному имени почты {user_email}  пользователь не найден!!!')
                 messages.error(request, f'По введенному имени почты {user_email}  пользователь не найден!!!')
                 return redirect('new_pass')
     def get_context_data(self, *, object_list=None, **kwargs):

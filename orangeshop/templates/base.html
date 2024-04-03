@@ -82,7 +82,7 @@
                             <a href="tel:+7 (905) 543 23 45" class="nav_link_tel">+7 (905) 543 23 45</a>
                         </div>
                         <div class="data_cart">
-                            <a href="#">
+                            <a href="{% url 'user_cart' %}">
                                 <img src="{% static '/images/header/cart.svg' %}" alt="Корзина" class="cart_img">
                                 <span class="value_cart">4290 &#8381</span>
                             </a>
@@ -169,7 +169,8 @@
         <main class="main">
             <!--Блок с основным содержимым сайта - ДИНАМИЧЕСКИЙ-->
             {% block content %}
-            
+                {% block link_section %}
+                {% endblock link_section %}
             {% endblock %}
         </main>
 

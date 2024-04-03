@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+{% load bootstrap4 %}
+{% load static %}
+{% load orangeMainApp_tag %}
+{% load products_tag %}
+
+{% block css_block %}
+<link rel="stylesheet" href="{% static 'css/style_catalog_goods.css' %}">
+<link rel="stylesheet" href="{% static 'css/register_auth.css' %}">
+<link rel="stylesheet" href="{% static 'css/statick_style_new.css' %}">
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
+<link rel="stylesheet" href="{% static 'css/order_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/user_cart.css' %}">
+{% endblock css_block %}
+
+{% block icon %}
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/icon_title.png' %}">
+{% endblock icon %}
+
+{% block nav_list_big %}
+<div class="block_nav_list_big">
+	<a href="#" class="nav_item_link_big">О компании</a>
+	<a href="#" class="nav_item_link_big">О продукции</a>
+	<button class="nav_item_btn_big">
+		Каталог товаров
+		<img src="{% static 'images/header/vector_list_of_good.svg'%}" alt="Каталог" class="nav_item_arrow_big">
+	</button>
+</div>
+{% endblock nav_list_big %}
+{% block catalog_of_goods_block %}
+{% category_list_relative %}
+{% endblock catalog_of_goods_block %}
+
+{% block content %}
+{% if messages %}
+<ul class="messages">
+	{% for message in messages %}
+	<li class="{{ message.tags }}">
+		{{ message|safe }}
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+	{% block link_section %}
+	<section class="link_section">
+		<div class="link_section_block">
+			<img src="{% static 'images/links_section/links_back.svg'%}" alt="<">
+			<a href="{% url 'home' %}">Вернуться к покупкам</a>
+		</div>
+	</section>
+	{% endblock link_section %}
+	
+	<section class="my_cart_section">
+		<div class="cart_header">
+			<h2 class="h2_some_block_title_32_pb_0">
+				Моя корзина {{ user }}
+			</h2>
+		</div>
+		<div class="cart_block">
+			<div class="order_header_block">
+				<div class="header_name_product">
+					<p class="cart_p_14">Товар</p>
+				</div>
+				<div class="header_count_product_cart">
+					<p class="cart_p_14">Количество</p>
+				</div>
+				<div class="header_total_cart">
+					<p class="cart_p_14">Итого</p>
+				</div>
+			</div>
+			<div class="cart_block_list">
+				{% for cart in carts_list %}
+
+				<div class="user_cart_item">
+					<img src="{{cart.product.image.url}}" alt="Фото" class="user_cart_img">
+					<div class="user_cart_product_name">
+						<p class="p16_Sans">{{cart.product.name}}</p>
+					</div>
+				
+					<div class="user_cart_btn_block">
+						<div class="product_counter_minus">
+							<img src="{% static 'images/user_cart/btn-less-items.svg'%}" alt="-">
+						</div>
+						<div class="product_counter">
+							{{cart.quantity}}
+						</div>
+						<div class="product_counter_plus">
+							<img src="{% static 'images/user_cart/btn-more-items.svg'%}" alt="+">
+						</div>
+					</div>
+					<div class="product_total">
+						<p class="popular_goods_price">{{cart.get_product_price}} ₽</p>
+					</div>
+
+					<form action="{% url 'remove_cart' cart.id %}" method="get">
+					<button class="delete_button" type="submit">
+						<img src="{% static 'images/user_cart/close-24px.svg'%}" alt="X">
+						</a>
+					</button>
+					</form>
+				</div>
+
+			
+				{% endfor %}
+	
+				<div class="kupon_block">
+					<button class="show_cupon_form">
+						У меня есть купон на скидку
+					</button>
+					<div class="cupon_form_block">
+						<form action="#" method="post" class="cupon_form">
+							<input type="text" name="promo_code" id="promo_code" class="promo_code_disable"
+								placeholder="Введите промо-код">
+							<button class="send_promo_code" disabled type="button">
+								Активировать
+							</button>
+						</form>
+						<div class="message_block_promo_code">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cart_total_block">
+				<div class="cart_total_description">
+					<img src="{% static 'images/user_cart/refund.svg'%}" alt="ЛОГО">
+					<p class="cart_p_14">Бесплатный возврат товара в течение 30 дней после оплаты</p>
+				</div>
+				<div class="cart_total_info">
+					<div class="cart_total_list">
+						<div class="subtotal_block_cart">
+							<span class="cart_p_14">Сумма заказа</span>
+							<span class="p_15_bold">{{carts_list.total_price}} ₽</span>
+						</div>
+						<div class="subtotal_block_cart">
+							<span class="cart_p_14">НДС 20% (включено в цену)</span>
+							<span class="p_15_bold">{{carts_list.total_NDS}} ₽</span>
+						</div>
+						<div class="subtotal_block_cart">
+							<span class="cart_p_14">Скидка</span>
+							<span class="p_15_bold">5 120 ₽</span>
+						</div>
+					</div>
+					<div class="total_cart">
+						<span class="cart_p_14">К оплате</span>
+						<span class="h3_24_sans">20 490 ₽</span>
+					</div>
+					<button class="order_btn_orange">
+						Оформить заказ
+					</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+{% endblock content %}
