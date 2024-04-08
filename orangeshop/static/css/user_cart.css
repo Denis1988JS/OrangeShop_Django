@@ -75,15 +75,23 @@
 .product_counter_minus {
 	width: fit-content;
 	height: auto;
+	background-color: inherit;
+	transition: all 0.7s ease;
 }
 .product_counter_plus{
 	width: fit-content;
 	height: auto;
+	background-color: inherit;
+	transition: all 0.7s ease;
 }
 
-.product_counter_minus, .product_counter_plus:hover{
+.product_counter_minus:hover{
 	cursor: pointer;
-
+	background-color: #D71D1D;
+}
+.product_counter_plus:hover{
+	cursor: pointer;
+	background-color: darkgreen;
 }
 
 .product_total {

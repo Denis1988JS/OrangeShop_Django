@@ -237,6 +237,7 @@ if (p_c == true) {
 }
 
 //Обработчик промокода
+/*
 $('.send_promo_code ').on('click', function (e) {
 
 	let code_val = $('#promo_code').val()
@@ -250,3 +251,4 @@ $('.send_promo_code ').on('click', function (e) {
 		$('.message_block_promo_code').append("<p class='message_warning_promo'>Промо-код недействителен </p>")
 	}
 })
+*/

@@ -33,15 +33,7 @@
 {% endblock catalog_of_goods_block %}
 
 {% block content %}
-{% if messages %}
-<ul class="messages">
-	{% for message in messages %}
-	<li class="{{ message.tags }}">
-		{{ message|safe }}
-	</li>
-	{% endfor %}
-</ul>
-{% endif %}
+
 	{% block link_section %}
 	<section class="link_section">
 		<div class="link_section_block">
@@ -77,18 +69,27 @@
 					<div class="user_cart_product_name">
 						<p class="p16_Sans">{{cart.product.name}}</p>
 					</div>
-				
-					<div class="user_cart_btn_block">
-						<div class="product_counter_minus">
-							<img src="{% static 'images/user_cart/btn-less-items.svg'%}" alt="-">
+					<form action="{% url 'change_quantity' cart.id %}" method="get">
+						<div class="user_cart_btn_block">
+							{% if cart.quantity == 1 %}
+							<button class="product_counter_minus" name="quantity" value="-1" type="submit" disabled>
+								<img src="{% static 'images/user_cart/btn-less-items.svg'%}" alt="-">
+							</button>
+							{% else %}
+							<button class="product_counter_minus" name="quantity" value="-1" type="submit" >
+								<img src="{% static 'images/user_cart/btn-less-items.svg'%}" alt="-">
+							</button>
+							{% endif %}
+							<div class="product_counter">
+								{{cart.quantity}}
+							</div>
+
+							<button class="product_counter_plus" name="quantity" value="1" type="submit">
+								<img src="{% static 'images/user_cart/btn-more-items.svg'%}" alt="+">
+							</button>
+
 						</div>
-						<div class="product_counter">
-							{{cart.quantity}}
-						</div>
-						<div class="product_counter_plus">
-							<img src="{% static 'images/user_cart/btn-more-items.svg'%}" alt="+">
-						</div>
-					</div>
+					</form>
 					<div class="product_total">
 						<p class="popular_goods_price">{{cart.get_product_price}} ₽</p>
 					</div>
@@ -108,17 +109,33 @@
 					<button class="show_cupon_form">
 						У меня есть купон на скидку
 					</button>
+					{% if cupon %}
 					<div class="cupon_form_block">
-						<form action="#" method="post" class="cupon_form">
+						<p class='message_success_promo'>Купон на скидку {{cupon}} уже применен</p>
+					</div>
+					{% else %}
+					<div class="cupon_form_block">
+						<form action="{% url 'addPromoCode' %}" method="get" class="cupon_form">
 							<input type="text" name="promo_code" id="promo_code" class="promo_code_disable"
 								placeholder="Введите промо-код">
-							<button class="send_promo_code" disabled type="button">
+							<button class="send_promo_code" disabled type="submit">
 								Активировать
 							</button>
 						</form>
 						<div class="message_block_promo_code">
+							{% if messages %}
+								{% for message in messages %}
+									{% if message.tags == "success" %}
+										<p class='message_success_promo'>{{ message }}</p>
+									
+									{% elif message.tags == "warning" %}
+									<p class='message_warning_promo'>{{ message }} </p>
+									{% endif %}
+								{% endfor %}
+							{% endif %}
 						</div>
 					</div>
+					{% endif %}
 				</div>
 			</div>
 			<div class="cart_total_block">
@@ -138,12 +155,12 @@
 						</div>
 						<div class="subtotal_block_cart">
 							<span class="cart_p_14">Скидка</span>
-							<span class="p_15_bold">5 120 ₽</span>
+							<span class="p_15_bold">{{carts_list.get_promo_discaunt}} ₽</span>
 						</div>
 					</div>
 					<div class="total_cart">
 						<span class="cart_p_14">К оплате</span>
-						<span class="h3_24_sans">20 490 ₽</span>
+						<span class="h3_24_sans">{{carts_list.price_discount}} ₽</span>
 					</div>
 					<button class="order_btn_orange">
 						Оформить заказ
