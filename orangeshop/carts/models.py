@@ -25,11 +25,11 @@ class CartQueryset(models.QuerySet):
         discaunt = 0
         for i in self:
             try:
-                per_sent = float(i.get_product_price()) * float(i.promo_code_id.value_discont/100)
+                per_sent =float(i.get_product_price()) * float(i.promo_code_id.value_discont/100)
                 discaunt +=per_sent
             except AttributeError:
                 discaunt = 0
-        return discaunt
+        return round(discaunt, 2)
 
     #Итоговая сумма общая сумма - общая сумма скидки
     def price_discount(self):

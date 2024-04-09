@@ -84,7 +84,7 @@
                         <div class="data_cart">
                             <a href="{% url 'user_cart' %}">
                                 <img src="{% static '/images/header/cart.svg' %}" alt="Корзина" class="cart_img">
-                                <span class="value_cart">4290 &#8381</span>
+                                <span class="value_cart">{{carts_list.price_discount}} &#8381</span>
                             </a>
                         </div>
                         
@@ -113,6 +113,7 @@
                     <div class="form_seach_site">
                         <form action="{% url 'seach' %}" method="get" name="filter" class="form_seach">
                             <h2 class="form_header">Что вы ищете?</h2>
+                            <input type="hidden" name="orderby" id="orderby" value="name">
                             <input type="text" name="seach" id="seach" class="seach" placeholder="Поиск на сайте...">
                             <div class="form_seach_buttons">
                                 <button type="button" class="btn_close_form">

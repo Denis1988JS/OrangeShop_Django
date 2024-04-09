@@ -40,20 +40,32 @@ class AddProductCart(TemplateView):
     def get(self, request, *args, **kwargs):
         user = User.objects.get(id=self.request.user.id)
         product = Product.objects.get(id=kwargs['id'])#Получаем товар
-
+        #Заранее получаем промокод - если уже он внесен но не использован но при этом пользователь
+        #решил еще новые товары добавть то учесть скидку на новый товар
+        try:
+            promo = PromoCode.objects.get(user_id = self.request.user.id)
+        except ObjectDoesNotExist:
+            promo=''
+        print(promo)
         #Проверяем если пользователь авторизован , то ищем товар в корзине
         if request.user.is_authenticated:
             carts = UserCart.objects.filter(user=user, product = product)
             #Если товар в корзине то ищем первый попавшийся и добавляем +1 к кол-ву
             if carts.exists():
                 cart = carts.first()
-                if cart:
+                if cart and promo !='':
+                    cart.quantity += 1
+                    cart.promo_code_id = PromoCode.objects.get(user_id = self.request.user.id)
+                    cart.save()
+                else:
                     cart.quantity += 1
                     cart.save()
             #Если товара нет в корзине то создаем экземпляр корзины
             else:
-                UserCart.objects.create(user = user, product = product, quantity = 1)
-
+                if promo !='':
+                    UserCart.objects.create(user = user, product = product, quantity = 1, promo_code_id = promo )
+                else:
+                    UserCart.objects.create(user=user, product=product, quantity=1)
         #Если пользователь не авторизован - то корзина по ключу сессии
         else:
             carts = UserCart.objects.filter(session_key=self.request.session_key, product = product)
@@ -114,7 +126,6 @@ class PromoAddToCart(TemplateView):
             user_cart = UserCart.objects.filter(user = self.request.user)
             for cart in user_cart:
                 cart.promo_code_id = promo
-                print(cart.product, '1', 'готово')
                 cart.save()
 
             messages.success(request, f'У вас скидка ₽ ({promo.value_discont}%)')

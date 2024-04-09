@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, TemplateView,
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 
+from carts.templates.utils import CartSumMixin
 from orangeMainApp.models import OurBenefits
 from products.models import Product, Category, AdvantagesCategory, Collection, ColorProduct
 from django.db.models import Q
@@ -12,19 +13,21 @@ from django.http import QueryDict
 
 
 #Классовый шаблон - каталог товаров
-class CatalogProducts(ListView):
+class CatalogProducts(CartSumMixin,ListView):
     model = Product
     template_name = 'products/catalog.html'
     context_object_name = 'products'
     paginate_by = 8
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context()
         context['title'] = 'Каталог'
         context['page_name'] = 'Товары'
+        context = dict(list(context.items()) + list(c_def.items()))
         return context
 
 #Классовый шаблон - каталог продукции в разрезе категории
-class CatalogProductsCategory(ListView):
+class CatalogProductsCategory(CartSumMixin,ListView):
     model = Product
     template_name = 'products/catalog_category.html'
     context_object_name = 'products'
@@ -39,16 +42,18 @@ class CatalogProductsCategory(ListView):
         return queryset
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context()
         context['title'] = f'Каталог '
         context['category'] = Category.objects.get(slug=self.kwargs['category_slug'])
         context['advantages'] = AdvantagesCategory.objects.filter(categoty__id=context['category'].id)
         context['collection_list'] = Collection.objects.all()
         context['color_list'] = ColorProduct.objects.all()  # Список всех цветов коллекци
+        context = dict(list(context.items()) + list(c_def.items()))
         return context
 
 
 #Классовый шаблон - каталог продукции в разрезе категории + сортировка + фильрация
-class SortCatalogProductsCategory(ListView):
+class SortCatalogProductsCategory(CartSumMixin, ListView):
     template_name = 'products/catalog_category.html'
     context_object_name = 'products'
     paginate_by = 6
@@ -105,6 +110,7 @@ class SortCatalogProductsCategory(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context()
         context['title'] = f'Каталог '
         context['collection_list'] = Collection.objects.all() #Список всех коллекций
         context['color_list'] = ColorProduct.objects.all()#Список всех цветов коллекций
@@ -121,7 +127,7 @@ class SortCatalogProductsCategory(ListView):
             context['promo'] = ''
         else:
             context['promo'] = 'promo'+'='+self.request.GET.getlist('promo')[0]+'&'
-
+        context = dict(list(context.items()) + list(c_def.items()))
         return context
 
 # sub_category = self.request.GET.getlist("subcategory_slug")[0]
@@ -153,25 +159,26 @@ class SortCatalogProductsCategory(ListView):
 # context['q'] = QueryDict(context["collection_name"]).getlist(key='collection_name')
 
 #Класс - о товаре отдельно
-class ProductView(DetailView):
+class ProductView(CartSumMixin, DetailView):
     model = Product
     template_name = 'products/product_detail.html'
     context_object_name = 'product'
     slug_url_kwarg = 'product_slug'
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context()
         context['benefits'] = OurBenefits.objects.all()
         context['other_product'] = Product.objects.filter(collection_id=self.object.collection.id)[0:4]
+        context = dict(list(context.items()) + list(c_def.items()))
         return context
 
 #Класс - поиск на сайте
-class SeachProduct(ListView):
+class SeachProduct(CartSumMixin,ListView):
     template_name = 'products/seach_result.html'
     paginate_by = 6
     context_object_name = 'products'
     #Переопределяем запрос - поиск по какому либо символу(символам) среди товаров
     def get_queryset(self):
-        print(self.request.GET.get('orderby'))
         #Список коллекций
         if self.request.GET.getlist('collection_name'):
             collection_name = self.request.GET.getlist('collection_name')
@@ -185,6 +192,8 @@ class SeachProduct(ListView):
         # Сортировка - если есть в request то значение из request если нет то name
         if self.request.GET.get("orderby") != 'name':
             orderby = self.request.GET.get("orderby")
+        elif self.request.GET.get("orderby") == None or self.request.GET.get("orderby") =="":
+            orderby = 'name'
         else:
             orderby = 'name'
         # Список цветов если есть в request то значение из request если нет то все цвета (список)
@@ -211,6 +220,7 @@ class SeachProduct(ListView):
         return queryset
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        c_def = self.get_user_context()
         context['title'] = f'Поиск по {self.request.GET.get("seach")} ' #title
         context['data'] = self.request.GET.get("seach") #Запрос get
         context['seach'] = f'seach={self.request.GET.get("seach")}&' #Для пагинации что искали
@@ -225,4 +235,5 @@ class SeachProduct(ListView):
             context['promo'] = ''
         else:
             context['promo'] = 'promo'+'='+self.request.GET.getlist('promo')[0]+'&'
+        context = dict(list(context.items()) + list(c_def.items()))
         return context
