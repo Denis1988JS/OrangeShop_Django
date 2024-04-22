@@ -46,7 +46,6 @@ class AddProductCart(TemplateView):
             promo = PromoCode.objects.get(user_id = self.request.user.id)
         except ObjectDoesNotExist:
             promo=''
-        print(promo)
         #Проверяем если пользователь авторизован , то ищем товар в корзине
         if request.user.is_authenticated:
             carts = UserCart.objects.filter(user=user, product = product)
@@ -80,6 +79,7 @@ class AddProductCart(TemplateView):
 
         #Возврат на карточку товара + сообщение о то что товар добавлен в корзину
         messages.success(request, f'Товар {product} добавлен в корзину покупок')
+        print(f'Товар {product} добавлен в корзину покупок')
         return redirect(product.get_absolute_url())
 
 #Класс удалить товар из корзины пользователя
@@ -89,7 +89,7 @@ class RemoveProductCart(TemplateView):
         cart_obj.delete()
 
         # Возврат в корзину покупок + сообщение о удалении товара
-        messages.success(request, f'Товар удален и корзины')
+        messages.warning(request, f'Товар удален и корзины')
         return redirect('user_cart')
 
 #Изменить кол-во товара +- от 1 до +++++

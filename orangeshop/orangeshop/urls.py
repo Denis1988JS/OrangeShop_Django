@@ -28,6 +28,7 @@ urlpatterns = [
     path('products/', include('products.urls')),#Маршруты из приложения products
     path('user/', include('users.urls')),#Маршруты из приложения users
     path('carts/', include('carts.urls')),#Маршруты из приложения carts
+    path('orders/', include('orders.urls')),#Маршруты из приложения orders
 ]
 
 if settings.DEBUG:

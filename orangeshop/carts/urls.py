@@ -8,5 +8,5 @@ urlpatterns = [
     path('remove_cart/<int:id>', RemoveProductCart.as_view(), name='remove_cart'),#Удалить товар из корзины
     path('changeQuantity/<int:id>',ChangeQuantityCart.as_view(), name='change_quantity'),#Изменить кол-во товара +-
     path('addPromoCode', PromoAddToCart.as_view(), name='addPromoCode'), #Добавить промокод
-
 ]
+

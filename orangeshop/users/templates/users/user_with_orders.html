@@ -45,10 +45,11 @@
 			<div class="user_profile_block">
 				<div class="user_profile">
 
-					{% if user.image == '' %}
-					<img src="{% static 'images/user/baseavatar.jpg' %}"  alt="Аватар" class="avatar">
-					{% else %}
+					{% if user.image %}
 					<img src="{{ user.userbuyersdata.image.url  }}" alt="Аватар" class="avatar">
+					
+					{% else %}
+					<img src="{% static 'images/user/baseavatar.jpg' %}" alt="Аватар" class="avatar">
 					{% endif %}
 
 					<div class="user_info">

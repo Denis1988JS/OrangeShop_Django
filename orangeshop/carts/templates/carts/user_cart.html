@@ -33,12 +33,20 @@
 {% endblock catalog_of_goods_block %}
 
 {% block content %}
-
+	{% if messages %}
+	<ul class="messages">
+		{% for message in messages %}
+		<li class="{{ message.tags }}">
+			{{ message|safe }}
+		</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
 	{% block link_section %}
 	<section class="link_section">
 		<div class="link_section_block">
 			<img src="{% static 'images/links_section/links_back.svg'%}" alt="<">
-			<a href="{% url 'home' %}">Вернуться к покупкам</a>
+			<a href="{% url 'catalog' %}">Вернуться к покупкам</a>
 		</div>
 	</section>
 	{% endblock link_section %}
@@ -49,6 +57,7 @@
 				Моя корзина {{ user }}
 			</h2>
 		</div>
+		{% if carts_list %}
 		<div class="cart_block">
 			<div class="order_header_block">
 				<div class="header_name_product">
@@ -62,8 +71,9 @@
 				</div>
 			</div>
 			<div class="cart_block_list">
-				{% for cart in carts_list %}
+				
 
+				{% for cart in carts_list %}
 				<div class="user_cart_item">
 					<img src="{{cart.product.image.url}}" alt="Фото" class="user_cart_img">
 					<div class="user_cart_product_name">
@@ -101,10 +111,7 @@
 					</button>
 					</form>
 				</div>
-
-			
 				{% endfor %}
-	
 				<div class="kupon_block">
 					<button class="show_cupon_form">
 						У меня есть купон на скидку
@@ -137,6 +144,7 @@
 					</div>
 					{% endif %}
 				</div>
+				
 			</div>
 			<div class="cart_total_block">
 				<div class="cart_total_description">
@@ -163,10 +171,18 @@
 						<span class="h3_24_sans">{{carts_list.price_discount}} ₽</span>
 					</div>
 					<button class="order_btn_orange">
-						Оформить заказ
+						<a href="{% url 'makeOrder' %}">
+							Оформить заказ
+						</a>
 					</button>
 				</div>
 			</div>
+			{% else %}
+				<div class="empty_cart">
+					<p>Ваша корзина пуста !!!</p>
+					<img src="{% static 'images/user_cart/empty_cart.jpg' %}" alt="ФОТО">
+				</div>
+			{% endif %}
 		</div>
 	</section>
 

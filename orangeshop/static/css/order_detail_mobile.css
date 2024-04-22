@@ -1,0 +1,63 @@
+/*-------------Страница order_detail - заказ товара ----------------*/
+/*1400-1200-992-768-576*/
+
+
+@media screen and (max-width: 992px) {
+	.take_order {
+		padding: 25px;
+		flex: 0 2 588px;
+	}
+	.order_data {
+		padding: 15px;
+	}
+	.block_number_cart, .block_CVV_cart {
+		position: relative;
+	}
+	.bank_cart_tabs {
+		height: auto;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.order_section {
+		background-color: #fff;
+	}
+	.order_block_take {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.take_order {
+		order: 1;
+		flex: 0 1 100%;
+	}
+	.item_body_flex {
+		flex-wrap: wrap;
+	}
+	.label_block {
+		display: inline-block;
+	}
+	.form_imput_tell {
+		width: calc(100% - 52px);
+	}
+	.order_data {
+		flex: 0 1 100%;
+	}
+	.form_radio_btn {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+	.form_radio_btn label{
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+	.take_order_form input[type="text"] {
+		width: 100%;
+	}
+}
+@media screen and (max-width: 576px) {
+	.order_data, .take_order {
+		border: none;
+		padding: 0;
+	}
+}
