@@ -12,7 +12,7 @@ class CartQueryset(models.QuerySet):
     #Получить общую цену за товары в корзине
     def total_price(self):
         summ = sum(cart.get_product_price() for cart in self)
-        return summ
+        return round(summ,2)
 
     #Получить НДС
     def total_NDS(self):
@@ -22,10 +22,10 @@ class CartQueryset(models.QuerySet):
 
     #Получить скидку на каждый товар в итоге ссумируется в общую
     def get_promo_discaunt(self):
-        discaunt = 0
+        discaunt = float(0)
         for i in self:
             try:
-                per_sent =float(i.get_product_price()) * float(i.promo_code_id.value_discont/100)
+                per_sent =round(float(i.get_product_price()) * float(i.promo_code_id.value_discont/100),2)
                 discaunt +=per_sent
             except AttributeError:
                 discaunt = 0
@@ -33,10 +33,10 @@ class CartQueryset(models.QuerySet):
 
     #Итоговая сумма общая сумма - общая сумма скидки
     def price_discount(self):
-        discount = self.get_promo_discaunt()
-        price = self.total_price()
-        priceDiscount = float(price) - float(discount)
-        return priceDiscount
+        discount = round(float(self.get_promo_discaunt()),2)
+        price = round(float(self.total_price()),2)
+        priceDiscount = float(round(price,2)) - float(round(discount,2))
+        return round(priceDiscount,2)
 
 
 # Create your models here.
@@ -56,7 +56,7 @@ class UserCart(models.Model):
 
     #Получить сумму за товар или сумму товар если есть акция на товар:
     def get_product_price(self):
-        return round(self.product.sell_price() * self.quantity, 0)
+        return round(self.product.sell_price() * self.quantity, 2)
 
     def get_promo(self):
         return self.pk

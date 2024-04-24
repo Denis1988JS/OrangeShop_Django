@@ -28,7 +28,7 @@ class BuyerStatus(models.Model):
         verbose_name = "Статус покупателя"
         verbose_name_plural = "Статусы покупателей"
     def __str__(self):
-        return f"Заказ № {self.status}"
+        return f"{self.status}"
 
 #Модель способ получения
 class MethodOfObtaining(models.Model):
