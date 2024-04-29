@@ -105,8 +105,9 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
+
     def __str__(self):
-        return f"Заказ № {self.pk} | Покупатель {self.user.first_name} {self.user.last_name}"
+        return f"Заказ № {self.pk}| {self.order_num} - Покупатель {self.user.first_name} {self.user.last_name}"
 
 #Промо-код из корзины в заказ для архива
 class PromoCode(models.Model):

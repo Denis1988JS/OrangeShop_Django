@@ -51,7 +51,7 @@
 		</div>
 		<div class="order_block_take">
 			<div class="take_order">
-				<form action="#" method="post" class="take_order_form">
+				<form action="{% url 'addOrder' %}" method="post" class="take_order_form">
 					{% csrf_token %}
 					<!--Статус пользователя-->
 					<div class="order_form_item">
@@ -167,23 +167,23 @@
 												Номер карты
 											</p>
 											<input type="text" name="cart_number_1" id="cart_number" class="cart_number"
-												minlength="4" maxlength="4" placeholder="0000" required>
+												minlength="4" maxlength="4" placeholder="0000" >
 											<input type="text" name="cart_number_2" id="cart_number_2" class="cart_number"
-												minlength="4" maxlength="4" placeholder="0000" required>
+												minlength="4" maxlength="4" placeholder="0000" >
 											<input type="text" name="cart_number_3" id="cart_number_3" class="cart_number"
-												minlength="4" maxlength="4" placeholder="0000" required>
+												minlength="4" maxlength="4" placeholder="0000" >
 											<input type="text" name="cart_number_4" id="cart_number_4" class="cart_number"
-												minlength="4" maxlength="4" placeholder="0000" required>
+												minlength="4" maxlength="4" placeholder="0000" >
 										</div>
 										<div class="input_mask_date">
 											<p class="cart_p_14">
 												MM / ГГ
 											</p>
 											<input type="text" name="cart_year" id="cart_year" class="cart_date" minlength="2"
-												maxlength="2" placeholder="MM" required>
+												maxlength="2" placeholder="MM" >
 											<span class="between_span">/</span>
 											<input type="text" name="cart_month" id="cart_month" class="cart_date" minlength="2"
-												maxlength="2" placeholder="ГГ" required>
+												maxlength="2" placeholder="ГГ" >
 										</div>
 
 									</div>
@@ -195,7 +195,7 @@
 										<div class="CVV_input_block">
 											<div>
 												<input type="text" name="cart_cvv" id="cart_cvv" class="cart_cvv" minlength="3"
-													maxlength="3" placeholder="CVV" required>
+													maxlength="3" placeholder="CVV" >
 												<p class="p15_sans_grey">Три цифры на обороте карты</p>
 											</div>
 
@@ -212,7 +212,7 @@
 						</div>
 					</div>
 					<div class="block_btn_take_order">
-						<button class="order_btn_orange" disabled>
+						<button class="order_btn_orange" >
 							Отправить заказ
 						</button>
 					</div>

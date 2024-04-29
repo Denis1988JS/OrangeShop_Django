@@ -10181,14 +10181,13 @@ $('.input_mask_date').click(function (e) {
 /*Блок вариант оплаты - смена стиля если все данные заполнены */
 $('#payment_type').on('click keydown', function (e) {
 	let classStyleList = ['radio_data pay_data',]
-	let variants_list = $('.variant_pay').find(':input[name=pay_type]')
+	let variants_list = $('.variant_pay').find(':input[name=methodPay]')
 	//console.log(variants_list,'Список вариантов', typeof(variants_list))
 	if (classStyleList.includes(e.target.className)) {
 		for (let i = 0; i < variants_list.length; i++) {
 			if (variants_list[i]['value'] == $(e.target).val()) {
 				$(e.target).attr('checked', 'true')
 			}
-
 		}
 	}
 	if ($('#pay_type_cash').attr('checked')) {
@@ -10227,11 +10226,4 @@ $('#payment_type').on('click keydown', function (e) {
 		})
 	}
 })
-$('.take_order_form').on('click', function () {
-	if ($('.take_order_form').find('.order_form_item_checked').length == 5) {
-		$('.take_order_form').find('.order_btn_orange').removeAttr('disabled')
-	}
-	else {
-		$('.take_order_form').find('.order_btn_orange').attr('disabled', true)
-	}
-})
+
