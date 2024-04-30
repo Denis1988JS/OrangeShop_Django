@@ -60,4 +60,8 @@
 		border: none;
 		padding: 0;
 	}
+	.order_success_block {
+		background-color: inherit;
+		border: none;
+	}
 }

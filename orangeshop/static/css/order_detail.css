@@ -166,8 +166,8 @@
 	margin-top: 20px;
 }
 .order_btn_orange {
-	width: 150px;
-	padding: 10px 0px;
+	width: auto;
+	padding: 10px 20px;
 	text-align: center;
 	background-color: #FF7028;
 	color: #FFF;
@@ -177,6 +177,10 @@
 	line-height: normal;
 	cursor: pointer;
 	box-shadow: 5px 5px 0px #ffffff, 7px 7px 0px -1px rgba(246, 118, 26, 1), 7px 3px 0px -1px rgba(246, 118, 26, 1), 3px 7px 0px -1px rgba(246, 118, 26, 1);
+}
+.order_btn_orange a {
+	text-decoration: none;
+	color: #fff;
 }
 .order_btn_lite_orange {
 	width: 150px;
@@ -264,7 +268,6 @@
 		border: none;
 	}
 
-
 	.user_order_info {
 		flex: 0 1 auto;
 		width: 187px;
@@ -278,4 +281,42 @@
 	.order_total {
 		flex: 0 1 auto;
 	}
+}
+
+/*Страница orderMessage - оповещение о заказе*/
+.order_success_section {
+	width: 100%;
+	height: auto;
+	padding:50px 20px;
+	background-color: #E5E5E5;
+}
+.order_success_block {
+	margin: 0px auto;
+	max-width: 792px;
+	border: 1px solid #D9D9D9;
+	border-radius: 8px;
+	height: auto;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 30px;
+	padding: 50px 0px;
+}
+.order_success_header {
+	width: 80px;
+	height: auto;
+	object-fit: contain;
+}
+.order_success_block p {
+	max-width: 519px;
+}
+.linkOrange {
+	color: #FB6900;
+	font-family: PT Sans;
+	font-size: clamp(0.90rem, 0.7067rem + 0.1923vw, 0.9375rem);
+	font-weight: 400;
+	line-height: 20px;
+	text-decoration: none;
 }

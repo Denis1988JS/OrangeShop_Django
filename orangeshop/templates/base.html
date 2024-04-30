@@ -88,9 +88,9 @@
                                 <span class="value_cart">{{carts_list.price_discount}} &#8381</span>
                             </a>
                             {% else %}
-                            <a href="{% url '' %}">
+                            <a href="#">
                                 <img src="{% static '/images/header/cart.svg' %}" alt="Корзина" class="cart_img">
-                                <span class="value_cart">{{carts_list.price_discount}} &#8381</span>
+                                <span class="value_cart">00 &#8381</span>
                             </a>
                             {% endif %}
                         </div>
@@ -105,6 +105,10 @@
                             <a href="{% url 'profile' %}" title="Кабинет {{user}}" >
                                 <img src="{% static 'images/header/user.svg'%}" alt="Пользователь">
                             </a>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="logoutLink">Выйти</button>
+                            </form>
                             {% else %}
                             <a href="{% url 'login' %}">
                                 <img src="{% static 'images/header/user.svg'%}" alt="Пользователь">

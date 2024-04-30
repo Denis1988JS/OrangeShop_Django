@@ -165,3 +165,6 @@ MEDIA_URL = 'media/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Для выхода из авторизации - с сайта
+LOGOUT_REDIRECT_URL = '/'

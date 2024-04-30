@@ -62,6 +62,7 @@
 			
 			<div class="user_cart">
 				<h2 class="h2_some_block_title_32_pb_0">Мои заказы</h2>
+				{% if orders %}
 				<div class="user_cart_block">
 					<div class="user_cart_header">
 						<div class="data_header">
@@ -91,62 +92,38 @@
 						</div>
 					</div>
 				</div>
+				{% for order in orders%}
 				<div class="user_cart_list">
 					<div class="user_cart_item">
 						<div class="cart_item_data">
-							<p class="p15_sans_grey_left">13.06.2019</p>
+							<p class="p15_sans_grey_left">{{order.create_time | date:"d.m.Y"}}</p>
 						</div>
 						<div class="cart_item_number">
-							<p>№ R879554545</p>
+							<p>{{order.order_num}}</p>
 						</div>
 						<div class="cart_item_product_list">
-							<img src="./link/img/profile/1.svg" alt="Фото">
+							{% for product in order.order.all %}
+							<a href="{{product.product.get_absolute_url}}">
+								<img src="{{product.product.image.url}}" alt="Фото">
+							</a>
+							{% endfor %}
 						</div>
 						<div class="cart_item_status">
+							{% if order.statusPay %}
 							<p class="p15_sans_grey_left">Оплачено</p>
+							{% else %}
+							<p class="p15_sans_grey_left">Не оплачено</p>
+							{% endif %}
 						</div>
 						<div class="cart_item_total">
-							<p class="p_15_bold">4 180,00 ₽</p>
-						</div>
-					</div>
-
-					<div class="user_cart_item">
-						<div class="cart_item_data">
-							<p class="p15_sans_grey_left">20.03.2019</p>
-						</div>
-						<div class="cart_item_number">
-							<p>№ R522481282</p>
-						</div>
-						<div class="cart_item_product_list">
-							<img src="./link/img/profile/12.svg" alt="Фото">
-							<img src="./link/img/profile/123.svg" alt="Фото">
-						</div>
-						<div class="cart_item_status">
-							<p class="p15_sans_grey_left">Отменен</p>
-						</div>
-						<div class="cart_item_total">
-							<p class="p_15_bold">14 890,00 ₽</p>
-						</div>
-					</div>
-
-					<div class="user_cart_item">
-						<div class="cart_item_data">
-							<p class="p15_sans_grey_left">13.06.2019</p>
-						</div>
-						<div class="cart_item_number">
-							<p>№ 9966547855</p>
-						</div>
-						<div class="cart_item_product_list">
-							<img src="./link/img/profile/1234.svg" alt="Фото">
-						</div>
-						<div class="cart_item_status">
-							<p class="p15_sans_grey_left">Оплачено</p>
-						</div>
-						<div class="cart_item_total">
-							<p class="p_15_bold">790,00 ₽ ₽</p>
+							<p class="p_15_bold">{{order.price}} ₽</p>
 						</div>
 					</div>
 				</div>
+				{% endfor %}
+				{% else %}
+				<p>У вас нет заказов</p>
+				{% endif %}
 			</div>
 			
 		</div>

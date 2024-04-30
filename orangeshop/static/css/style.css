@@ -160,10 +160,25 @@
 	border-radius: 2px;
 	border: 1px solid #494949;
 }
+.data_account {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 25px;
+}
 .data_seach_btn_2 {
 	display: none;
 }
-
+.logoutLink {
+	color: white;
+	font-size: 18px;
+	font-weight: 700;
+	background-color: inherit;
+}
+.logoutLink:hover {
+	color: red;
+	opacity: 1;
+}
 /*Форма поиска на сайте -мобильная*/
 .form_seach_site {
 	position: absolute;

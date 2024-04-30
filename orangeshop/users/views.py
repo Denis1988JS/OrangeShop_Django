@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
@@ -9,6 +9,9 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, View, ListView, DetailView, CreateView, FormView, UpdateView
+
+from carts.templates.utils import CartSumMixin
+from orders.models import Order
 from users.forms import RegisterUserForm, LoginUserForm, NewPasswordForm, UserBuyersDataRedactor
 from django.contrib import messages
 
@@ -87,13 +90,17 @@ class NewPassword(TemplateView):
         return context
 
 #Личный кабинет
-class UserProfile(LoginRequiredMixin,TemplateView):
+class UserProfile(CartSumMixin,LoginRequiredMixin,TemplateView):
     model = User
     template_name = 'users/user_with_orders.html'
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context()
         context['user_data'] = UserBuyersData.objects.get(user=self.request.user.id)
         context['title'] = f'Личный кабинет {self.request.user}'
+        context['orders'] = Order.objects.filter(user__id = self.request.user.id)
+        context = dict(list(context.items()) + list(c_def.items()))
+        print(context['orders'], 'заказы', self.request.user.id)
         return context
 
 #Редактирование профиля - только UserBuyersData
@@ -108,3 +115,4 @@ class EditUserProfile(SuccessMessageMixin,LoginRequiredMixin,UpdateView):
         context['title'] = f'Редактирование пользователя {self.request.user}'
         print(self.request)
         return context
+

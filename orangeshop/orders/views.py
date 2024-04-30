@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView,View
 from django.shortcuts import render, redirect
@@ -75,17 +76,33 @@ class AddOrder(CartSumMixin, View):
                 productOrder.price = price
                 productOrder.quantity = quantity
                 productOrder.save()
-            #Получаем промо-код из корзины покупок по id-user
-            promoCart = PromoCodeCart.objects.get(user_id=self.request.user.id)
-            #Создем промо=код из ордерс
-            promoOrder = PromoCodeOrder()
-            promoOrder.code_value = promoCart.code_value
-            promoOrder.value_discont = promoCart.value_discont
-            promoOrder.create_code = promoCart.create_code
-            promoOrder.order = newOrder
-            promoOrder.save()
+
+            try:
+                # Получаем промо-код из корзины покупок по id-user
+                promoCart = PromoCodeCart.objects.get(user_id=self.request.user.id)
+                # Создем промо=код из ордерс
+                promoOrder = PromoCodeOrder()
+                promoOrder.code_value = promoCart.code_value
+                promoOrder.value_discont = promoCart.value_discont
+                promoOrder.create_code = promoCart.create_code
+                promoOrder.order = newOrder
+                promoOrder.save()
+                promoCart.delete()
+            except ObjectDoesNotExist:
+                pass
             #После внесения всех данных в заказ удаляем корзину пользователя и промо-код
             carts_list.delete()
-            promoCart.delete()
-            print('Заказ успешно оформлен !!!')
-            return redirect("makeOrder")
+            return redirect(f'orderMessage/{newOrder.pk}')
+
+#Страница сообщение о заказе
+class OrderMessage(CartSumMixin, TemplateView):
+    template_name = 'orders/order_message.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context()
+        context['title'] = "Оформление заказа"
+        context['order'] = Order.objects.get(id=context['pk'])
+        context = dict(list(context.items()) + list(c_def.items()))
+
+        return context

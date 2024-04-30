@@ -24,8 +24,6 @@ class CatalogProducts(CartSumMixin,ListView):
         context['title'] = 'Каталог'
         context['page_name'] = 'Товары'
         context = dict(list(context.items()) + list(c_def.items()))
-
-
         return context
 
 #Классовый шаблон - каталог продукции в разрезе категории

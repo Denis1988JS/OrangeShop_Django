@@ -39,6 +39,7 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ("order_num",'fullNameUser')
     search_help_text = 'Поиск по заказам - номер или ФИО получателя'
     list_filter = ('methodPay', 'methodDelivery','buyerStatus','statusPay','create_time')
+    list_editable = ('statusPay',)
     ordering = ['pk']
     readonly_fields = (
         'user','create_time','order_num','methodPay',"statusPay","fullNameUser","phone","buyerStatus",

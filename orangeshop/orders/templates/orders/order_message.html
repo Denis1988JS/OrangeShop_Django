@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+{% load bootstrap4 %}
+{% load static %}
+{% load orangeMainApp_tag %}
+{% load products_tag %}
+
+{% block css_block %}
+<link rel="stylesheet" href="{% static 'css/style_catalog_goods.css' %}">
+<link rel="stylesheet" href="{% static 'css/register_auth.css' %}">
+<link rel="stylesheet" href="{% static 'css/statick_style_new.css' %}">
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
+<link rel="stylesheet" href="{% static 'css/order_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/take_order.css' %}">
+<link rel="stylesheet" href="{% static 'css/autocomplite.css' %}">
+<link rel="stylesheet" href="{% static 'css/order_detail_mobile.css' %}">
+<link rel="stylesheet" href="{% static 'css/user_cart.css' %}">
+
+{% endblock css_block %}
+
+{% block icon %}
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/icon_title.png' %}">
+{% endblock icon %}
+
+{% block nav_list_big %}
+<div class="block_nav_list_big">
+	<a href="#" class="nav_item_link_big">О компании</a>
+	<a href="#" class="nav_item_link_big">О продукции</a>
+	<button class="nav_item_btn_big">
+		Каталог товаров
+		<img src="{% static 'images/header/vector_list_of_good.svg'%}" alt="Каталог" class="nav_item_arrow_big">
+	</button>
+</div>
+{% endblock nav_list_big %}
+{% block catalog_of_goods_block %}
+{% category_list_relative %}
+{% endblock catalog_of_goods_block %}
+
+{% block content %}
+
+<section class="order_success_section">
+	<div class="order_success_block">
+		<img src="{% static 'images/makeOrder/orderMessageHeader.svg'%}" alt="Логотип" class="order_success_header">
+		<h2 class="h2_32_center">
+			Заказ оформлен
+		</h2>
+		<p class="p15_sans_grey">
+			Номер заказа {{order.order_num}}. Вы можете найти его в своем <a href="{% url 'profile' %}" class="linkOrange">личном кабинете</a> .
+			Наш менеджер свяжется с вами для подтверждения заказа в течение 24 часов
+		</p>
+		<button class="order_btn_orange">
+			<a href="{% url 'catalog' %}">Продолжить покупки</a>
+		</button>
+	</div>
+</section>
+
+{% endblock content %}
+	
+{% block scripts %}
+
+<script src="{% static 'js/autocomplite.js'%}"></script>
+<script src="{% static 'js/script_order.js'%}"></script>
+{% endblock scripts %}
