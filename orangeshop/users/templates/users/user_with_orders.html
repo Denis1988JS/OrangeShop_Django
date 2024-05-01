@@ -92,14 +92,14 @@
 						</div>
 					</div>
 				</div>
-				{% for order in orders%}
+				{% for order in orders %}
 				<div class="user_cart_list">
 					<div class="user_cart_item">
 						<div class="cart_item_data">
 							<p class="p15_sans_grey_left">{{order.create_time | date:"d.m.Y"}}</p>
 						</div>
 						<div class="cart_item_number">
-							<p>{{order.order_num}}</p>
+							<a href="{{order.get_absolute_url}}"><p>{{order.order_num}}</p></a>
 						</div>
 						<div class="cart_item_product_list">
 							{% for product in order.order.all %}

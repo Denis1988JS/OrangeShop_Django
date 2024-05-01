@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+{% load bootstrap4 %}
+{% load static %}
+{% load orangeMainApp_tag %}
+{% load products_tag %}
+
+{% block css_block %}
+<link rel="stylesheet" href="{% static 'css/style_catalog_goods.css' %}">
+<link rel="stylesheet" href="{% static 'css/register_auth.css' %}">
+<link rel="stylesheet" href="{% static 'css/statick_style_new.css' %}">
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
+<link rel="stylesheet" href="{% static 'css/order_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/take_order.css' %}">
+<link rel="stylesheet" href="{% static 'css/autocomplite.css' %}">
+<link rel="stylesheet" href="{% static 'css/order_detail_mobile.css' %}">
+<link rel="stylesheet" href="{% static 'css/user_cart.css' %}">
+{% endblock css_block %}
+
+{% block icon %}
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/icon_title.png' %}">
+{% endblock icon %}
+
+{% block nav_list_big %}
+<div class="block_nav_list_big">
+	<a href="#" class="nav_item_link_big">О компании</a>
+	<a href="#" class="nav_item_link_big">О продукции</a>
+	<button class="nav_item_btn_big">
+		Каталог товаров
+		<img src="{% static 'images/header/vector_list_of_good.svg'%}" alt="Каталог" class="nav_item_arrow_big">
+	</button>
+</div>
+{% endblock nav_list_big %}
+{% block catalog_of_goods_block %}
+{% category_list_relative %}
+{% endblock catalog_of_goods_block %}
+
+{% block content %}
+			<section class="link_section">
+				<div class="link_section_block">
+					<img src="{% static 'images/links_section/links_back.svg'%}" alt="<">
+					<a href="{% url 'profile' %}">Список заказов</a>
+				</div>
+			</section>
+			<section class="order_section">
+				<div class="order_number">
+					<h2 class="h2_some_block_title_32_pb_0">
+						Заказ № {{order.order_num}}
+					</h2>
+				</div>
+				<div class="order_main">
+					<div class="order_description">
+						
+						<ul class="order_list">
+							<li>
+								Способ оплаты
+							</li>
+							<li class="order_item">
+								<p class="p16_Sans">{{order.methodPay}}</p>
+							</li>
+						</ul>
+
+						
+						<ul class="order_list">
+							<li>
+								Платежный адрес
+							</li>
+							<li class="order_item">
+								<p class="p16_Sans">Orange RUS</p>
+							</li>
+							<li class="order_item">
+								<p class="p16_Sans">Москва</p>
+							</li>
+							<li class="order_item">
+								<p class="p16_Sans">Москва MOW 109559</p>
+							</li>
+							<li class="order_item">
+								<p class="p16_Sans">9075375757</p>
+							</li>
+						</ul>
+
+						
+						<ul class="order_list">
+							<li>
+								Доставка
+							</li>
+							<li class="order_item">
+								<p class="p16_Sans">{{order.methodDelivery}}</p>
+							</li>
+							{% if order.methodDelivery.method_name == "Постамат" %}
+							<li class="order_item">
+								<p class="p16_Sans">Постамат - {{order.adresPostmat}}</p>
+							</li>
+							{% else %}
+							<li class="order_item">
+								<p class="p16_Sans">{{order.indexNumber}} {{order.city_delivery}}</p>
+							</li>
+							<li class="order_item">
+								<p class="p16_Sans">{{order.streetName}} {{order.streetNumber}}</p>
+							</li>
+							<li class="order_item">
+								<p class="p16_Sans">Квартира {{order.numberApartment}}</p>
+							</li>
+							{% endif %}
+						</ul>
+					</div>
+
+					
+					<div class="order_block">
+						<h2 class="h2_some_block_title_32_pb_35">
+							Товары
+						</h2>
+						<div class="order_header_block">
+							<div class="header_name_product">
+								<p class="cart_p_14">Товар</p>
+							</div>
+							<div class="header_count_product">
+								<p class="cart_p_14">Количество</p>
+							</div>
+							<div class="header_total">
+								<p class="cart_p_14">Итого</p>
+							</div>
+						</div>
+						<div class="user_order_list">
+							{% for product in order.order.all %}
+							<div class="user_order_item">
+								<div class="item_img">
+								<a href="{{product.product.get_absolute_url}}">
+									<img src="{{product.product.image.url}}" alt="Фото">
+								</a>
+								</div>
+								<div class="user_order_info">
+									<p class="p16_Sans">{{product.name}}</p>
+									<p class="p_15_bold">{{product.price}} ₽</p>
+								</div>
+								<div class="order_count">
+									<p class="cart_p_14">
+									{{product.quantity}} шт.
+									</p>
+								</div>
+								
+								<div class="order_total">
+									<p class="p_15_bold">{{product.products_price}} ₽</p>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+						
+						<div class="user_order_total">
+								<div class="subtotal_block">
+									<span class="cart_p_14">Подитог</span>
+									<span class="p_15_bold">{{order.total_price}} ₽</span>
+								</div>
+								<div class="delivery_block">
+									<span class="cart_p_14">НДС</span>
+									<span class="p_15_bold">{{order.totel_nds}} ₽</span>
+								</div>
+								<div class="delivery_block">
+									<span class="cart_p_14">Скидка</span>
+									<span class="p_15_bold">{{order.promo_discaunt}} ₽</span>
+								</div>
+								<div class="order_total_line"></div>
+								<div class="total_block">
+									<span class="cart_p_14">Итого заказ на</span>
+									<span class="h3_24_sans">{{order.price}} ₽</span>
+								</div>
+								<div class="button_order_list">
+									<button class="order_btn_orange">
+										Оплатить заказ
+									</button>
+									<button class="order_btn_lite_orange">
+										Отменить заказ
+									</button>
+									<button class="order_btn_lite_orange">
+										Распечатать инвойс
+									</button>
+								</div>
+						</div>
+						
+					</div>
+				</div>
+			</section>
+{% endblock content %}

@@ -4,6 +4,9 @@ from django.db import models
 from datetime import datetime
 from random import random, randint
 
+from django.urls import reverse_lazy
+from django.utils.text import slugify
+
 from products.models import Product
 
 
@@ -81,6 +84,7 @@ class OrderItemQueryset(models.QuerySet):
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, verbose_name="Пользователь", default=None)
     create_time = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания заказа" )
+    slug = models.SlugField(max_length=25, null=True, blank=True, editable=True,verbose_name='URL-ссылка')
     order_num = models.CharField(max_length=20, default=RandomOrderNumber(), unique=True, verbose_name='Номер заказа')
     city_delivery = models.CharField(max_length=50, verbose_name="Город доставки")#Данные берем из json файла
     fullNameUser = models.CharField(max_length=200,null=True, blank=True ,verbose_name='ФИО получателя')
@@ -105,9 +109,15 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
-
     def __str__(self):
         return f"Заказ № {self.pk}| {self.order_num} - Покупатель {self.user.first_name} {self.user.last_name}"
+    def get_absolute_url(self):
+        return reverse_lazy('orderDetail', kwargs={'slug':self.slug})
+    def save(self):
+        super(Order, self).save()
+        if not self.slug:
+            self.slug = slugify(self.order_num)
+            super(Order, self).save()
 
 #Промо-код из корзины в заказ для архива
 class PromoCode(models.Model):

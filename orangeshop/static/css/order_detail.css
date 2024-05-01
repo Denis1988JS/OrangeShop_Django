@@ -72,7 +72,7 @@
 }
 .order_description ul:last-of-type {
 	margin-bottom: 0px;
-	padding: 15px 0px 0px;
+	padding: 15px 0px 35px;
 }
 .order_block {
 	width: 100%;
@@ -237,6 +237,11 @@
 		flex: 0 1 100%;
 		order: 1;
 	}
+	.order_block {
+		border: none;
+		width: 100%;
+
+	}
 	.order_header_block {
 		display: none;
 	}
@@ -254,23 +259,31 @@
 		height: 80px;
 	}
 	.user_order_list {
-		padding: 0px 20px;
+		padding: 0px 0px;
 	}
 	
 	.user_order_item {
-		flex-direction: column;
 		flex-wrap: wrap;
 		align-items: flex-start;
-		width: 287px;
-		height: 110px;
-		padding: 0px 0px 0px 0px;
+		width: 100%;
+		height: auto;
+		padding: 10px 0px 10px 0px;
 		margin-bottom: 25px;
-		border: none;
+		gap: 20px;
 	}
-
+	.item_img {
+		order: 1;
+	}
+	.order_count {
+		order: 2;
+	}
+	.order_total {
+		order: 3;
+	}
 	.user_order_info {
-		flex: 0 1 auto;
+		flex: 0 1 100%;
 		width: 187px;
+		order: 0;
 	}
 	.user_order_info p:first-child {
 		padding-bottom: 0px;
@@ -280,6 +293,13 @@
 	}
 	.order_total {
 		flex: 0 1 auto;
+	}
+	.user_order_total {
+		padding: 0;
+	}
+	.order_description {
+		padding: 0;
+		border: none;
 	}
 }
 

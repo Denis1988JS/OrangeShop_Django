@@ -34,7 +34,7 @@ class ProductOrderAdminInline(admin.TabularInline):
     getImg.short_description = 'Фото'
 #Админка - заказ   покупателя - Order
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id','order_num','fullNameUser','user','create_time','statusPay')
+    list_display = ('id','slug','order_num','fullNameUser','user','create_time','statusPay')
     list_display_links = ('id','order_num','fullNameUser','user')
     search_fields = ("order_num",'fullNameUser')
     search_help_text = 'Поиск по заказам - номер или ФИО получателя'
@@ -42,14 +42,14 @@ class OrderAdmin(admin.ModelAdmin):
     list_editable = ('statusPay',)
     ordering = ['pk']
     readonly_fields = (
-        'user','create_time','order_num','methodPay',"statusPay","fullNameUser","phone","buyerStatus",
+        'user','create_time',"slug","order_num",'methodPay',"statusPay","fullNameUser","phone","buyerStatus",
         "methodDelivery", "adresPostmat", "city_delivery", "streetName", "streetNumber","indexNumber","numberApartment",
         "total_price", "totel_nds", "promo_discaunt", "price"
     )
     inlines = [ProductOrderAdminInline]
     fieldsets = (
         ("Данные о заказе", {
-            "fields": (("order_num","create_time","methodPay","statusPay"),)
+            "fields": (("order_num","slug","create_time","methodPay","statusPay"),)
         }),
         ("Данные о получателе", {
             "fields": (("fullNameUser","user", "phone","buyerStatus"),)

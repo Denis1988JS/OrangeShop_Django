@@ -100,7 +100,7 @@ class UserProfile(CartSumMixin,LoginRequiredMixin,TemplateView):
         context['title'] = f'Личный кабинет {self.request.user}'
         context['orders'] = Order.objects.filter(user__id = self.request.user.id)
         context = dict(list(context.items()) + list(c_def.items()))
-        print(context['orders'], 'заказы', self.request.user.id)
+
         return context
 
 #Редактирование профиля - только UserBuyersData
